@@ -16,10 +16,9 @@ export default function Login() {
     setError('')
     setLoading(true)
 
-    // Mock authentication - accepts any email/password with @ symbol
+    // Mock authentication
     setTimeout(() => {
       if (email.includes('@') && password.length >= 4) {
-        // Store auth token in localStorage
         localStorage.setItem('reflectAtlasAuth', 'true')
         localStorage.setItem('userEmail', email)
         router.push('/dashboard')
@@ -33,76 +32,63 @@ export default function Login() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Customer Login - ReflectAtlas</title>
-        <meta name="description" content="Login to access your ReflectAtlas dashboard" />
+        <title>Customer Login - Reflect Atlas</title>
+        <meta name="description" content="Login to access your Reflect Atlas dashboard" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <nav className={styles.nav}>
-        <Link href="/" className={styles.logo}>
-          ReflectAtlas
-        </Link>
-      </nav>
-
-      <main className={styles.main}>
-        <div className={styles.loginBox}>
-          <h1 className={styles.title}>Customer Login</h1>
-          <p className={styles.subtitle}>Access your analytics dashboard</p>
-
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.formGroup}>
-              <label htmlFor="email">Email Address</label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your.email@company.com"
-                required
-                className={styles.input}
-              />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-                required
-                className={styles.input}
-              />
-            </div>
-
-            {error && <div className={styles.error}>{error}</div>}
-
-            <button
-              type="submit"
-              disabled={loading}
-              className={styles.submitButton}
-            >
-              {loading ? 'Signing in...' : 'Sign In'}
-            </button>
-          </form>
-
-          <div className={styles.demoNote}>
-            <p><strong>Demo Mode:</strong> Use any email with @ and password (4+ chars)</p>
-            <p className={styles.example}>Example: demo@company.com / password</p>
-          </div>
-
-          <div className={styles.links}>
-            <a href="#">Forgot password?</a>
-            <span>•</span>
-            <a href="#">Request access</a>
-          </div>
+      <div className={styles.loginCard}>
+        <div className={styles.header}>
+          <svg width="60" height="60" viewBox="0 0 80 80">
+            <circle cx="40" cy="24" r="12" fill="#DC2626"/>
+            <circle cx="28" cy="48" r="12" fill="#3B82F6"/>
+            <circle cx="52" cy="48" r="12" fill="#FF6B35"/>
+          </svg>
+          <h1>Customer Login</h1>
+          <p>Access your Reflect Atlas dashboard</p>
         </div>
-      </main>
 
-      <footer className={styles.footer}>
-        <p>&copy; 2025 ReflectAtlas Inc. All rights reserved.</p>
-      </footer>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.formGroup}>
+            <label htmlFor="email">Email Address</label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@company.com"
+              required
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          {error && <div className={styles.error}>{error}</div>}
+
+          <button type="submit" disabled={loading} className={styles.submitBtn}>
+            {loading ? 'Signing in...' : 'Sign In'}
+          </button>
+        </form>
+
+        <div className={styles.demoNote}>
+          <p><strong>Demo Mode:</strong> Use any email with @ and password (4+ chars)</p>
+          <p className={styles.example}>Example: demo@company.com / password</p>
+        </div>
+
+        <div className={styles.links}>
+          <Link href="/">← Back to home</Link>
+        </div>
+      </div>
     </div>
   )
 }
