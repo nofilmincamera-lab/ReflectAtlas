@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reflect Atlas - Cognitive Drag Index Report</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: linear-gradient(135deg, #F5F3EF 0%, #E8E5E0 100%);
+      color: #2D2420;
+      line-height: 1.6;
+      padding: 60px 40px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      margin-bottom: 60px;
+    }
+    
+    .logo-bar {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    
+    .company-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2D2420;
+    }
+    
+    .product-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 20px 30px;
+      background: white;
+      border-radius: 10px;
+      border: 2px solid #E8E5E0;
+      margin-bottom: 20px;
+    }
+    
+    .product-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2D2420;
+    }
+    
+    .hero {
+      background: linear-gradient(135deg, #2D2420 0%, #1A1A1A 100%);
+      padding: 60px 40px;
+      border-radius: 20px;
+      color: white;
+      margin-bottom: 40px;
+    }
+    
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    
+    .hero .subtitle {
+      font-size: 1.2rem;
+      color: #E8E5E0;
+      margin-bottom: 30px;
+    }
+    
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    
+    .hero-stat {
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .hero-stat-value {
+      font-family: 'Fira Code', monospace;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #DC2626;
+      margin-bottom: 8px;
+    }
+    
+    .hero-stat-label {
+      font-size: 0.95rem;
+      color: #E8E5E0;
+    }
+    
+    .overview-card {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      border: 2px solid #E8E5E0;
+      margin-bottom: 40px;
+    }
+    
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2D2420;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid #DC2626;
+    }
+    
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+    
+    .overview-item {
+      padding: 20px;
+      background: #F5F3EF;
+      border-radius: 10px;
+    }
+    
+    .overview-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #5A5350;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    
+    .overview-value {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #2D2420;
+    }
+    
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .data-table thead {
+      background: #2D2420;
+      color: white;
+    }
+    
+    .data-table th {
+      padding: 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    
+    .data-table td {
+      padding: 16px;
+      border-bottom: 1px solid #E8E5E0;
+    }
+    
+    .data-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .data-table tbody tr:hover {
+      background: #F5F3EF;
+    }
+    
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 40px 0;
+    }
+    
+    .metric-card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      border: 2px solid #E8E5E0;
+      transition: all 0.3s ease;
+    }
+    
+    .metric-card:hover {
+      border-color: #DC2626;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    
+    .metric-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .metric-value {
+      font-family: 'Fira Code', monospace;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .metric-label {
+      font-size: 0.95rem;
+      color: #5A5350;
+      margin-bottom: 12px;
+    }
+    
+    .metric-context {
+      font-size: 0.85rem;
+      color: #5A5350;
+      padding-top: 12px;
+      border-top: 1px solid #E8E5E0;
+    }
+    
+    .alert {
+      padding: 20px 24px;
+      border-radius: 10px;
+      margin: 24px 0;
+      border-left: 4px solid;
+    }
+    
+    .alert-danger {
+      background: #FEF2F2;
+      border-color: #DC2626;
+      color: #7F1D1D;
+    }
+    
+    .alert-warning {
+      background: #FFF7ED;
+      border-color: #FF6B35;
+      color: #7C2D12;
+    }
+    
+    .alert-success {
+      background: #F0FDF4;
+      border-color: #84CC16;
+      color: #365314;
+    }
+    
+    .alert-info {
+      background: #EFF6FF;
+      border-color: #3B82F6;
+      color: #1E3A8A;
+    }
+    
+    .alert-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+    
+    .progress-container {
+      margin: 20px 0;
+    }
+    
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    .progress-bar {
+      height: 12px;
+      background: #E8E5E0;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      transition: width 0.3s ease;
+      border-radius: 6px;
+    }
+    
+    .comparison-chart {
+      display: flex;
+      gap: 20px;
+      align-items: flex-end;
+      height: 300px;
+      padding: 20px;
+      background: #F5F3EF;
+      border-radius: 10px;
+      margin: 24px 0;
+    }
+    
+    .chart-bar {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .bar {
+      width: 100%;
+      background: #DC2626;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 12px;
+      color: white;
+      font-weight: 700;
+      font-family: 'Fira Code', monospace;
+      transition: transform 0.3s ease;
+    }
+    
+    .bar:hover {
+      transform: translateY(-8px);
+    }
+    
+    .bar-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #2D2420;
+      text-align: center;
+    }
+    
+    .opportunity-cards {
+      display: grid;
+      gap: 24px;
+      margin: 40px 0;
+    }
+    
+    .opportunity-card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      border: 2px solid #E8E5E0;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 24px;
+      align-items: center;
+    }
+    
+    .opportunity-rank {
+      width: 60px;
+      height: 60px;
+      background: #DC2626;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .opportunity-content h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #2D2420;
+      margin-bottom: 8px;
+    }
+    
+    .opportunity-content p {
+      color: #5A5350;
+      margin-bottom: 12px;
+    }
+    
+    .opportunity-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .tag {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .tag-impact {
+      background: #FEF2F2;
+      color: #DC2626;
+    }
+    
+    .tag-function {
+      background: #EFF6FF;
+      color: #3B82F6;
+    }
+    
+    .tag-tech {
+      background: #F0FDF4;
+      color: #84CC16;
+    }
+    
+    .opportunity-impact {
+      text-align: right;
+    }
+    
+    .impact-value {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #84CC16;
+      margin-bottom: 4px;
+    }
+    
+    .impact-label {
+      font-size: 0.85rem;
+      color: #5A5350;
+    }
+    
+    .tech-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin: 30px 0;
+    }
+    
+    .tech-column {
+      background: #F5F3EF;
+      padding: 30px;
+      border-radius: 15px;
+    }
+    
+    .tech-column h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2D2420;
+      margin-bottom: 20px;
+    }
+    
+    .tech-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #E8E5E0;
+    }
+    
+    .tech-item:last-child {
+      border-bottom: none;
+    }
+    
+    .tech-name {
+      font-weight: 500;
+      color: #2D2420;
+    }
+    
+    .tech-status {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+    
+    .status-present {
+      background: #F0FDF4;
+      color: #84CC16;
+    }
+    
+    .status-missing {
+      background: #FEF2F2;
+      color: #DC2626;
+    }
+    
+    .status-partial {
+      background: #FFF7ED;
+      color: #FF6B35;
+    }
+    
+    .footer {
+      margin-top: 80px;
+      padding: 40px;
+      background: white;
+      border-radius: 15px;
+      border: 2px solid #E8E5E0;
+      text-align: center;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    @media print {
+      body {
+        background: white;
+        padding: 20px;
+      }
+      .hero {
+        break-inside: avoid;
+      }
+      .metric-card, .opportunity-card {
+        break-inside: avoid;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .opportunity-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .tech-comparison {
+        grid-template-columns: 1fr;
+      }
+      .hero-stats {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo-bar">
+        <svg width="35" height="35" viewBox="0 0 80 80">
+          <circle cx="40" cy="24" r="12" fill="#DC2626"/>
+          <circle cx="28" cy="48" r="12" fill="#3B82F6"/>
+          <circle cx="52" cy="48" r="12" fill="#FF6B35"/>
+        </svg>
+        <span class="company-name">Still Logic</span>
+      </div>
+      
+      <div class="product-logo">
+        <svg width="45" height="45" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" fill="none" stroke="#3B82F6" stroke-width="3"/>
+          <line x1="50" y1="10" x2="50" y2="25" stroke="#DC2626" stroke-width="4"/>
+          <line x1="50" y1="75" x2="50" y2="90" stroke="#FF6B35" stroke-width="4"/>
+          <line x1="10" y1="50" x2="25" y2="50" stroke="#84CC16" stroke-width="4"/>
+          <line x1="75" y1="50" x2="90" y2="50" stroke="#3B82F6" stroke-width="4"/>
+          <circle cx="50" cy="50" r="8" fill="#2D2420"/>
+        </svg>
+        <span class="product-name">Reflect Atlas</span>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>Cognitive Drag Index Report</h1>
+      <p class="subtitle">Organizational Efficiency Diagnostics</p>
+      
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">71.3</div>
+          <div class="hero-stat-label">Cognitive Drag Index (High)</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">+13.1</div>
+          <div class="hero-stat-label">Points Above Industry Median</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">10-15</div>
+          <div class="hero-stat-label">Point Reduction Target</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">8-10%</div>
+          <div class="hero-stat-label">Revenue/Employee Gain Potential</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Company Overview -->
+    <div class="overview-card">
+      <h2 class="section-title">Company Overview</h2>
+      
+      <div class="overview-grid">
+        <div class="overview-item">
+          <div class="overview-label">Company</div>
+          <div class="overview-value">NovaBank Financial Services</div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-label">Sector</div>
+          <div class="overview-value">NAICS 522110</div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-label">Employees</div>
+          <div class="overview-value">18,000</div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-label">Data Sample</div>
+          <div class="overview-value">1,200 postings</div>
+        </div>
+      </div>
+
+      <div class="alert alert-info" style="margin-top: 24px;">
+        <div class="alert-title">Data Sources</div>
+        O*NET Content Model (Tasks, Detailed Work Activities, Skills, Technology Skills), BLS Occupational Employment Statistics (OES) data, internal job text analysis, and proprietary analytical models by Still Logic.
+      </div>
+    </div>
+
+    <!-- Task Distribution -->
+    <div class="overview-card">
+      <h2 class="section-title">1. Linguistic Extraction & Task Distribution</h2>
+      
+      <p style="color: #5A5350; margin-bottom: 24px;">
+        Reflect Atlas processed all job postings to extract verbs, skills, and technologies, mapping them to O*NET Detailed Work Activities (DWAs) and task categories. The analysis reveals organizational cognitive patterns and automation readiness.
+      </p>
+
+      <div class="progress-container">
+        <div class="progress-label">
+          <span>Routine / Manual</span>
+          <span style="font-family: 'Fira Code', monospace; color: #DC2626;">47%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 47%; background: #DC2626;"></div>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-label">
+          <span>Cognitive / Analytical</span>
+          <span style="font-family: 'Fira Code', monospace; color: #3B82F6;">34%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 34%; background: #3B82F6;"></div>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-label">
+          <span>Collaborative / Complex</span>
+          <span style="font-family: 'Fira Code', monospace; color: #FF6B35;">12%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 12%; background: #FF6B35;"></div>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-label">
+          <span>Automation / Technical</span>
+          <span style="font-family: 'Fira Code', monospace; color: #84CC16;">7%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 7%; background: #84CC16;"></div>
+        </div>
+      </div>
+
+      <div class="alert alert-danger" style="margin-top: 24px;">
+        <div class="alert-title">Critical Finding</div>
+        The organization remains overexposed to manual processes (47%) and significantly under-indexed on automation-ready task language (7%). This 40-point gap represents substantial untapped efficiency potential.
+      </div>
+
+      <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; margin-top: 40px; margin-bottom: 20px; color: #2D2420;">Task Examples by Category</h3>
+      
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>O*NET Category</th>
+            <th>Example Extracted Phrases</th>
+            <th>Automation Potential</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Routine / Manual</strong></td>
+            <td>"process transactions," "verify documents," "update systems manually," "reconcile accounts"</td>
+            <td style="color: #DC2626; font-weight: 600;">High (70-85%)</td>
+          </tr>
+          <tr>
+            <td><strong>Cognitive / Analytical</strong></td>
+            <td>"assess risk," "interpret trends," "recommend actions," "analyze patterns"</td>
+            <td style="color: #FF6B35; font-weight: 600;">Medium (40-60%)</td>
+          </tr>
+          <tr>
+            <td><strong>Collaborative / Complex</strong></td>
+            <td>"coordinate across teams," "manage escalations," "liaise with compliance"</td>
+            <td style="color: #3B82F6; font-weight: 600;">Low (15-30%)</td>
+          </tr>
+          <tr>
+            <td><strong>Automation / Technical</strong></td>
+            <td>"configure RPA bots," "build ETL scripts," "use workflow platforms"</td>
+            <td style="color: #84CC16; font-weight: 600;">N/A (Enablers)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Occupational Composition -->
+    <div class="overview-card">
+      <h2 class="section-title">2. O*NET Occupational Composition</h2>
+      
+      <p style="color: #5A5350; margin-bottom: 24px;">
+        Job postings were mapped to Standard Occupational Classification (SOC) groups using O*NET occupational profiles and compared against BLS benchmark data for NAICS 5221 (Commercial Banking). The analysis reveals significant workforce composition misalignment.
+      </p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>SOC Group</th>
+            <th>NovaBank</th>
+            <th>BLS Peer Avg</th>
+            <th>Gap</th>
+            <th>Impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>43-XXXX</strong> Office & Administrative Support</td>
+            <td style="font-family: 'Fira Code', monospace; font-weight: 600;">44%</td>
+            <td style="font-family: 'Fira Code', monospace;">34%</td>
+            <td style="color: #DC2626; font-weight: 600;">+10 pts</td>
+            <td style="font-size: 0.85rem; color: #5A5350;">Overweight operations</td>
+          </tr>
+          <tr>
+            <td><strong>13-XXXX</strong> Business & Financial Ops</td>
+            <td style="font-family: 'Fira Code', monospace; font-weight: 600;">28%</td>
+            <td style="font-family: 'Fira Code', monospace;">30%</td>
+            <td style="color: #5A5350; font-weight: 600;">-2 pts</td>
+            <td style="font-size: 0.85rem; color: #5A5350;">Aligned</td>
+          </tr>
+          <tr>
+            <td><strong>15-XXXX</strong> Computer & Mathematical</td>
+            <td style="font-family: 'Fira Code', monospace; font-weight: 600;">18%</td>
+            <td style="font-family: 'Fira Code', monospace;">24%</td>
+            <td style="color: #DC2626; font-weight: 600;">-6 pts</td>
+            <td style="font-size: 0.85rem; color: #5A5350;">Underweight automation enablers</td>
+          </tr>
+          <tr>
+            <td><strong>13-1111</strong> Management Analysts</td>
+            <td style="font-family: 'Fira Code', monospace; font-weight: 600;">5%</td>
+            <td style="font-family: 'Fira Code', monospace;">6%</td>
+            <td style="color: #5A5350; font-weight: 600;">-1 pt</td>
+            <td style="font-size: 0.85rem; color: #5A5350;">Slightly below benchmark</td>
+          </tr>
+          <tr>
+            <td><strong>13-20XX</strong> Risk & Compliance</td>
+            <td style="font-family: 'Fira Code', monospace; font-weight: 600;">5%</td>
+            <td style="font-family: 'Fira Code', monospace;">4%</td>
+            <td style="color: #84CC16; font-weight: 600;">+1 pt</td>
+            <td style="font-size: 0.85rem; color: #5A5350;">Appropriate emphasis</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-warning" style="margin-top: 24px;">
+        <div class="alert-title">Workforce Composition Signal</div>
+        Disproportionate operations-heavy (43-series) roles versus technology enablers (15-series) suggests structural drag. NovaBank employs approximately 12% more 43-series roles per $1B revenue than peer banks, indicating higher labor intensity and lower automation leverage.
+      </div>
+    </div>
+
+    <!-- Technology Stack Comparison -->
+    <div class="overview-card">
+      <h2 class="section-title">Technology Stack vs. Benchmark Peers</h2>
+      
+      <p style="color: #5A5350; margin-bottom: 30px;">
+        Analysis of technology mentions in job postings compared against peer banks in NAICS 5221. Gaps indicate underutilized or missing automation capabilities that contribute to elevated cognitive drag.
+      </p>
+
+      <div class="tech-comparison">
+        <div class="tech-column">
+          <h4>Core Banking Systems</h4>
+          <div class="tech-item">
+            <span class="tech-name">Core Banking Platform</span>
+            <span class="tech-status status-present">Present</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-name">CRM System (Salesforce/similar)</span>
+            <span class="tech-status status-present">Present</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-name">Document Management</span>
+            <span class="tech-status status-partial">Limited</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-name">Workflow Orchestration</span>
+            <span class="tech-status status-missing">Missing</span>
+          </div>
+        </div>
+
+        <div class="tech-column">
+          <h4>Automation & Intelligence</h4>
+          <div class="tech-item">
+            <span class="tech-name">RPA Platform (UiPath/Automation Anywhere)</span>
+            <span class="tech-status status-partial">Limited</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-name">Intelligent Document Processing</span>
+            <span class="tech-status status-missing">Missing</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-name">Chatbot / Virtual Assistant</span>
+            <span class="tech-status status-partial">Limited</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-name">Natural Language Processing</span>
+            <span class="tech-status status-missing">Missing</span>
+          </div>
+        </div>
+
+        <div class="tech-column">
+          <h4>Data & Analytics</h4>
+          <div class="tech-item">
+            <span class="tech-name">Data Warehouse</span>
+            <span class="tech-status status-present">Present</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-name">Business Intelligence Tools</span>
+            <span class="tech-status status-present">Present</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-name">ETL/Data Pipeline Automation</span>
+            <span class="tech-status status-partial">Limited</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-name">Predictive Analytics Platform</span>
+            <span class="tech-status status-missing">Missing</span>
+          </div>
+        </div>
+
+        <div class="tech-column">
+          <h4>Customer Experience</h4>
+          <div class="tech-item">
+            <span class="tech-name">Contact Center Platform</span>
+            <span class="tech-status status-present">Present</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-name">Knowledge Management System</span>
+            <span class="tech-status status-partial">Limited</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-name">Assisted Response Tools</span>
+            <span class="tech-status status-missing">Missing</span>
+          </div>
+          <div class="tech-item">
+            <span class="tech-name">Auto-summarization/Case Mgmt</span>
+            <span class="tech-status status-missing">Missing</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="metrics-grid" style="margin-top: 40px;">
+        <div class="metric-card">
+          <div class="metric-value" style="color: #DC2626;">9 / 16</div>
+          <div class="metric-label">Technology Categories</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            56% technology coverage vs. 78% peer average
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-value" style="color: #FF6B35;">35%</div>
+          <div class="metric-label">Automation Tool Adoption</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            vs. 62% among benchmark peer banks
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-value" style="color: #3B82F6;">4 / 8</div>
+          <div class="metric-label">Intelligence Capabilities</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            50% adoption of advanced capabilities vs. 75% peer average
+          </p>
+        </div>
+      </div>
+
+      <div class="alert alert-danger" style="margin-top: 30px;">
+        <div class="alert-title">Technology Gap Impact</div>
+        Critical automation tools (RPA, intelligent document processing, assisted response) are missing or underutilized despite high manual task volumes. This technology-labor misalignment directly contributes to elevated Process-Tech Misalignment (PTM) and Tech-Labor Divergence (TLD) scores.
+      </div>
+    </div>
+
+    <!-- CDI Component Scoring -->
+    <div class="overview-card">
+      <h2 class="section-title">3. Cognitive Drag Index (CDI) Component Scoring</h2>
+      
+      <p style="color: #5A5350; margin-bottom: 30px;">
+        The Cognitive Drag Index quantifies organizational efficiency through three interconnected dimensions. Each component is scored 0-100, with higher scores indicating greater inefficiency and drag.
+      </p>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon" style="background: #DC2626;">RCL</div>
+          <div class="metric-value" style="color: #DC2626;">74</div>
+          <div class="metric-label">Role Complexity Load</div>
+          <div class="metric-context">
+            <strong>+13 vs. median (61)</strong><br>
+            Measures cognitive load density per role: breadth of Detailed Work Activities, verb entropy, decision-making language complexity, and coordination overhead. High RCL indicates roles carrying excessive cognitive burden.
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon" style="background: #FF6B35;">PTM</div>
+          <div class="metric-value" style="color: #FF6B35;">68</div>
+          <div class="metric-label">Process-Tech Misalignment</div>
+          <div class="metric-context">
+            <strong>+13 vs. median (55)</strong><br>
+            Quantifies the disconnect between manual task descriptions and available technology mentions. High PTM signals tools exist but processes remain manual, indicating underutilized automation capacity.
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon" style="background: #3B82F6;">TLD</div>
+          <div class="metric-value" style="color: #3B82F6;">72</div>
+          <div class="metric-label">Tech-Labor Divergence</div>
+          <div class="metric-context">
+            <strong>+14 vs. median (58)</strong><br>
+            Detects misalignment between workforce SOC composition and technology stack profile. High TLD indicates operations-heavy staffing without proportional technology enablers.
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-danger">
+        <div class="alert-title">Composite CDI Score: 71.3 (High Drag)</div>
+        Weighted aggregate (RCL 40%, PTM 35%, TLD 25%) places NovaBank in the 84th percentile for drag among peer banks. The elevated scores across all three dimensions indicate systemic inefficiency rather than isolated issues. Industry median: 58.2
+      </div>
+
+      <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; margin-top: 50px; margin-bottom: 25px; color: #2D2420;">Component Interdependencies</h3>
+      
+      <div style="background: #F5F3EF; padding: 30px; border-radius: 15px; margin-bottom: 30px;">
+        <p style="color: #2D2420; line-height: 1.8; margin-bottom: 16px;">
+          <strong>RCL ↔ PTM Correlation (r = 0.71):</strong> High role complexity often stems from manual processes. When technology doesn't support workflows, individual roles compensate by absorbing more tasks and decision points.
+        </p>
+        <p style="color: #2D2420; line-height: 1.8; margin-bottom: 16px;">
+          <strong>PTM ↔ TLD Correlation (r = 0.68):</strong> Process-tech misalignment typically occurs when workforce composition lacks sufficient technical enablers (15-series roles) to implement and maintain automation tools.
+        </p>
+        <p style="color: #2D2420; line-height: 1.8; margin-bottom: 0;">
+          <strong>TLD ↔ RCL Correlation (r = 0.64):</strong> Without technical leverage, operational roles must handle greater task variety and complexity, driving up cognitive load per position.
+        </p>
+      </div>
+    </div>
+
+    <!-- CDI Comparison Chart -->
+    <div class="overview-card">
+      <h2 class="section-title">CDI Components vs. Industry Benchmark</h2>
+      
+      <div class="comparison-chart">
+        <div class="chart-bar">
+          <div class="bar" style="height: 75%; background: #DC2626;">74</div>
+          <div class="bar-label">RCL<br>NovaBank</div>
+        </div>
+        <div class="chart-bar">
+          <div class="bar" style="height: 62%; background: #E8E5E0; color: #2D2420;">61</div>
+          <div class="bar-label">RCL<br>Median</div>
+        </div>
+        <div class="chart-bar">
+          <div class="bar" style="height: 69%; background: #FF6B35;">68</div>
+          <div class="bar-label">PTM<br>NovaBank</div>
+        </div>
+        <div class="chart-bar">
+          <div class="bar" style="height: 56%; background: #E8E5E0; color: #2D2420;">55</div>
+          <div class="bar-label">PTM<br>Median</div>
+        </div>
+        <div class="chart-bar">
+          <div class="bar" style="height: 73%; background: #3B82F6;">72</div>
+          <div class="bar-label">TLD<br>NovaBank</div>
+        </div>
+        <div class="chart-bar">
+          <div class="bar" style="height: 59%; background: #E8E5E0; color: #2D2420;">58</div>
+          <div class="bar-label">TLD<br>Median</div>
+        </div>
+      </div>
+
+      <div class="alert alert-info">
+        <div class="alert-title">Benchmark Methodology</div>
+        Industry median derived from 6 peer regional banks (NAICS 5221) with similar asset size ($50B-$150B) and geographic footprint. CDI components normalized 0-100 using z-scores across peer sample.
+      </div>
+    </div>
+
+    <!-- External Validation -->
+    <div class="overview-card">
+      <h2 class="section-title">4. External Validation (BLS Context)</h2>
+      
+      <p style="color: #5A5350; margin-bottom: 30px;">
+        CDI findings are validated against external economic indicators from the Bureau of Labor Statistics and industry performance metrics. Multiple independent signals confirm the organizational efficiency gaps.
+      </p>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-value" style="color: #DC2626;">+12%</div>
+          <div class="metric-label">Labor Intensity</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            More 43-series roles per $1B revenue than peers (BLS OES data)
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-value" style="color: #FF6B35;">52 days</div>
+          <div class="metric-label">Median Vacancy Duration</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            vs. 38 days peer average. Extended fill time correlates with overly complex role design
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-value" style="color: #3B82F6;">+1.5%</div>
+          <div class="metric-label">Output per FTE Growth</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            vs. +3.8% sector productivity growth (Finance/Insurance, BLS)
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-value" style="color: #DC2626;">$188K</div>
+          <div class="metric-label">Revenue per Employee</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            vs. $210K peer average. 10% gap consistent with high drag prediction
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-value" style="color: #FF6B35;">23%</div>
+          <div class="metric-label">Employee Sentiment</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            Reviews mentioning "manual" or "repetitive" vs. 11% peer average
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-value" style="color: #3B82F6;">-0.62</div>
+          <div class="metric-label">CDI-Revenue Correlation</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            Strong negative correlation confirms higher drag predicts lower productivity
+          </p>
+        </div>
+      </div>
+
+      <div class="alert alert-success" style="margin-top: 30px;">
+        <div class="alert-title">Validation Outcome</div>
+        Multiple independent metrics validate CDI findings. The consistency across labor composition (BLS OES), hiring friction (JOLTS proxy), productivity trends, and employee sentiment provides strong empirical support for cognitive drag measurement methodology.
+      </div>
+    </div>
+
+    <!-- Opportunity Map -->
+    <div class="overview-card">
+      <h2 class="section-title">5. Opportunity Map (O*NET-Guided Prescriptions)</h2>
+      
+      <p style="color: #5A5350; margin-bottom: 30px;">
+        Ranked intervention opportunities based on drag concentration, automation feasibility (mapped to O*NET DWAs), and projected CDI impact. Each recommendation targets specific SOC groups with actionable technology implementations.
+      </p>
+
+      <div class="opportunity-cards">
+        <div class="opportunity-card">
+          <div class="opportunity-rank">1</div>
+          <div class="opportunity-content">
+            <h4>Loan Operations Automation</h4>
+            <p>Deploy OCR with intelligent document processing and RPA validation pipelines to eliminate manual verification, data entry, and reconciliation tasks. Target O*NET DWAs: "verify accuracy of records," "enter data into systems," "reconcile discrepancies."</p>
+            <div class="opportunity-tags">
+              <span class="tag tag-function">13-2072 Loan Officers</span>
+              <span class="tag tag-function">43-3021 Billing Clerks</span>
+              <span class="tag tag-tech">OCR + RPA</span>
+              <span class="tag tag-impact">Critical Priority</span>
+            </div>
+          </div>
+          <div class="opportunity-impact">
+            <div class="impact-value">-10 CDI</div>
+            <div class="impact-label">PTM -15 pts<br>12-18 mo ROI</div>
+          </div>
+        </div>
+
+        <div class="opportunity-card">
+          <div class="opportunity-rank" style="background: #3B82F6;">2</div>
+          <div class="opportunity-content">
+            <h4>Contact Center Intelligence</h4>
+            <p>Implement knowledge-assisted response systems with auto-summarization to augment CSR workflows. Reduce documentation overhead and improve first-call resolution. Target DWAs: "resolve customer complaints," "update account information," "document interactions."</p>
+            <div class="opportunity-tags">
+              <span class="tag tag-function">43-4051 CSRs</span>
+              <span class="tag tag-tech">Knowledge Systems</span>
+              <span class="tag tag-impact">High Priority</span>
+            </div>
+          </div>
+          <div class="opportunity-impact">
+            <div class="impact-value">-8 CDI</div>
+            <div class="impact-label">RCL -10 pts<br>8-12 mo ROI</div>
+          </div>
+        </div>
+
+        <div class="opportunity-card">
+          <div class="opportunity-rank" style="background: #FF6B35;">3</div>
+          <div class="opportunity-content">
+            <h4>Exception Processing Pipeline</h4>
+            <p>Build automated exception handling with pattern recognition for discrepancy research and escalation routing. Reduce manual investigation time. Target DWAs: "research and resolve discrepancies," "investigate errors," "escalate complex cases."</p>
+            <div class="opportunity-tags">
+              <span class="tag tag-function">43-9061 Office Clerks</span>
+              <span class="tag tag-tech">Rules Engine + ML</span>
+              <span class="tag tag-impact">High Priority</span>
+            </div>
+          </div>
+          <div class="opportunity-impact">
+            <div class="impact-value">-6 CDI</div>
+            <div class="impact-label">PTM -12 pts<br>14-18 mo ROI</div>
+          </div>
+        </div>
+
+        <div class="opportunity-card">
+          <div class="opportunity-rank" style="background: #84CC16;">4</div>
+          <div class="opportunity-content">
+            <h4>Workflow Orchestration Platform</h4>
+            <p>Deploy end-to-end workflow orchestration to connect disparate systems and reduce manual handoffs between processes. Target DWAs: "coordinate with other departments," "transfer information between systems," "manage multi-step processes."</p>
+            <div class="opportunity-tags">
+              <span class="tag tag-function">43-4051 CSRs</span>
+              <span class="tag tag-function">43-3021 Billing</span>
+              <span class="tag tag-tech">Workflow Platform</span>
+              <span class="tag tag-impact">Medium-High Priority</span>
+            </div>
+          </div>
+          <div class="opportunity-impact">
+            <div class="impact-value">-5 CDI</div>
+            <div class="impact-label">RCL -8 pts<br>18-24 mo ROI</div>
+          </div>
+        </div>
+
+        <div class="opportunity-card">
+          <div class="opportunity-rank" style="background: #5A5350;">5</div>
+          <div class="opportunity-content">
+            <h4>Risk Assessment Augmentation</h4>
+            <p>Implement decision support tools for risk officers to accelerate assessment cycles and improve consistency. Target DWAs: "evaluate risk factors," "analyze creditworthiness," "recommend approval decisions."</p>
+            <div class="opportunity-tags">
+              <span class="tag tag-function">13-2099 Financial Specialists</span>
+              <span class="tag tag-tech">Decision Support</span>
+              <span class="tag tag-impact">Medium Priority</span>
+            </div>
+          </div>
+          <div class="opportunity-impact">
+            <div class="impact-value">-4 CDI</div>
+            <div class="impact-label">RCL -6 pts<br>16-22 mo ROI</div>
+          </div>
+        </div>
+
+        <div class="opportunity-card">
+          <div class="opportunity-rank" style="background: #5A5350;">6</div>
+          <div class="opportunity-content">
+            <h4>Data Pipeline Modernization</h4>
+            <p>Automate ETL processes and reporting generation to reduce manual data compilation and transformation work. Target DWAs: "compile reports," "extract data from sources," "transform data formats."</p>
+            <div class="opportunity-tags">
+              <span class="tag tag-function">15-2051 Data Analysts</span>
+              <span class="tag tag-function">43-9061 Clerks</span>
+              <span class="tag tag-tech">ETL Automation</span>
+              <span class="tag tag-impact">Medium Priority</span>
+            </div>
+          </div>
+          <div class="opportunity-impact">
+            <div class="impact-value">-3 CDI</div>
+            <div class="impact-label">PTM -7 pts<br>20-26 mo ROI</div>
+          </div>
+        </div>
+
+        <div class="opportunity-card">
+          <div class="opportunity-rank" style="background: #5A5350;">7</div>
+          <div class="opportunity-content">
+            <h4>Compliance Monitoring Automation</h4>
+            <p>Deploy automated compliance checking and monitoring to reduce manual review burden and improve coverage. Target DWAs: "monitor compliance," "review transactions for violations," "generate compliance reports."</p>
+            <div class="opportunity-tags">
+              <span class="tag tag-function">13-2099 Compliance Officers</span>
+              <span class="tag tag-tech">Rule-Based Monitoring</span>
+              <span class="tag tag-impact">Medium Priority</span>
+            </div>
+          </div>
+          <div class="opportunity-impact">
+            <div class="impact-value">-3 CDI</div>
+            <div class="impact-label">RCL -5 pts<br>22-28 mo ROI</div>
+          </div>
+        </div>
+
+        <div class="opportunity-card">
+          <div class="opportunity-rank" style="background: #5A5350;">8</div>
+          <div class="opportunity-content">
+            <h4>Workforce Rebalancing Initiative</h4>
+            <p>Strategic hiring shift toward 15-series enablement roles (developers, analysts, automation specialists) to improve technology-labor ratio and build internal automation capability. Reduce dependency on 43-series operational roles.</p>
+            <div class="opportunity-tags">
+              <span class="tag tag-function">15-1252 Software Developers</span>
+              <span class="tag tag-function">15-2051 Data Scientists</span>
+              <span class="tag tag-impact">Strategic Priority</span>
+            </div>
+          </div>
+          <div class="opportunity-impact">
+            <div class="impact-value">-7 CDI</div>
+            <div class="impact-label">TLD -14 pts<br>24-36 mo ROI</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-success" style="margin-top: 40px;">
+        <div class="alert-title">Portfolio Impact Projection</div>
+        Implementing the top 5 recommendations would reduce CDI by 33 points (from 71.3 to ~38), placing NovaBank in the top quartile for efficiency. Combined interventions target all three CDI components, creating compounding benefits through reduced complexity, better process-tech alignment, and improved workforce composition.
+      </div>
+    </div>
+
+    <!-- Implementation Roadmap -->
+    <div class="overview-card">
+      <h2 class="section-title">6. Implementation Roadmap</h2>
+      
+      <p style="color: #5A5350; margin-bottom: 30px;">
+        Phased approach to CDI reduction, prioritizing high-impact, fast-ROI initiatives while building foundational capabilities for long-term transformation.
+      </p>
+
+      <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; margin-bottom: 20px; color: #2D2420;">Phase 1: Quick Wins (0-6 Months)</h3>
+      <div style="background: #F5F3EF; padding: 30px; border-radius: 15px; margin-bottom: 30px;">
+        <ul style="margin-left: 20px; color: #2D2420; line-height: 2;">
+          <li><strong>Loan Operations Automation:</strong> Deploy document intake OCR and verification RPA</li>
+          <li><strong>Contact Center Intelligence:</strong> Implement assisted response and auto-summarization</li>
+          <li><strong>Process Assessment:</strong> Complete detailed workflow mapping for top 3 drag areas</li>
+          <li><strong>Expected Impact:</strong> -12 CDI points, +5-7% productivity in targeted functions</li>
+        </ul>
+      </div>
+
+      <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; margin-bottom: 20px; color: #2D2420;">Phase 2: Platform Build (6-12 Months)</h3>
+      <div style="background: #F5F3EF; padding: 30px; border-radius: 15px; margin-bottom: 30px;">
+        <ul style="margin-left: 20px; color: #2D2420; line-height: 2;">
+          <li><strong>Exception Processing Pipeline:</strong> Automated discrepancy handling</li>
+          <li><strong>Workflow Orchestration:</strong> Deploy cross-system workflow platform</li>
+          <li><strong>Data Pipeline Modernization:</strong> Automate ETL and reporting</li>
+          <li><strong>Hiring Pivot:</strong> Begin workforce rebalancing toward 15-series roles</li>
+          <li><strong>Expected Impact:</strong> -15 additional CDI points, +8-10% overall productivity</li>
+        </ul>
+      </div>
+
+      <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; margin-bottom: 20px; color: #2D2420;">Phase 3: Strategic Transformation (12-24 Months)</h3>
+      <div style="background: #F5F3EF; padding: 30px; border-radius: 15px; margin-bottom: 30px;">
+        <ul style="margin-left: 20px; color: #2D2420; line-height: 2;">
+          <li><strong>Risk Assessment Augmentation:</strong> Decision support systems</li>
+          <li><strong>Compliance Monitoring:</strong> Automated transaction monitoring</li>
+          <li><strong>Workforce Composition:</strong> Complete rebalancing to optimal SOC mix</li>
+          <li><strong>Process Redesign:</strong> Comprehensive role simplification initiative</li>
+          <li><strong>Expected Impact:</strong> -10 additional CDI points, target of 38-42 achieved</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="overview-card" style="background: linear-gradient(135deg, #2D2420 0%, #1A1A1A 100%); color: white; border: none;">
+      <h2 class="section-title" style="color: white; border-color: #DC2626;">7. Executive Summary</h2>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; margin-top: 32px;">
+        <div>
+          <h4 style="color: #DC2626; font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; margin-bottom: 12px;">Current State</h4>
+          <p style="color: #E8E5E0; line-height: 1.8;">
+            CDI of 71.3 (84th percentile) driven by high manual task concentration (47%), underweight technical enablers (18% vs. 24% peer benchmark), and significant process-technology gaps. NovaBank operates with 12% excess labor intensity compared to peers.
+          </p>
+        </div>
+        
+        <div>
+          <h4 style="color: #3B82F6; font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; margin-bottom: 12px;">Root Causes</h4>
+          <p style="color: #E8E5E0; line-height: 1.8;">
+            Structural workforce imbalance (overweight 43-series operational roles), critical automation gaps (56% vs. 78% peer technology coverage), and inefficient role design creating excessive cognitive load. These factors compound to create systemic drag.
+          </p>
+        </div>
+        
+        <div>
+          <h4 style="color: #FF6B35; font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; margin-bottom: 12px;">Priority Actions</h4>
+          <p style="color: #E8E5E0; line-height: 1.8;">
+            Immediate: Digitize loan operations and augment contact center with intelligent tools. Near-term: Deploy workflow orchestration and exception automation. Strategic: Rebalance workforce composition toward technical enablers.
+          </p>
+        </div>
+        
+        <div>
+          <h4 style="color: #84CC16; font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; margin-bottom: 12px;">Target Outcome</h4>
+          <p style="color: #E8E5E0; line-height: 1.8;">
+            24-month target: 33-point CDI reduction to ~38 (top quartile). Projected outcomes: +8-10% revenue per employee, +20% cycle time improvement, -14 days time-to-fill, +35% automation coverage. NPV: $42-58M over 3 years.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px; padding: 30px; background: rgba(255,255,255,0.05); border-radius: 15px; border-left: 4px solid #DC2626;">
+        <h4 style="color: white; font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 12px;">Critical Success Factors</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+          <div>
+            <strong style="color: #DC2626;">Executive Sponsorship:</strong>
+            <p style="color: #E8E5E0; margin: 8px 0 0 0; font-size: 0.95rem;">Cross-functional commitment to process redesign and workforce transformation</p>
+          </div>
+          <div>
+            <strong style="color: #3B82F6;">Technology Investment:</strong>
+            <p style="color: #E8E5E0; margin: 8px 0 0 0; font-size: 0.95rem;">$8-12M capital allocation for automation platforms and implementation</p>
+          </div>
+          <div>
+            <strong style="color: #FF6B35;">Change Management:</strong>
+            <p style="color: #E8E5E0; margin: 8px 0 0 0; font-size: 0.95rem;">Structured approach to role transitions and skill development</p>
+          </div>
+          <div>
+            <strong style="color: #84CC16;">Measurement Discipline:</strong>
+            <p style="color: #E8E5E0; margin: 8px 0 0 0; font-size: 0.95rem;">Quarterly CDI tracking and KPI monitoring to validate impact</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <div class="overview-card">
+      <h2 class="section-title">8. Methodological Appendix</h2>
+      
+      <div style="display: grid; gap: 20px;">
+        <div style="padding: 20px; background: #F5F3EF; border-radius: 10px;">
+          <strong style="color: #2D2420;">Data Corpus:</strong>
+          <span style="color: #5A5350;"> 1,200 job postings collected over 90-day period, deduplicated and preprocessed using natural language processing. Text normalized for part-of-speech tagging and semantic clustering.</span>
+        </div>
+        
+        <div style="padding: 20px; background: #F5F3EF; border-radius: 10px;">
+          <strong style="color: #2D2420;">O*NET Mapping:</strong>
+          <span style="color: #5A5350;"> Job language mapped to O*NET Tasks, Detailed Work Activities (DWAs), Skills, and Technology Skills using semantic embeddings (cosine similarity > 0.75 threshold). 847 unique DWAs identified across corpus.</span>
+        </div>
+        
+        <div style="padding: 20px; background: #F5F3

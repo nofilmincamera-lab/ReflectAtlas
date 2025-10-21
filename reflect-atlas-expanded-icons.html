@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reflect Atlas - Expanded Icon Library</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Plus+Jakarta+Sans:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #F5F3EF;
+      color: #2D2420;
+      padding: 40px 20px;
+    }
+    
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+      font-weight: 700;
+    }
+    
+    .subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #5A5350;
+      margin-bottom: 3rem;
+    }
+    
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      margin: 3rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid #2D2420;
+      font-weight: 700;
+    }
+    
+    h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      margin: 2rem 0 1rem;
+      font-weight: 700;
+      color: #FF6B35;
+    }
+    
+    .intro {
+      color: #5A5350;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    
+    .category {
+      margin-bottom: 3rem;
+    }
+    
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .icon-card {
+      background: white;
+      padding: 1rem;
+      border: 2px solid #2D2420;
+      text-align: center;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    
+    .icon-card:hover {
+      transform: translateY(-4px);
+      border-color: #FF6B35;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .icon-label {
+      font-size: 0.7rem;
+      margin-top: 0.5rem;
+      font-weight: 600;
+      color: #5A5350;
+      line-height: 1.3;
+    }
+    
+    .color-badge {
+      display: inline-block;
+      padding: 2px 6px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      margin-top: 0.25rem;
+      border-radius: 2px;
+    }
+    
+    .badge-orange { background: #FF6B35; color: white; }
+    .badge-blue { background: #3B82F6; color: white; }
+    .badge-red { background: #DC2626; color: white; }
+    .badge-green { background: #84CC16; color: white; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Reflect Atlas</h1>
+    <div class="subtitle">Expanded Icon Library — 120+ Icons</div>
+
+    <!-- O*NET OCCUPATION CATEGORIES -->
+    <div class="category">
+      <h2>O*NET Occupation Categories</h2>
+      <p class="intro">Icons representing different O*NET occupation families commonly analyzed</p>
+      
+      <div class="icon-grid">
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="25" width="40" height="30" fill="#3B82F6"/>
+            <circle cx="35" cy="15" r="7" fill="#3B82F6"/>
+            <rect x="20" y="55" width="30" height="10" fill="#3B82F6"/>
+          </svg>
+          <div class="icon-label">Office & Support<br/><span class="color-badge badge-blue">43-XXXX</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="20" width="40" height="35" fill="#FF6B35"/>
+            <rect x="20" y="25" width="8" height="8" fill="white"/>
+            <rect x="31" y="25" width="8" height="8" fill="white"/>
+            <rect x="42" y="25" width="8" height="8" fill="white"/>
+            <rect x="20" y="36" width="30" height="3" fill="white"/>
+            <rect x="20" y="42" width="30" height="3" fill="white"/>
+          </svg>
+          <div class="icon-label">Business & Finance<br/><span class="color-badge badge-orange">13-XXXX</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="15" width="40" height="40" fill="#1E3A8A"/>
+            <rect x="20" y="20" width="10" height="10" fill="#3B82F6"/>
+            <rect x="35" y="20" width="10" height="10" fill="#3B82F6"/>
+            <rect x="20" y="35" width="10" height="10" fill="#3B82F6"/>
+            <rect x="35" y="35" width="10" height="10" fill="#3B82F6"/>
+            <text x="35" y="48" font-size="20" fill="#84CC16" text-anchor="middle" font-weight="700">&lt;/&gt;</text>
+          </svg>
+          <div class="icon-label">IT & Data<br/><span class="color-badge badge-blue">15-XXXX</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <polygon points="35,15 50,25 50,45 35,55 20,45 20,25" fill="none" stroke="#84CC16" stroke-width="3"/>
+            <circle cx="35" cy="35" r="8" fill="#84CC16"/>
+            <line x1="35" y1="25" x2="35" y2="15" stroke="#84CC16" stroke-width="2"/>
+            <line x1="35" y1="45" x2="35" y2="55" stroke="#84CC16" stroke-width="2"/>
+          </svg>
+          <div class="icon-label">Management Analysts<br/><span class="color-badge badge-green">13-1111</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="20" width="40" height="35" fill="#DC2626"/>
+            <polygon points="35,30 40,35 35,40 30,35" fill="white"/>
+            <rect x="23" y="45" width="24" height="3" fill="white"/>
+            <rect x="25" y="50" width="20" height="2" fill="white"/>
+          </svg>
+          <div class="icon-label">Risk & Compliance<br/><span class="color-badge badge-red">13-2XXX</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="20" fill="none" stroke="#FF6B35" stroke-width="3"/>
+            <path d="M 25 35 Q 35 28, 45 35" fill="none" stroke="#FF6B35" stroke-width="2"/>
+            <circle cx="28" cy="30" r="2" fill="#FF6B35"/>
+            <circle cx="42" cy="30" r="2" fill="#FF6B35"/>
+          </svg>
+          <div class="icon-label">Customer Service<br/><span class="color-badge badge-orange">43-4051</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK TYPES (DWAs) -->
+    <div class="category">
+      <h2>Task Types & Work Activities</h2>
+      <p class="intro">Detailed Work Activities (DWAs) from O*NET taxonomy</p>
+      
+      <div class="icon-grid">
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="25" width="40" height="8" fill="#DC2626"/>
+            <rect x="15" y="35" width="40" height="8" fill="#DC2626" opacity="0.7"/>
+            <rect x="15" y="45" width="40" height="8" fill="#DC2626" opacity="0.5"/>
+          </svg>
+          <div class="icon-label">Routine/Manual<br/><span class="color-badge badge-red">47%</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="18" fill="none" stroke="#3B82F6" stroke-width="3"/>
+            <path d="M 25 35 L 32 42 L 45 28" fill="none" stroke="#3B82F6" stroke-width="3"/>
+          </svg>
+          <div class="icon-label">Verify/Check<br/><span class="color-badge badge-blue">DWA</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="20" y="20" width="30" height="35" fill="none" stroke="#FF6B35" stroke-width="2"/>
+            <line x1="25" y1="28" x2="40" y2="28" stroke="#FF6B35" stroke-width="2"/>
+            <line x1="25" y1="35" x2="40" y2="35" stroke="#FF6B35" stroke-width="2"/>
+            <line x1="25" y1="42" x2="40" y2="42" stroke="#FF6B35" stroke-width="2"/>
+            <line x1="25" y1="49" x2="35" y2="49" stroke="#FF6B35" stroke-width="2"/>
+          </svg>
+          <div class="icon-label">Enter Data<br/><span class="color-badge badge-orange">DWA</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="25" width="18" height="25" fill="#3B82F6"/>
+            <rect x="37" y="25" width="18" height="25" fill="#FF6B35"/>
+            <line x1="35" y1="20" x2="35" y2="55" stroke="#84CC16" stroke-width="3"/>
+            <polygon points="35,55 30,50 40,50" fill="#84CC16"/>
+          </svg>
+          <div class="icon-label">Reconcile<br/><span class="color-badge badge-green">DWA</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="18" fill="#FF6B35" opacity="0.3"/>
+            <path d="M 25 40 Q 30 30, 35 35 T 45 30" fill="none" stroke="#FF6B35" stroke-width="3"/>
+            <circle cx="30" cy="32" r="3" fill="#FF6B35"/>
+            <circle cx="40" cy="28" r="3" fill="#FF6B35"/>
+          </svg>
+          <div class="icon-label">Analyze<br/><span class="color-badge badge-orange">DWA</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="20" width="40" height="30" fill="none" stroke="#3B82F6" stroke-width="2"/>
+            <rect x="20" y="25" width="12" height="8" fill="#3B82F6"/>
+            <rect x="35" y="25" width="15" height="8" fill="#3B82F6"/>
+            <rect x="20" y="37" width="30" height="3" fill="#3B82F6"/>
+            <rect x="20" y="43" width="25" height="3" fill="#3B82F6"/>
+          </svg>
+          <div class="icon-label">Compile Reports<br/><span class="color-badge badge-blue">DWA</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="25" cy="30" r="8" fill="#84CC16"/>
+            <circle cx="45" cy="30" r="8" fill="#84CC16"/>
+            <circle cx="25" cy="50" r="8" fill="#84CC16"/>
+            <circle cx="45" cy="50" r="8" fill="#84CC16"/>
+            <line x1="25" y1="30" x2="25" y2="50" stroke="#2D2420" stroke-width="2"/>
+            <line x1="25" y1="30" x2="45" y2="30" stroke="#2D2420" stroke-width="2"/>
+            <line x1="45" y1="30" x2="45" y2="50" stroke="#2D2420" stroke-width="2"/>
+            <line x1="25" y1="50" x2="45" y2="50" stroke="#2D2420" stroke-width="2"/>
+          </svg>
+          <div class="icon-label">Coordinate<br/><span class="color-badge badge-green">DWA</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <polygon points="35,15 48,25 45,42 25,42 22,25" fill="none" stroke="#DC2626" stroke-width="3"/>
+            <circle cx="35" cy="30" r="6" fill="#DC2626"/>
+            <line x1="35" y1="36" x2="35" y2="45" stroke="#DC2626" stroke-width="2"/>
+          </svg>
+          <div class="icon-label">Evaluate Risk<br/><span class="color-badge badge-red">DWA</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CDI COMPONENTS DETAILED -->
+    <div class="category">
+      <h2>CDI Components & Signals</h2>
+      <p class="intro">Visual representations of Role Complexity Load, Process-Tech Misalignment, and Tech-Labor Divergence</p>
+      
+      <div class="icon-grid">
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="22" fill="none" stroke="#FF6B35" stroke-width="2"/>
+            <circle cx="35" cy="35" r="16" fill="none" stroke="#FF6B35" stroke-width="2"/>
+            <circle cx="35" cy="35" r="10" fill="#FF6B35" opacity="0.5"/>
+            <text x="35" y="40" font-size="12" fill="#2D2420" text-anchor="middle" font-weight="700">RCL</text>
+          </svg>
+          <div class="icon-label">Role Complexity Load<br/><span class="color-badge badge-orange">CDI</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="25" width="18" height="20" fill="#3B82F6"/>
+            <rect x="37" y="25" width="18" height="20" fill="#DC2626"/>
+            <line x1="35" y1="20" x2="35" y2="50" stroke="#2D2420" stroke-width="3" stroke-dasharray="3,3"/>
+            <text x="35" y="60" font-size="11" fill="#2D2420" text-anchor="middle" font-weight="700">PTM</text>
+          </svg>
+          <div class="icon-label">Process-Tech Misalign<br/><span class="color-badge badge-red">CDI</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="30" width="14" height="15" fill="#DC2626" opacity="0.7"/>
+            <rect x="15" y="47" width="14" height="8" fill="#DC2626" opacity="0.7"/>
+            <rect x="42" y="40" width="13" height="5" fill="#3B82F6"/>
+            <rect x="42" y="48" width="13" height="7" fill="#3B82F6"/>
+            <line x1="33" y1="25" x2="38" y2="25" stroke="#FF6B35" stroke-width="3"/>
+            <polygon points="38,25 33,22 33,28" fill="#FF6B35"/>
+            <text x="35" y="20" font-size="11" fill="#2D2420" text-anchor="middle" font-weight="700">TLD</text>
+          </svg>
+          <div class="icon-label">Tech-Labor Diverge<br/><span class="color-badge badge-orange">CDI</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="20" fill="#DC2626" opacity="0.2"/>
+            <text x="35" y="42" font-size="20" fill="#DC2626" text-anchor="middle" font-weight="700">74</text>
+            <text x="35" y="56" font-size="9" fill="#5A5350" text-anchor="middle">HIGH DRAG</text>
+          </svg>
+          <div class="icon-label">CDI Score High<br/><span class="color-badge badge-red">70+</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="20" fill="#84CC16" opacity="0.2"/>
+            <text x="35" y="42" font-size="20" fill="#84CC16" text-anchor="middle" font-weight="700">38</text>
+            <text x="35" y="56" font-size="9" fill="#5A5350" text-anchor="middle">LOW DRAG</text>
+          </svg>
+          <div class="icon-label">CDI Score Low<br/><span class="color-badge badge-green">&lt;50</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <polyline points="15,55 25,50 35,45 45,35 55,25" fill="none" stroke="#84CC16" stroke-width="4"/>
+            <circle cx="15" cy="55" r="4" fill="#DC2626"/>
+            <circle cx="35" cy="45" r="4" fill="#FF6B35"/>
+            <circle cx="55" cy="25" r="4" fill="#84CC16"/>
+            <polygon points="55,25 50,27 52,22" fill="#84CC16"/>
+          </svg>
+          <div class="icon-label">CDI Velocity<br/><span class="color-badge badge-green">Improving</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="40" width="8" height="15" fill="#DC2626"/>
+            <rect x="26" y="35" width="8" height="20" fill="#FF6B35"/>
+            <rect x="37" y="28" width="8" height="27" fill="#3B82F6"/>
+            <rect x="48" y="22" width="8" height="33" fill="#84CC16"/>
+            <line x1="10" y1="58" x2="60" y2="15" stroke="#2D2420" stroke-width="1" stroke-dasharray="2,2"/>
+          </svg>
+          <div class="icon-label">Peer Benchmark<br/><span class="color-badge badge-blue">NAICS</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <path d="M 15 50 Q 25 45, 35 47 T 55 35" fill="none" stroke="#FF6B35" stroke-width="3"/>
+            <circle cx="25" cy="46" r="3" fill="#FF6B35"/>
+            <circle cx="35" cy="47" r="3" fill="#FF6B35"/>
+            <circle cx="45" cy="41" r="3" fill="#FF6B35"/>
+            <text x="35" y="25" font-size="10" fill="#5A5350" text-anchor="middle">ENTROPY</text>
+          </svg>
+          <div class="icon-label">Complexity Entropy<br/><span class="color-badge badge-orange">RCL</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUTOMATION & AI INTERVENTIONS -->
+    <div class="category">
+      <h2>Automation & AI Interventions</h2>
+      <p class="intro">Technologies and approaches for reducing cognitive drag</p>
+      
+      <div class="icon-grid">
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="20" width="40" height="30" fill="none" stroke="#3B82F6" stroke-width="2"/>
+            <circle cx="25" cy="30" r="3" fill="#3B82F6"/>
+            <circle cx="35" cy="30" r="3" fill="#3B82F6"/>
+            <circle cx="45" cy="30" r="3" fill="#3B82F6"/>
+            <rect x="22" y="38" width="26" height="3" fill="#3B82F6"/>
+            <rect x="22" y="43" width="20" height="2" fill="#3B82F6"/>
+          </svg>
+          <div class="icon-label">OCR/Document<br/><span class="color-badge badge-blue">Tech</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <polygon points="35,15 50,25 50,45 35,55 20,45 20,25" fill="none" stroke="#84CC16" stroke-width="3"/>
+            <circle cx="35" cy="35" r="8" fill="#84CC16"/>
+            <polygon points="35,25 40,30 35,35 30,30" fill="white"/>
+          </svg>
+          <div class="icon-label">RPA Bot<br/><span class="color-badge badge-green">Auto</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="18" fill="#FF6B35" opacity="0.2"/>
+            <path d="M 25 40 Q 30 28, 35 35 Q 40 42, 45 32" fill="none" stroke="#FF6B35" stroke-width="3"/>
+            <circle cx="30" cy="30" r="3" fill="#FF6B35"/>
+            <circle cx="40" cy="36" r="3" fill="#FF6B35"/>
+            <text x="35" y="58" font-size="9" fill="#2D2420" text-anchor="middle" font-weight="700">LLM</text>
+          </svg>
+          <div class="icon-label">LLM Assist<br/><span class="color-badge badge-orange">AI</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="20" cy="35" r="7" fill="#3B82F6"/>
+            <circle cx="35" cy="35" r="7" fill="#3B82F6"/>
+            <circle cx="50" cy="35" r="7" fill="#3B82F6"/>
+            <polygon points="35,20 40,25 35,30 30,25" fill="#84CC16"/>
+            <line x1="27" y1="35" x2="28" y2="35" stroke="#2D2420" stroke-width="2"/>
+            <line x1="42" y1="35" x2="43" y2="35" stroke="#2D2420" stroke-width="2"/>
+          </svg>
+          <div class="icon-label">Workflow Engine<br/><span class="color-badge badge-green">Orch</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="20" width="40" height="30" fill="none" stroke="#FF6B35" stroke-width="2"/>
+            <polyline points="20,30 30,40 45,25" fill="none" stroke="#84CC16" stroke-width="3"/>
+            <text x="35" y="60" font-size="9" fill="#2D2420" text-anchor="middle" font-weight="700">RULES</text>
+          </svg>
+          <div class="icon-label">Rules Engine<br/><span class="color-badge badge-orange">Logic</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="30" r="12" fill="#3B82F6" opacity="0.3"/>
+            <circle cx="28" cy="27" r="3" fill="#3B82F6"/>
+            <circle cx="42" cy="27" r="3" fill="#3B82F6"/>
+            <path d="M 28 36 Q 35 40, 42 36" fill="none" stroke="#3B82F6" stroke-width="2"/>
+            <circle cx="35" cy="50" r="8" fill="none" stroke="#2D2420" stroke-width="2"/>
+            <circle cx="35" cy="50" r="3" fill="#2D2420"/>
+          </svg>
+          <div class="icon-label">Copilot/Assist<br/><span class="color-badge badge-blue">Agent</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="25" width="40" height="8" fill="#DC2626" opacity="0.5"/>
+            <rect x="15" y="36" width="40" height="8" fill="#DC2626" opacity="0.3"/>
+            <polygon points="60,40 55,35 55,45" fill="#84CC16"/>
+            <rect x="15" y="47" width="40" height="8" fill="#84CC16"/>
+          </svg>
+          <div class="icon-label">Process Redesign<br/><span class="color-badge badge-green">CI</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="20" width="18" height="30" fill="#FF6B35"/>
+            <rect x="37" y="20" width="18" height="30" fill="#3B82F6"/>
+            <line x1="26" y1="35" x2="46" y2="35" stroke="#84CC16" stroke-width="4"/>
+            <circle cx="36" cy="35" r="5" fill="#84CC16"/>
+          </svg>
+          <div class="icon-label">API Integration<br/><span class="color-badge badge-blue">Connect</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INDUSTRIES & SECTORS -->
+    <div class="category">
+      <h2>Industries & Sectors</h2>
+      <p class="intro">NAICS industry representations for sector-specific analysis</p>
+      
+      <div class="icon-grid">
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="20" width="40" height="35" fill="#1E3A8A"/>
+            <rect x="20" y="25" width="10" height="8" fill="#3B82F6"/>
+            <rect x="20" y="36" width="10" height="8" fill="#3B82F6"/>
+            <rect x="20" y="47" width="10" height="4" fill="#3B82F6"/>
+            <circle cx="45" cy="35" r="8" fill="#84CC16"/>
+            <text x="45" y="39" font-size="12" fill="#2D2420" text-anchor="middle" font-weight="700">$</text>
+          </svg>
+          <div class="icon-label">Banking<br/><span class="color-badge badge-blue">5221</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="18" fill="none" stroke="#DC2626" stroke-width="3"/>
+            <path d="M 25 35 L 30 40 L 45 25" fill="none" stroke="#DC2626" stroke-width="3"/>
+            <rect x="30" y="50" width="10" height="8" fill="#DC2626"/>
+          </svg>
+          <div class="icon-label">Healthcare<br/><span class="color-badge badge-red">621</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="35" width="40" height="5" fill="#5A5350"/>
+            <circle cx="20" cy="37" r="8" fill="#2D2420"/>
+            <circle cx="50" cy="37" r="8" fill="#2D2420"/>
+            <rect x="28" y="20" width="14" height="15" fill="#FF6B35"/>
+            <polygon points="35,15 40,20 30,20" fill="#FF6B35"/>
+          </svg>
+          <div class="icon-label">Manufacturing<br/><span class="color-badge badge-orange">31-33</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="15" width="40" height="40" fill="none" stroke="#3B82F6" stroke-width="2"/>
+            <path d="M 20 45 L 25 30 L 35 35 L 45 25 L 50 30" fill="none" stroke="#3B82F6" stroke-width="3"/>
+          </svg>
+          <div class="icon-label">Insurance<br/><span class="color-badge badge-blue">5241</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="20" y="15" width="30" height="40" fill="none" stroke="#84CC16" stroke-width="2"/>
+            <rect x="25" y="20" width="20" height="3" fill="#84CC16"/>
+            <rect x="25" y="26" width="20" height="3" fill="#84CC16"/>
+            <rect x="25" y="32" width="15" height="3" fill="#84CC16"/>
+            <rect x="25" y="38" width="18" height="3" fill="#84CC16"/>
+            <rect x="25" y="44" width="12" height="3" fill="#84CC16"/>
+          </svg>
+          <div class="icon-label">Professional Svcs<br/><span class="color-badge badge-green">54</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="30" r="12" fill="#FF6B35"/>
+            <rect x="20" y="42" width="30" height="15" fill="#FF6B35"/>
+            <rect x="25" y="47" width="8" height="8" fill="white"/>
+            <rect x="37" y="47" width="8" height="8" fill="white"/>
+          </svg>
+          <div class="icon-label">Retail<br/><span class="color-badge badge-orange">44-45</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="25" width="40" height="25" fill="none" stroke="#1E3A8A" stroke-width="2"/>
+            <polygon points="20,30 30,20 40,30" fill="#3B82F6"/>
+            <polygon points="40,30 50,20 60,30" fill="#3B82F6"/>
+            <circle cx="35" cy="42" r="5" fill="#84CC16"/>
+          </svg>
+          <div class="icon-label">Telecom<br/><span class="color-badge badge-blue">517</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="20" width="40" height="30" fill="#166534"/>
+            <circle cx="35" cy="35" r="8" fill="#84CC16"/>
+            <text x="35" y="40" font-size="12" fill="white" text-anchor="middle" font-weight="700">E</text>
+          </svg>
+          <div class="icon-label">Energy/Utilities<br/><span class="color-badge badge-green">221</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- METRICS & OUTCOMES -->
+    <div class="category">
+      <h2>Metrics & Outcomes</h2>
+      <p class="intro">Performance indicators and business outcomes</p>
+      
+      <div class="icon-grid">
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="20" fill="none" stroke="#84CC16" stroke-width="3"/>
+            <polyline points="35,35 35,20 48,28" fill="none" stroke="#84CC16" stroke-width="3"/>
+          </svg>
+          <div class="icon-label">Cycle Time<br/><span class="color-badge badge-green">-25%</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="45" width="10" height="10" fill="#DC2626"/>
+            <rect x="30" y="35" width="10" height="20" fill="#FF6B35"/>
+            <rect x="45" y="20" width="10" height="35" fill="#84CC16"/>
+            <polygon points="20,42 35,27 50,15" fill="none" stroke="#84CC16" stroke-width="3"/>
+          </svg>
+          <div class="icon-label">Productivity<br/><span class="color-badge badge-green">+23%</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="18" fill="none" stroke="#3B82F6" stroke-width="3"/>
+            <text x="35" y="32" font-size="16" fill="#3B82F6" text-anchor="middle" font-weight="700">$</text>
+            <text x="35" y="48" font-size="10" fill="#3B82F6" text-anchor="middle" font-weight="700">ROI</text>
+          </svg>
+          <div class="icon-label">ROI Impact<br/><span class="color-badge badge-blue">Revenue</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <polyline points="15,50 25,45 35,48 45,35 55,30" fill="none" stroke="#DC2626" stroke-width="4"/>
+            <polygon points="55,30 50,32 52,25" fill="#DC2626"/>
+            <text x="35" y="20" font-size="9" fill="#2D2420" text-anchor="middle">TIME TO FILL</text>
+          </svg>
+          <div class="icon-label">Time-to-Fill<br/><span class="color-badge badge-red">Days</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="30" r="12" fill="#FF6B35" opacity="0.3"/>
+            <circle cx="28" cy="27" r="3" fill="#FF6B35"/>
+            <circle cx="42" cy="27" r="3" fill="#FF6B35"/>
+            <path d="M 28 36 Q 35 40, 42 36" fill="none" stroke="#FF6B35" stroke-width="2"/>
+            <rect x="20" y="48" width="30" height="8" fill="#84CC16"/>
+            <text x="35" y="54" font-size="8" fill="white" text-anchor="middle" font-weight="700">QUALITY</text>
+          </svg>
+          <div class="icon-label">Quality Score<br/><span class="color-badge badge-green">+12%</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="20" width="40" height="30" fill="none" stroke="#3B82F6" stroke-width="2"/>
+            <rect x="20" y="25" width="10" height="20" fill="#DC2626"/>
+            <rect x="33" y="30" width="10" height="15" fill="#FF6B35"/>
+            <rect x="46" y="35" width="7" height="10" fill="#84CC16"/>
+          </svg>
+          <div class="icon-label">Backlog Reduction<br/><span class="color-badge badge-green">-35%</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="20" fill="none" stroke="#84CC16" stroke-width="3"/>
+            <text x="35" y="38" font-size="14" fill="#84CC16" text-anchor="middle" font-weight="700">99.9</text>
+            <text x="35" y="50" font-size="8" fill="#5A5350" text-anchor="middle">UPTIME</text>
+          </svg>
+          <div class="icon-label">SLA Performance<br/><span class="color-badge badge-green">Target</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="18" fill="#FF6B35" opacity="0.2"/>
+            <polygon points="35,20 40,30 50,32 42,40 44,50 35,45 26,50 28,40 20,32 30,30" fill="#FF6B35"/>
+          </svg>
+          <div class="icon-label">CSAT/NPS<br/><span class="color-badge badge-orange">Score</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATA SOURCES & DOCUMENTS -->
+    <div class="category">
+      <h2>Data Sources & Analysis Tools</h2>
+      <p class="intro">Input sources and analytical frameworks</p>
+      
+      <div class="icon-grid">
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="20" width="40" height="35" fill="none" stroke="#3B82F6" stroke-width="2"/>
+            <rect x="20" y="26" width="30" height="4" fill="#3B82F6"/>
+            <rect x="20" y="33" width="25" height="3" fill="#3B82F6"/>
+            <rect x="20" y="39" width="28" height="3" fill="#3B82F6"/>
+            <rect x="20" y="45" width="22" height="3" fill="#3B82F6"/>
+            <circle cx="45" cy="48" r="6" fill="#FF6B35"/>
+            <text x="45" y="51" font-size="8" fill="white" text-anchor="middle" font-weight="700">JD</text>
+          </svg>
+          <div class="icon-label">Job Postings<br/><span class="color-badge badge-blue">Source</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="15" width="40" height="40" fill="none" stroke="#84CC16" stroke-width="2"/>
+            <circle cx="25" cy="25" r="4" fill="#84CC16"/>
+            <circle cx="45" cy="25" r="4" fill="#84CC16"/>
+            <circle cx="25" cy="45" r="4" fill="#84CC16"/>
+            <circle cx="45" cy="45" r="4" fill="#84CC16"/>
+            <circle cx="35" cy="35" r="6" fill="#84CC16"/>
+            <line x1="25" y1="25" x2="35" y2="35" stroke="#84CC16" stroke-width="2"/>
+            <line x1="45" y1="25" x2="35" y2="35" stroke="#84CC16" stroke-width="2"/>
+            <line x1="25" y1="45" x2="35" y2="35" stroke="#84CC16" stroke-width="2"/>
+            <line x1="45" y1="45" x2="35" y2="35" stroke="#84CC16" stroke-width="2"/>
+          </svg>
+          <div class="icon-label">O*NET Taxonomy<br/><span class="color-badge badge-green">Map</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="20" width="40" height="30" fill="#1E3A8A"/>
+            <rect x="20" y="26" width="8" height="6" fill="#3B82F6"/>
+            <rect x="30" y="26" width="8" height="6" fill="#3B82F6"/>
+            <rect x="40" y="26" width="8" height="6" fill="#3B82F6"/>
+            <text x="35" y="44" font-size="11" fill="white" text-anchor="middle" font-weight="700">BLS</text>
+          </svg>
+          <div class="icon-label">BLS Data<br/><span class="color-badge badge-blue">Benchmark</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="20" width="40" height="30" fill="none" stroke="#FF6B35" stroke-width="2"/>
+            <text x="35" y="40" font-size="14" fill="#FF6B35" text-anchor="middle" font-weight="700">NLP</text>
+          </svg>
+          <div class="icon-label">NLP Analysis<br/><span class="color-badge badge-orange">Engine</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="20" fill="none" stroke="#3B82F6" stroke-width="2"/>
+            <circle cx="35" cy="35" r="14" fill="none" stroke="#3B82F6" stroke-width="2"/>
+            <circle cx="35" cy="35" r="8" fill="none" stroke="#3B82F6" stroke-width="2"/>
+            <line x1="35" y1="15" x2="35" y2="21" stroke="#3B82F6" stroke-width="2"/>
+            <line x1="35" y1="49" x2="35" y2="55" stroke="#3B82F6" stroke-width="2"/>
+            <line x1="15" y1="35" x2="21" y2="35" stroke="#3B82F6" stroke-width="2"/>
+            <line x1="49" y1="35" x2="55" y2="35" stroke="#3B82F6" stroke-width="2"/>
+          </svg>
+          <div class="icon-label">Embeddings<br/><span class="color-badge badge-blue">Vector</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="20" width="40" height="30" fill="none" stroke="#84CC16" stroke-width="2"/>
+            <polyline points="20,43 27,35 33,40 40,28 47,32" fill="none" stroke="#84CC16" stroke-width="3"/>
+            <circle cx="27" cy="35" r="3" fill="#84CC16"/>
+            <circle cx="40" cy="28" r="3" fill="#84CC16"/>
+          </svg>
+          <div class="icon-label">Correlation Model<br/><span class="color-badge badge-green">ML</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="15" width="40" height="40" fill="none" stroke="#DC2626" stroke-width="2"/>
+            <rect x="20" y="20" width="12" height="12" fill="#DC2626" opacity="0.8"/>
+            <rect x="35" y="20" width="12" height="12" fill="#FF6B35" opacity="0.6"/>
+            <rect x="20" y="35" width="12" height="12" fill="#FF6B35" opacity="0.6"/>
+            <rect x="35" y="35" width="12" height="12" fill="#84CC16" opacity="0.4"/>
+          </svg>
+          <div class="icon-label">Heat Map Output<br/><span class="color-badge badge-red">Viz</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="15" width="40" height="40" fill="none" stroke="#FF6B35" stroke-width="2"/>
+            <text x="35" y="28" font-size="10" fill="#FF6B35" text-anchor="middle" font-weight="700">TOP 5</text>
+            <rect x="20" y="32" width="30" height="4" fill="#FF6B35"/>
+            <rect x="20" y="38" width="28" height="4" fill="#FF6B35" opacity="0.8"/>
+            <rect x="20" y="44" width="25" height="4" fill="#FF6B35" opacity="0.6"/>
+          </svg>
+          <div class="icon-label">Opportunity Map<br/><span class="color-badge badge-orange">Output</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REPORTING & DELIVERY -->
+    <div class="category">
+      <h2>Reporting & Delivery</h2>
+      <p class="intro">Final diagnostic outputs and deliverables</p>
+      
+      <div class="icon-grid">
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="15" width="40" height="45" fill="none" stroke="#3B82F6" stroke-width="2"/>
+            <rect x="20" y="20" width="30" height="5" fill="#3B82F6"/>
+            <rect x="20" y="28" width="25" height="3" fill="#3B82F6" opacity="0.6"/>
+            <rect x="20" y="33" width="28" height="3" fill="#3B82F6" opacity="0.6"/>
+            <rect x="20" y="40" width="30" height="15" fill="#FF6B35" opacity="0.2"/>
+          </svg>
+          <div class="icon-label">10-Day Report<br/><span class="color-badge badge-blue">PDF</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="20" width="40" height="30" fill="none" stroke="#FF6B35" stroke-width="2"/>
+            <circle cx="35" cy="35" r="10" fill="#FF6B35" opacity="0.2"/>
+            <text x="35" y="40" font-size="16" fill="#FF6B35" text-anchor="middle" font-weight="700">5</text>
+            <text x="35" y="58" font-size="8" fill="#2D2420" text-anchor="middle">OPPORTUNITIES</text>
+          </svg>
+          <div class="icon-label">Top 5 Insights<br/><span class="color-badge badge-orange">Key</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="12" y="15" width="46" height="40" fill="none" stroke="#84CC16" stroke-width="2"/>
+            <rect x="17" y="20" width="36" height="6" fill="#84CC16"/>
+            <rect x="17" y="29" width="28" height="4" fill="#84CC16" opacity="0.6"/>
+            <rect x="17" y="36" width="32" height="4" fill="#84CC16" opacity="0.6"/>
+            <rect x="17" y="43" width="30" height="4" fill="#84CC16" opacity="0.6"/>
+            <polygon points="50,46 45,48 48,43" fill="#84CC16"/>
+          </svg>
+          <div class="icon-label">Action Plan<br/><span class="color-badge badge-green">Next</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="10" y="15" width="50" height="40" fill="none" stroke="#3B82F6" stroke-width="2"/>
+            <rect x="15" y="20" width="15" height="12" fill="#DC2626"/>
+            <rect x="15" y="35" width="15" height="12" fill="#FF6B35"/>
+            <rect x="35" y="20" width="20" height="4" fill="#3B82F6"/>
+            <rect x="35" y="27" width="18" height="3" fill="#3B82F6" opacity="0.6"/>
+            <rect x="35" y="35" width="20" height="4" fill="#3B82F6"/>
+            <rect x="35" y="42" width="16" height="3" fill="#3B82F6" opacity="0.6"/>
+          </svg>
+          <div class="icon-label">Executive Brief<br/><span class="color-badge badge-blue">Slides</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="15" y="15" width="40" height="40" fill="none" stroke="#FF6B35" stroke-width="2"/>
+            <rect x="20" y="20" width="30" height="8" fill="#FF6B35"/>
+            <line x1="20" y1="35" x2="45" y2="35" stroke="#FF6B35" stroke-width="2"/>
+            <line x1="20" y1="42" x2="40" y2="42" stroke="#FF6B35" stroke-width="2"/>
+            <line x1="20" y1="49" x2="43" y2="49" stroke="#FF6B35" stroke-width="2"/>
+          </svg>
+          <div class="icon-label">Implementation Guide<br/><span class="color-badge badge-orange">How-To</span></div>
+        </div>
+        
+        <div class="icon-card">
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="20" fill="none" stroke="#84CC16" stroke-width="3"/>
+            <polyline points="25,35 32,42 45,28" fill="none" stroke="#84CC16" stroke-width="4"/>
+          </svg>
+          <div class="icon-label">Validated Results<br/><span class="color-badge badge-green">Proof</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

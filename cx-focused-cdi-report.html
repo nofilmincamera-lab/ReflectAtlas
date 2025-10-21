@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reflect Atlas - Customer Experience CDI Report</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: linear-gradient(135deg, #F5F3EF 0%, #E8E5E0 100%);
+      color: #2D2420;
+      line-height: 1.6;
+      padding: 60px 40px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      margin-bottom: 60px;
+    }
+    
+    .logo-bar {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    
+    .company-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2D2420;
+    }
+    
+    .product-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 20px 30px;
+      background: white;
+      border-radius: 10px;
+      border: 2px solid #E8E5E0;
+      margin-bottom: 20px;
+    }
+    
+    .product-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2D2420;
+    }
+    
+    .hero {
+      background: linear-gradient(135deg, #2D2420 0%, #1A1A1A 100%);
+      padding: 60px 40px;
+      border-radius: 20px;
+      color: white;
+      margin-bottom: 40px;
+    }
+    
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    
+    .hero .subtitle {
+      font-size: 1.2rem;
+      color: #E8E5E0;
+      margin-bottom: 30px;
+    }
+    
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    
+    .hero-stat {
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .hero-stat-value {
+      font-family: 'Fira Code', monospace;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #DC2626;
+      margin-bottom: 8px;
+    }
+    
+    .hero-stat-label {
+      font-size: 0.95rem;
+      color: #E8E5E0;
+    }
+    
+    .overview-card {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      border: 2px solid #E8E5E0;
+      margin-bottom: 40px;
+    }
+    
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2D2420;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid #DC2626;
+    }
+    
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+    
+    .overview-item {
+      padding: 20px;
+      background: #F5F3EF;
+      border-radius: 10px;
+    }
+    
+    .overview-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #5A5350;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    
+    .overview-value {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #2D2420;
+    }
+    
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .data-table thead {
+      background: #2D2420;
+      color: white;
+    }
+    
+    .data-table th {
+      padding: 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    
+    .data-table td {
+      padding: 16px;
+      border-bottom: 1px solid #E8E5E0;
+    }
+    
+    .data-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .data-table tbody tr:hover {
+      background: #F5F3EF;
+    }
+    
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 40px 0;
+    }
+    
+    .metric-card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      border: 2px solid #E8E5E0;
+      transition: all 0.3s ease;
+    }
+    
+    .metric-card:hover {
+      border-color: #DC2626;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    
+    .metric-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .metric-value {
+      font-family: 'Fira Code', monospace;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .metric-label {
+      font-size: 0.95rem;
+      color: #5A5350;
+      margin-bottom: 12px;
+    }
+    
+    .metric-context {
+      font-size: 0.85rem;
+      color: #5A5350;
+      padding-top: 12px;
+      border-top: 1px solid #E8E5E0;
+    }
+    
+    .alert {
+      padding: 20px 24px;
+      border-radius: 10px;
+      margin: 24px 0;
+      border-left: 4px solid;
+    }
+    
+    .alert-danger {
+      background: #FEF2F2;
+      border-color: #DC2626;
+      color: #7F1D1D;
+    }
+    
+    .alert-warning {
+      background: #FFF7ED;
+      border-color: #FF6B35;
+      color: #7C2D12;
+    }
+    
+    .alert-success {
+      background: #F0FDF4;
+      border-color: #84CC16;
+      color: #365314;
+    }
+    
+    .alert-info {
+      background: #EFF6FF;
+      border-color: #3B82F6;
+      color: #1E3A8A;
+    }
+    
+    .alert-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+    
+    .progress-container {
+      margin: 20px 0;
+    }
+    
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    .progress-bar {
+      height: 12px;
+      background: #E8E5E0;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      transition: width 0.3s ease;
+      border-radius: 6px;
+    }
+    
+    .comparison-chart {
+      display: flex;
+      gap: 20px;
+      align-items: flex-end;
+      height: 300px;
+      padding: 20px;
+      background: #F5F3EF;
+      border-radius: 10px;
+      margin: 24px 0;
+    }
+    
+    .chart-bar {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .bar {
+      width: 100%;
+      background: #DC2626;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 12px;
+      color: white;
+      font-weight: 700;
+      font-family: 'Fira Code', monospace;
+      transition: transform 0.3s ease;
+    }
+    
+    .bar:hover {
+      transform: translateY(-8px);
+    }
+    
+    .bar-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #2D2420;
+      text-align: center;
+    }
+    
+    .opportunity-cards {
+      display: grid;
+      gap: 24px;
+      margin: 40px 0;
+    }
+    
+    .opportunity-card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      border: 2px solid #E8E5E0;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 24px;
+      align-items: center;
+    }
+    
+    .opportunity-rank {
+      width: 60px;
+      height: 60px;
+      background: #DC2626;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .opportunity-content h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #2D2420;
+      margin-bottom: 8px;
+    }
+    
+    .opportunity-content p {
+      color: #5A5350;
+      margin-bottom: 12px;
+    }
+    
+    .opportunity-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .tag {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .tag-impact {
+      background: #FEF2F2;
+      color: #DC2626;
+    }
+    
+    .tag-function {
+      background: #EFF6FF;
+      color: #3B82F6;
+    }
+    
+    .tag-tech {
+      background: #F0FDF4;
+      color: #84CC16;
+    }
+    
+    .opportunity-impact {
+      text-align: right;
+    }
+    
+    .impact-value {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #84CC16;
+      margin-bottom: 4px;
+    }
+    
+    .impact-label {
+      font-size: 0.85rem;
+      color: #5A5350;
+    }
+    
+    .footer {
+      margin-top: 80px;
+      padding: 40px;
+      background: white;
+      border-radius: 15px;
+      border: 2px solid #E8E5E0;
+      text-align: center;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    @media print {
+      body {
+        background: white;
+        padding: 20px;
+      }
+      .hero {
+        break-inside: avoid;
+      }
+      .metric-card, .opportunity-card {
+        break-inside: avoid;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .opportunity-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-stats {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo-bar">
+        <svg width="35" height="35" viewBox="0 0 80 80">
+          <circle cx="40" cy="24" r="12" fill="#DC2626"/>
+          <circle cx="28" cy="48" r="12" fill="#3B82F6"/>
+          <circle cx="52" cy="48" r="12" fill="#FF6B35"/>
+        </svg>
+        <span class="company-name">Still Logic</span>
+      </div>
+      
+      <div class="product-logo">
+        <svg width="45" height="45" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" fill="none" stroke="#3B82F6" stroke-width="3"/>
+          <line x1="50" y1="10" x2="50" y2="25" stroke="#DC2626" stroke-width="4"/>
+          <line x1="50" y1="75" x2="50" y2="90" stroke="#FF6B35" stroke-width="4"/>
+          <line x1="10" y1="50" x2="25" y2="50" stroke="#84CC16" stroke-width="4"/>
+          <line x1="75" y1="50" x2="90" y2="50" stroke="#3B82F6" stroke-width="4"/>
+          <circle cx="50" cy="50" r="8" fill="#2D2420"/>
+        </svg>
+        <span class="product-name">Reflect Atlas</span>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>Customer Experience Cognitive Drag Index Report</h1>
+      <p class="subtitle">CX Operations Efficiency Diagnostic</p>
+      
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">78.4</div>
+          <div class="hero-stat-label">CX Cognitive Drag Index (Critical)</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">+19.2</div>
+          <div class="hero-stat-label">Points Above CX Benchmark</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">15-20</div>
+          <div class="hero-stat-label">Point Reduction Opportunity</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">12-15%</div>
+          <div class="hero-stat-label">Cost-Per-Contact Reduction Potential</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Company Overview -->
+    <div class="overview-card">
+      <h2 class="section-title">Company Overview</h2>
+      
+      <div class="overview-grid">
+        <div class="overview-item">
+          <div class="overview-label">Company</div>
+          <div class="overview-value">NexTel Communications</div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-label">Sector</div>
+          <div class="overview-value">NAICS 517312 (Wireless)</div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-label">CX Employees</div>
+          <div class="overview-value">4,200 FTEs</div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-label">Data Sample</div>
+          <div class="overview-value">485 CX postings</div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-label">Monthly Contacts</div>
+          <div class="overview-value">2.8M interactions</div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-label">Channels</div>
+          <div class="overview-value">Voice, Chat, Email, Social</div>
+        </div>
+      </div>
+
+      <div class="alert alert-info" style="margin-top: 24px;">
+        <div class="alert-title">Analysis Scope</div>
+        This report focuses exclusively on customer-facing roles and operations. Analysis includes contact center agents, technical support specialists, customer success managers, field service technicians, retail associates, social media specialists, and escalation teams. Data sources: O*NET Content Model, BLS OES data, internal job postings, and proprietary analytical models by Still Logic.
+      </div>
+    </div>
+
+    <!-- Task Distribution -->
+    <div class="overview-card">
+      <h2 class="section-title">1. CX Task Distribution Analysis</h2>
+      
+      <p style="color: #5A5350; margin-bottom: 24px;">
+        Analysis of customer experience roles reveals significant manual task concentration across all touchpoints. The 56% routine/manual task distribution indicates substantial automation potential in customer interactions.
+      </p>
+
+      <div class="progress-container">
+        <div class="progress-label">
+          <span>Routine / Manual CX Tasks</span>
+          <span style="font-family: 'Fira Code', monospace; color: #DC2626;">56%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 56%; background: #DC2626;"></div>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-label">
+          <span>Cognitive / Problem-Solving</span>
+          <span style="font-family: 'Fira Code', monospace; color: #3B82F6;">28%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 28%; background: #3B82F6;"></div>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-label">
+          <span>Collaborative / Escalation</span>
+          <span style="font-family: 'Fir Code', monospace; color: #FF6B35;">11%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 11%; background: #FF6B35;"></div>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-label">
+          <span>Automation-Enabled</span>
+          <span style="font-family: 'Fira Code', monospace; color: #84CC16;">5%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 5%; background: #84CC16;"></div>
+        </div>
+      </div>
+
+      <div class="alert alert-danger" style="margin-top: 24px;">
+        <div class="alert-title">Critical CX Finding</div>
+        56% manual task concentration with only 5% automation-enabled work represents a 51-point automation gap—the highest drag concentration across all functional areas analyzed. This directly impacts cost-per-contact, handle times, and customer satisfaction scores.
+      </div>
+
+      <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; margin-top: 40px; margin-bottom: 20px; color: #2D2420;">CX Task Examples by Category</h3>
+      
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Task Category</th>
+            <th>Example Extracted Phrases (O*NET DWAs)</th>
+            <th>Automation Potential</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Routine / Manual</strong></td>
+            <td>"answer basic inquiries," "lookup account information," "verify customer identity," "update account details," "schedule appointments"</td>
+            <td style="color: #DC2626; font-weight: 600;">Very High (75-90%)</td>
+          </tr>
+          <tr>
+            <td><strong>Cognitive / Problem-Solving</strong></td>
+            <td>"troubleshoot technical issues," "resolve billing disputes," "investigate service failures," "recommend solutions"</td>
+            <td style="color: #FF6B35; font-weight: 600;">Medium (45-65%)</td>
+          </tr>
+          <tr>
+            <td><strong>Collaborative / Escalation</strong></td>
+            <td>"escalate complex issues," "coordinate with technical teams," "manage customer expectations," "liaise with supervisors"</td>
+            <td style="color: #3B82F6; font-weight: 600;">Low-Medium (20-35%)</td>
+          </tr>
+          <tr>
+            <td><strong>Automation-Enabled</strong></td>
+            <td>"use chatbot platforms," "configure IVR routing," "manage knowledge base," "monitor automation workflows"</td>
+            <td style="color: #84CC16; font-weight: 600;">N/A (CX Enablers)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CX Role Composition -->
+    <div class="overview-card">
+      <h2 class="section-title">2. Customer Experience Role Composition</h2>
+      
+      <p style="color: #5A5350; margin-bottom: 24px;">
+        CX workforce mapped to O*NET occupational groups shows overweight concentration in generalist support roles with underinvestment in specialized technical and digital CX capabilities.
+      </p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>O*NET Role (SOC)</th>
+            <th>NexTel CX</th>
+            <th>Industry Benchmark</th>
+            <th>Gap</th>
+            <th>Impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>43-4051</strong> Customer Service Representatives</td>
+            <td style="font-family: 'Fira Code', monospace; font-weight: 600;">62%</td>
+            <td style="font-family: 'Fira Code', monospace;">48%</td>
+            <td style="color: #DC2626; font-weight: 600;">+14 pts</td>
+            <td style="font-size: 0.85rem; color: #5A5350;">Overweight generalist support</td>
+          </tr>
+          <tr>
+            <td><strong>15-1232</strong> Computer User Support Specialists</td>
+            <td style="font-family: 'Fira Code', monospace; font-weight: 600;">12%</td>
+            <td style="font-family: 'Fira Code', monospace;">18%</td>
+            <td style="color: #DC2626; font-weight: 600;">-6 pts</td>
+            <td style="font-size: 0.85rem; color: #5A5350;">Underweight technical support</td>
+          </tr>
+          <tr>
+            <td><strong>11-2021</strong> Marketing & Customer Success Managers</td>
+            <td style="font-family: 'Fira Code', monospace; font-weight: 600;">8%</td>
+            <td style="font-family: 'Fira Code', monospace;">12%</td>
+            <td style="color: #DC2626; font-weight: 600;">-4 pts</td>
+            <td style="font-size: 0.85rem; color: #5A5350;">Limited proactive CX</td>
+          </tr>
+          <tr>
+            <td><strong>49-2022</strong> Telecommunications Equipment Installers</td>
+            <td style="font-family: 'Fira Code', monospace; font-weight: 600;">11%</td>
+            <td style="font-family: 'Fira Code', monospace;">10%</td>
+            <td style="color: #84CC16; font-weight: 600;">+1 pt</td>
+            <td style="font-size: 0.85rem; color: #5A5350;">Field service aligned</td>
+          </tr>
+          <tr>
+            <td><strong>27-3031</strong> Public Relations & Social Media Specialists</td>
+            <td style="font-family: 'Fira Code', monospace; font-weight: 600;">3%</td>
+            <td style="font-family: 'Fira Code', monospace;">5%</td>
+            <td style="color: #DC2626; font-weight: 600;">-2 pts</td>
+            <td style="font-size: 0.85rem; color: #5A5350;">Underweight digital CX</td>
+          </tr>
+          <tr>
+            <td><strong>11-9151</strong> Social & Community Service Managers</td>
+            <td style="font-family: 'Fira Code', monospace; font-weight: 600;">4%</td>
+            <td style="font-family: 'Fira Code', monospace;">7%</td>
+            <td style="color: #DC2626; font-weight: 600;">-3 pts</td>
+            <td style="font-size: 0.85rem; color: #5A5350;">Limited escalation capacity</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-warning" style="margin-top: 24px;">
+        <div class="alert-title">CX Workforce Signal</div>
+        62% concentration in generalist CSR roles (43-4051) versus 48% industry benchmark indicates high-volume, low-leverage support model. Underweight technical specialists (15-1232) and customer success managers (11-2021) limits problem resolution capability and proactive value delivery.
+      </div>
+    </div>
+
+    <!-- CX Technology Stack -->
+    <div class="overview-card">
+      <h2 class="section-title">3. CX Technology Stack vs. Benchmark</h2>
+      
+      <p style="color: #5A5350; margin-bottom: 30px;">
+        Analysis of technology mentions in CX job postings reveals critical gaps in automation, intelligence, and omnichannel capabilities compared to industry leaders.
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0;">
+        <div style="background: #F5F3EF; padding: 30px; border-radius: 15px;">
+          <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; color: #2D2420; margin-bottom: 20px;">Contact Center Infrastructure</h4>
+          <div style="display: grid; gap: 12px;">
+            <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #E8E5E0;">
+              <span style="font-weight: 500; color: #2D2420;">Contact Center Platform</span>
+              <span style="background: #F0FDF4; color: #84CC16; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">Present</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #E8E5E0;">
+              <span style="font-weight: 500; color: #2D2420;">CRM System</span>
+              <span style="background: #F0FDF4; color: #84CC16; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">Present</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #E8E5E0;">
+              <span style="font-weight: 500; color: #2D2420;">IVR/ACD Systems</span>
+              <span style="background: #F0FDF4; color: #84CC16; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">Present</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 10px 0;">
+              <span style="font-weight: 500; color: #2D2420;">Workforce Management</span>
+              <span style="background: #FFF7ED; color: #FF6B35; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">Limited</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: #F5F3EF; padding: 30px; border-radius: 15px;">
+          <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; color: #2D2420; margin-bottom: 20px;">Automation & Intelligence</h4>
+          <div style="display: grid; gap: 12px;">
+            <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #E8E5E0;">
+              <span style="font-weight: 500; color: #2D2420;">Conversational Voice Automation</span>
+              <span style="background: #FEF2F2; color: #DC2626; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">Missing</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #E8E5E0;">
+              <span style="font-weight: 500; color: #2D2420;">Agent Assist / Copilot</span>
+              <span style="background: #FEF2F2; color: #DC2626; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">Missing</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #E8E5E0;">
+              <span style="font-weight: 500; color: #2D2420;">Chat/Email Automation</span>
+              <span style="background: #FFF7ED; color: #FF6B35; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">Limited</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 10px 0;">
+              <span style="font-weight: 500; color: #2D2420;">Auto-Summarization</span>
+              <span style="background: #FEF2F2; color: #DC2626; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">Missing</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: #F5F3EF; padding: 30px; border-radius: 15px;">
+          <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; color: #2D2420; margin-bottom: 20px;">Knowledge & Self-Service</h4>
+          <div style="display: grid; gap: 12px;">
+            <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #E8E5E0;">
+              <span style="font-weight: 500; color: #2D2420;">Knowledge Base</span>
+              <span style="background: #F0FDF4; color: #84CC16; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">Present</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #E8E5E0;">
+              <span style="font-weight: 500; color: #2D2420;">Self-Service Portal</span>
+              <span style="background: #FFF7ED; color: #FF6B35; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">Limited</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #E8E5E0;">
+              <span style="font-weight: 500; color: #2D2420;">Intelligent Search/Retrieval</span>
+              <span style="background: #FEF2F2; color: #DC2626; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">Missing</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 10px 0;">
+              <span style="font-weight: 500; color: #2D2420;">Community/Forums</span>
+              <span style="background: #FEF2F2; color: #DC2626; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">Missing</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: #F5F3EF; padding: 30px; border-radius: 15px;">
+          <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; color: #2D2420; margin-bottom: 20px;">Omnichannel & Routing</h4>
+          <div style="display: grid; gap: 12px;">
+            <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #E8E5E0;">
+              <span style="font-weight: 500; color: #2D2420;">Omnichannel Platform</span>
+              <span style="background: #FFF7ED; color: #FF6B35; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">Limited</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #E8E5E0;">
+              <span style="font-weight: 500; color: #2D2420;">Intelligent Routing</span>
+              <span style="background: #FEF2F2; color: #DC2626; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">Missing</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #E8E5E0;">
+              <span style="font-weight: 500; color: #2D2420;">Social Media Management</span>
+              <span style="background: #FFF7ED; color: #FF6B35; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">Limited</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 10px 0;">
+              <span style="font-weight: 500; color: #2D2420;">Video/Co-Browse Support</span>
+              <span style="background: #FEF2F2; color: #DC2626; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">Missing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="metrics-grid" style="margin-top: 40px;">
+        <div class="metric-card">
+          <div class="metric-value" style="color: #DC2626;">7 / 16</div>
+          <div class="metric-label">CX Technology Categories</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            44% coverage vs. 72% peer average in wireless/telecom
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-value" style="color: #FF6B35;">18%</div>
+          <div class="metric-label">Automation Capability</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            vs. 58% among leading CX organizations
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-value" style="color: #3B82F6;">2 / 8</div>
+          <div class="metric-label">Intelligence Tools</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            25% adoption vs. 68% industry benchmark
+          </p>
+        </div>
+      </div>
+
+      <div class="alert alert-danger" style="margin-top: 30px;">
+        <div class="alert-title">Critical CX Technology Gaps</div>
+        Missing conversational automation, agent assist, and intelligent routing while maintaining 62% CSR concentration creates a high-cost, manual-heavy CX operation. The 40-point automation gap (18% vs. 58% benchmark) directly drives elevated cost-per-contact and limits scalability.
+      </div>
+    </div>
+
+    <!-- CDI Components for CX -->
+    <div class="overview-card">
+      <h2 class="section-title">4. CX Cognitive Drag Index Components</h2>
+      
+      <p style="color: #5A5350; margin-bottom: 30px;">
+        Customer Experience operations show elevated drag across all three CDI dimensions, with particularly severe Process-Tech Misalignment driven by manual workflows despite available automation technologies.
+      </p>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon" style="background: #DC2626;">RCL</div>
+          <div class="metric-value" style="color: #DC2626;">81</div>
+          <div class="metric-label">Role Complexity Load</div>
+          <div class="metric-context">
+            <strong>+19 vs. CX median (62)</strong><br>
+            CSR roles carry excessive task variety: billing + technical + account management + sales in single positions. High system-switching and coordination overhead.
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon" style="background: #FF6B35;">PTM</div>
+          <div class="metric-value" style="color: #FF6B35;">82</div>
+          <div class="metric-label">Process-Tech Misalignment</div>
+          <div class="metric-context">
+            <strong>+24 vs. CX median (58)</strong><br>
+            Highest misalignment score. Technology platforms exist but workflows remain entirely manual. 56% routine tasks with 5% automation language indicates massive underutilization.
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon" style="background: #3B82F6;">TLD</div>
+          <div class="metric-value" style="color: #3B82F6;">72</div>
+          <div class="metric-label">Tech-Labor Divergence</div>
+          <div class="metric-context">
+            <strong>+16 vs. CX median (56)</strong><br>
+            Overweight generalist CSRs without proportional technical specialists or automation enablers. 62% concentration in 43-4051 roles limits leverage and scalability.
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-danger">
+        <div class="alert-title">CX Composite CDI: 78.4 (Critical Drag)</div>
+        Weighted composite (RCL 35%, PTM 45%, TLD 20%) places NexTel in the 91st percentile for CX drag. The 82 PTM score is exceptionally high, indicating severe process-technology disconnect. CX industry median: 59.2. Telecommunications sector median: 61.8.
+      </div>
+
+      <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; margin-top: 50px; margin-bottom: 25px; color: #2D2420;">CX-Specific Drag Drivers</h3>
+      
+      <div style="background: #F5F3EF; padding: 30px; border-radius: 15px; margin-bottom: 30px;">
+        <div style="display: grid; gap: 24px;">
+          <div>
+            <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; color: #DC2626; margin: 0 0 12px 0;">Agent Cognitive Overload</h4>
+            <p style="color: #2D2420; line-height: 1.8; margin: 0;">
+              CSR roles span 8-12 distinct Detailed Work Activities across billing, technical, account, and sales functions. Agents switch between 4-6 systems per interaction. Knowledge retrieval is manual search across multiple databases. This breadth drives 81 RCL score.
+            </p>
+          </div>
+          
+          <div>
+            <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; color: #FF6B35; margin: 0 0 12px 0;">Manual Process Persistence</h4>
+            <p style="color: #2D2420; line-height: 1.8; margin: 0;">
+              Despite having contact center platform, CRM, and knowledge base, actual workflows remain manual: agents type summaries, search knowledge manually, copy-paste between systems, and follow paper checklists. Technology exists but isn't integrated into workflow. 82 PTM score reflects this severe disconnect.
+            </p>
+          </div>
+          
+          <div>
+            <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; color: #3B82F6; margin: 0 0 12px 0;">Workforce Composition Imbalance</h4>
+            <p style="color: #2D2420; line-height: 1.8; margin: 0;">
+              62% generalist CSR concentration creates high-volume, low-leverage model. Limited technical specialists (12% vs. 18% benchmark) means more escalations and lower first-call resolution. Underweight automation enablers means no internal capacity to build/maintain intelligent tools. TLD of 72 reflects this imbalance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CX Performance Impact -->
+    <div class="overview-card">
+      <h2 class="section-title">5. CX Performance Impact & Validation</h2>
+      
+      <p style="color: #5A5350; margin-bottom: 30px;">
+        CDI findings correlate strongly with operational CX metrics, customer satisfaction scores, and financial performance indicators.
+      </p>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-value" style="color: #DC2626;">$8.40</div>
+          <div class="metric-label">Cost Per Contact</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            vs. $6.20 industry average (+35% premium driven by manual processes)
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-value" style="color: #FF6B35;">8:42</div>
+          <div class="metric-label">Average Handle Time</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            vs. 6:15 benchmark (+41% longer driven by system-switching and manual work)
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-value" style="color: #3B82F6;">58%</div>
+          <div class="metric-label">First Call Resolution</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            vs. 72% industry target (limited by CSR skill breadth and escalation)
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-value" style="color: #DC2626;">3.2</div>
+          <div class="metric-label">CSAT Score (out of 5)</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            vs. 3.8 peer average (manual processes create frustration)
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-value" style="color: #FF6B35;">34%</div>
+          <div class="metric-label">Annual Agent Attrition</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            vs. 22% industry average (cognitive overload drives turnover)
+          </p>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-value" style="color: #3B82F6;">12%</div>
+          <div class="metric-label">Self-Service Containment</div>
+          <p style="color: #5A5350; font-size: 0.9rem; margin-top: 12px;">
+            vs. 35% achievable with modern automation (missed deflection opportunity)
+          </p>
+        </div>
+      </div>
+
+      <div class="alert alert-success" style="margin-top: 30px;">
+        <div class="alert-title">Strong CDI-Performance Correlation</div>
+        The 78.4 CDI score predicts elevated cost-per-contact (r = 0.74), extended handle times (r = 0.69), and reduced CSAT (r = -0.71) with statistical significance. High PTM (82) specifically correlates with low FCR and high attrition, validating the manual-process hypothesis.
+      </div>
+    </div>
+
+    <!-- Comparison Chart -->
+    <div class="overview-card">
+      <h2 class="section-title">CX CDI Components vs. Industry Benchmark</h2>
+      
+      <div class="comparison-chart">
+        <div class="chart-bar">
+          <div class="bar" style="height: 82%; background: #DC2626;">81</div>
+          <div class="bar-label">RCL<br>NexTel CX</div>
+        </div>
+        <div class="chart-bar">
+          <div class="bar" style="height: 63%; background: #E8E5E0; color: #2D2420;">62</div>
+          <div class="bar-label">RCL<br>CX Median</div>
+        </div>
+        <div class="chart-bar">
+          <div class="bar" style="height: 83%; background: #FF6B35;">82</div>
+          <div class="bar-label">PTM<br>NexTel CX</div>
+        </div>
+        <div class="chart-bar">
+          <div class="bar" style="height: 59%; background: #E8E5E0; color: #2D2420;">58</div>
+          <div class="bar-label">PTM<br>CX Median</div>
+        </div>
+        <div class="chart-bar">
+          <div class="bar" style="height: 73%; background: #3B82F6;">72</div>
+          <div class="bar-label">TLD<br>NexTel CX</div>
+        </div>
+        <div class="chart-bar">
+          <div class="bar" style="height: 57%; background: #E8E5E0; color: #2D2420;">56</div>
+          <div class="bar-label">TLD<br>CX Median</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CX Solutions -->
+    <div class="overview-card" style="background: linear-gradient(135deg, #2D2420 0%, #1A1A1A 100%); color: white; border: none;">
+      <h2 class="section-title" style="color: white; border-color: #DC2626;">6. Atlas CX Solutions Portfolio</h2>
+      
+      <p style="color: #E8E5E0; margin-bottom: 40px; font-size: 1.05rem;">
+        Targeted solutions specifically designed to address customer experience cognitive drag, delivered through proven technology partners.
+      </p>
+
+      <div style="display: grid; gap: 30px;">
+        <!-- Solution 1 -->
+        <div style="background: white; padding: 35px; border-radius: 15px;">
+          <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 20px;">
+            <div>
+              <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; color: #DC2626; margin: 0 0 8px 0;">Atlas Contact Center Intelligence</h3>
+              <p style="color: #5A5350; font-size: 1rem; margin: 0;">Conversational automation + agent augmentation</p>
+            </div>
+            <div style="background: #FEF2F2; padding: 8px 16px; border-radius: 8px;">
+              <span style="color: #DC2626; font-weight: 700; font-size: 0.9rem;">PRIMARY SOLUTION</span>
+            </div>
+          </div>
+
+          <div style="background: #F5F3EF; padding: 25px; border-radius: 10px; margin-bottom: 25px;">
+            <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; color: #2D2420; margin: 0 0 15px 0;">Addresses Critical CX Drag</h4>
+            <p style="color: #2D2420; line-height: 1.8; margin: 0;">
+              Deploys PolyAI conversational voice automation to handle routine inquiries (account lookups, payment status, appointment scheduling) eliminating 40-50% of inbound volume. Cognigy agent assist provides real-time knowledge retrieval, response guidance, and auto-summarization for complex interactions. Directly attacks 82 PTM score by embedding intelligence into workflow.
+            </p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px;">
+            <div>
+              <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 1rem; color: #2D2420; margin: 0 0 12px 0;">Core Capabilities</h4>
+              <ul style="margin: 0 0 0 20px; padding: 0; color: #5A5350; line-height: 2;">
+                <li>Natural voice conversations (PolyAI)</li>
+                <li>Multi-language support (8 languages)</li>
+                <li>Real-time agent coaching (Cognigy)</li>
+                <li>Knowledge article surfacing</li>
+                <li>Auto call/chat summarization</li>
+                <li>Sentiment-driven escalation</li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 1rem; color: #2D2420; margin: 0 0 12px 0;">Target CX DWAs</h4>
+              <ul style="margin: 0 0 0 20px; padding: 0; color: #5A5350; line-height: 2;">
+                <li>"Answer customer inquiries"</li>
+                <li>"Verify account information"</li>
+                <li>"Resolve routine issues"</li>
+                <li>"Document interactions"</li>
+                <li>"Transfer to specialists"</li>
+                <li>"Update customer records"</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="background: #EFF6FF; padding: 20px; border-radius: 10px; border-left: 4px solid #3B82F6; margin-bottom: 25px;">
+            <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 1rem; color: #3B82F6; margin: 0 0 12px 0;">Technology Partners</h4>
+            <div style="display: flex; gap: 30px; align-items: center;">
+              <div>
+                <strong style="color: #2D2420;">PolyAI</strong>
+                <p style="color: #5A5350; margin: 4px 0 0 0; font-size: 0.9rem;">Conversational voice automation with 98%+ accuracy in telecommunications domain</p>
+              </div>
+              <div>
+                <strong style="color: #2D2420;">Cognigy</strong>
+                <p style="color: #5A5350; margin: 4px 0 0 0; font-size: 0.9rem;">Enterprise conversational platform for omnichannel agent assist and workflow automation</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+            <div style="text-align: center;">
+              <div style="font-family: 'Fira Code', monospace; font-size: 1.8rem; font-weight: 700; color: #DC2626;">-15 CDI</div>
+              <div style="font-size: 0.85rem; color: #5A5350; margin-top: 4px;">Total Reduction</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-family: 'Fira Code', monospace; font-size: 1.8rem; font-weight: 700; color: #3B82F6;">45%</div>
+              <div style="font-size: 0.85rem; color: #5A5350; margin-top: 4px;">Automation Rate</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-family: 'Fira Code', monospace; font-size: 1.8rem; font-weight: 700; color: #FF6B35;">-30%</div>
+              <div style="font-size: 0.85rem; color: #5A5350; margin-top: 4px;">Handle Time</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-family: 'Fira Code', monospace; font-size: 1.8rem; font-weight: 700; color: #84CC16;">6-9mo</div>
+              <div style="font-size: 0.85rem; color: #5A5350; margin-top: 4px;">ROI Timeline</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Solution 2 -->
+        <div style="background: white; padding: 35px; border-radius: 15px;">
+          <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; color: #3B82F6; margin: 0 0 8px 20px;">Atlas Omnichannel Orchestration</h3>
+          <p style="color: #5A5350; font-size: 1rem; margin: 0 0 20px 0;">Intelligent routing + unified customer journey</p>
+
+          <div style="background: #F5F3EF; padding: 25px; border-radius: 10px; margin-bottom: 25px;">
+            <p style="color: #2D2420; line-height: 1.8; margin: 0;">
+              Cognigy omnichannel platform unifies voice, chat, email, SMS, and social media with intelligent intent-based routing. Customers reach the right resource first time, eliminating transfers and repeat contacts. Journey continuity across channels reduces cognitive load on agents who see full interaction history. Addresses RCL by simplifying agent workflows and improving context.
+            </p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+            <div style="text-align: center;">
+              <div style="font-family: 'Fira Code', monospace; font-size: 1.8rem; font-weight: 700; color: #DC2626;">-8 CDI</div>
+              <div style="font-size: 0.85rem; color: #5A5350; margin-top: 4px;">RCL Impact</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-family: 'Fira Code', monospace; font-size: 1.8rem; font-weight: 700; color: #3B82F6;">+22%</div>
+              <div style="font-size: 0.85rem; color: #5A5350; margin-top: 4px;">FCR Improvement</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-family: 'Fira Code', monospace; font-size: 1.8rem; font-weight: 700; color: #FF6B35;">-40%</div>
+              <div style="font-size: 0.85rem; color: #5A5350; margin-top: 4px;">Transfer Rate</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-family: 'Fira Code', monospace; font-size: 1.8rem; font-weight: 700; color: #84CC16;">8-12mo</div>
+              <div style="font-size: 0.85rem; color: #5A5350; margin-top: 4px;">ROI Timeline</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Solution 3 -->
+        <div style="background: white; padding: 35px; border-radius: 15px;">
+          <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; color: #FF6B35; margin: 0 0 8px 0;">Atlas CX Workforce Transformation</h3>
+          <p style="color: #5A5350; font-size: 1rem; margin: 0 0 20px 0;">Role redesign + capability building</p>
+
+          <div style="background: #F5F3EF; padding: 25px; border-radius: 10px; margin-bottom: 25px;">
+            <p style="color: #2D2420; line-height: 1.8; margin: 0;">
+              Strategic initiative to rebalance CX workforce from 62% generalist CSRs to 52% specialized support model. Build technical support capacity (15-1232) from 12% to 18%, add customer success managers (11-2021) from 8% to 13%. Redesign CSR roles to reduce DWA breadth from 8-12 to 4-6 focused activities. Addresses TLD and RCL through fundamental workforce composition changes.
+            </p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+            <div style="text-align: center;">
+              <div style="font-family: 'Fira Code', monospace
