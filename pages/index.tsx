@@ -1,60 +1,102 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>ReflectAtlas - Mock Site</title>
-        <meta name="description" content="ReflectAtlas mock site for demonstration" />
+        <title>ReflectAtlas - Transform Your Data Into Insights</title>
+        <meta name="description" content="ReflectAtlas provides powerful analytics and reporting solutions to help businesses make data-driven decisions" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <nav className={styles.nav}>
+        <div className={styles.logo}>ReflectAtlas</div>
+        <Link href="/login" className={styles.loginButton}>
+          Customer Login
+        </Link>
+      </nav>
+
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <span className={styles.highlight}>ReflectAtlas</span>
-        </h1>
+        <section className={styles.hero}>
+          <h1 className={styles.title}>
+            Transform Your Data Into <span className={styles.highlight}>Insights</span>
+          </h1>
 
-        <p className={styles.description}>
-          A modern mock site built with Next.js and deployed on Vercel
-        </p>
+          <p className={styles.description}>
+            ReflectAtlas empowers organizations with intelligent analytics and comprehensive reporting solutions that drive better business decisions.
+          </p>
 
-        <div className={styles.grid}>
-          <div className={styles.card}>
-            <h2>Fast &rarr;</h2>
-            <p>Optimized for performance and speed with Next.js</p>
+          <div className={styles.ctaButtons}>
+            <Link href="/login" className={styles.primaryButton}>
+              Access Dashboard
+            </Link>
+            <a href="#features" className={styles.secondaryButton}>
+              Learn More
+            </a>
           </div>
+        </section>
 
-          <div className={styles.card}>
-            <h2>Modern &rarr;</h2>
-            <p>Built with the latest React and Next.js technologies</p>
+        <section id="about" className={styles.section}>
+          <h2 className={styles.sectionTitle}>About ReflectAtlas</h2>
+          <p className={styles.sectionText}>
+            Founded on the principle that data should illuminate, not overwhelm, ReflectAtlas delivers
+            cutting-edge analytics solutions tailored to modern businesses. Our platform combines advanced
+            data processing with intuitive visualizations to help you understand your business at a glance.
+          </p>
+        </section>
+
+        <section id="features" className={styles.section}>
+          <h2 className={styles.sectionTitle}>Our Products</h2>
+          <div className={styles.grid}>
+            <div className={styles.card}>
+              <h3>Analytics Engine</h3>
+              <p>Real-time data processing and analysis with advanced machine learning capabilities</p>
+            </div>
+
+            <div className={styles.card}>
+              <h3>Custom Reports</h3>
+              <p>Generate tailored reports that answer your specific business questions</p>
+            </div>
+
+            <div className={styles.card}>
+              <h3>Data Visualization</h3>
+              <p>Interactive dashboards and charts that make complex data easy to understand</p>
+            </div>
+
+            <div className={styles.card}>
+              <h3>Team Collaboration</h3>
+              <p>Share insights across your organization with role-based access controls</p>
+            </div>
           </div>
+        </section>
 
-          <div className={styles.card}>
-            <h2>Scalable &rarr;</h2>
-            <p>Deployed on Vercel for global edge network performance</p>
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Why Choose ReflectAtlas?</h2>
+          <div className={styles.features}>
+            <ul>
+              <li>Enterprise-grade security and compliance</li>
+              <li>Seamless integration with existing data sources</li>
+              <li>Scalable architecture that grows with your business</li>
+              <li>24/7 customer support and dedicated account management</li>
+              <li>Customizable dashboards and reporting templates</li>
+              <li>AI-powered insights and predictive analytics</li>
+            </ul>
           </div>
-
-          <div className={styles.card}>
-            <h2>Responsive &rarr;</h2>
-            <p>Fully responsive design that works on all devices</p>
-          </div>
-        </div>
-
-        <div className={styles.features}>
-          <h2>Features</h2>
-          <ul>
-            <li>Server-side rendering with Next.js</li>
-            <li>TypeScript for type safety</li>
-            <li>Optimized for Vercel deployment</li>
-            <li>Modern CSS modules for styling</li>
-            <li>SEO-friendly meta tags</li>
-          </ul>
-        </div>
+        </section>
       </main>
 
       <footer className={styles.footer}>
-        <p>ReflectAtlas &copy; 2025 - Powered by Next.js & Vercel</p>
+        <div className={styles.footerContent}>
+          <div>
+            <h4>ReflectAtlas</h4>
+            <p>Transforming data into actionable insights</p>
+          </div>
+          <div>
+            <p>&copy; 2025 ReflectAtlas Inc. All rights reserved.</p>
+          </div>
+        </div>
       </footer>
     </div>
   )
