@@ -16,14 +16,14 @@ export default function Login() {
     setError('')
     setLoading(true)
 
-    // Mock authentication
+    // Mock authentication - accepts RL/RL or any email with @ and 4+ char password
     setTimeout(() => {
-      if (email.includes('@') && password.length >= 4) {
+      if ((email === 'RL' && password === 'RL') || (email.includes('@') && password.length >= 4)) {
         localStorage.setItem('reflectAtlasAuth', 'true')
-        localStorage.setItem('userEmail', email)
+        localStorage.setItem('userEmail', email === 'RL' ? 'demo@reflectatlas.com' : email)
         router.push('/dashboard')
       } else {
-        setError('Please enter a valid email and password (min 4 characters)')
+        setError('Invalid credentials. Use RL/RL for demo access.')
         setLoading(false)
       }
     }, 800)
@@ -50,13 +50,13 @@ export default function Login() {
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email">Username or Email</label>
             <input
               id="email"
-              type="email"
+              type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@company.com"
+              placeholder="RL"
               required
             />
           </div>
@@ -81,8 +81,9 @@ export default function Login() {
         </form>
 
         <div className={styles.demoNote}>
-          <p><strong>Demo Mode:</strong> Use any email with @ and password (4+ chars)</p>
-          <p className={styles.example}>Example: demo@company.com / password</p>
+          <p><strong>Sample Reports Access:</strong></p>
+          <p className={styles.example}>Username: RL  |  Password: RL</p>
+          <p style={{fontSize: '0.85rem', marginTop: '10px', color: 'var(--color-warm-gray)'}}>View sample Cognitive Efficiency Diagnostics for CX operations and AI-first BPO implementations</p>
         </div>
 
         <div className={styles.links}>

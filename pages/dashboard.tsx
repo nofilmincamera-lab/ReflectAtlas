@@ -63,52 +63,101 @@ export default function Dashboard() {
 
       <main className={styles.main}>
         <header className={styles.header}>
-          <h1>Analytics Dashboard</h1>
-          <p>Welcome back! Here's an overview of your data insights.</p>
+          <h1>Sample Cognitive Efficiency Reports</h1>
+          <p>Explore sample diagnostics showing how Reflect Atlas identifies automation opportunities and measures organizational cognitive drag.</p>
         </header>
 
         <div className={styles.statsGrid}>
           <div className={styles.statCard}>
-            <div className={styles.statValue}>127</div>
-            <div className={styles.statLabel}>Total Reports</div>
-            <div className={styles.statChange}>+12% from last month</div>
+            <div className={styles.statValue}>71.3</div>
+            <div className={styles.statLabel}>Sample CDI Score</div>
+            <div className={styles.statChange}>Industry Avg: 58.2</div>
           </div>
 
           <div className={styles.statCard}>
-            <div className={styles.statValue}>2,543</div>
-            <div className={styles.statLabel}>Active Users</div>
-            <div className={styles.statChange}>+8% from last month</div>
+            <div className={styles.statValue}>47%</div>
+            <div className={styles.statLabel}>Manual Task Load</div>
+            <div className={styles.statChange}>vs 28% peer avg</div>
           </div>
 
           <div className={styles.statCard}>
-            <div className={styles.statValue}>1.2M</div>
-            <div className={styles.statLabel}>Data Points</div>
-            <div className={styles.statChange}>+23% from last month</div>
+            <div className={styles.statValue}>$188K</div>
+            <div className={styles.statLabel}>Rev per Employee</div>
+            <div className={styles.statChange}>vs $210K industry</div>
           </div>
 
           <div className={styles.statCard}>
-            <div className={styles.statValue}>98.5%</div>
-            <div className={styles.statLabel}>Accuracy</div>
-            <div className={styles.statChange}>+2% from last month</div>
+            <div className={styles.statValue}>18-25%</div>
+            <div className={styles.statLabel}>Est. ROI Range</div>
+            <div className={styles.statChange}>12-month projection</div>
           </div>
         </div>
 
         <section className={styles.reportsSection}>
-          <h2>Recent Reports</h2>
+          <h2>Sample Cognitive Efficiency Diagnostics</h2>
+          <p style={{color: 'var(--color-warm-gray)', marginBottom: '30px', fontSize: '1.05rem'}}>
+            These reports demonstrate how Reflect Atlas analyzes CX operations and identifies AI/automation opportunities using O*NET taxonomy and proprietary CDI scoring.
+          </p>
           <div className={styles.reportsGrid}>
             {[
-              { title: 'Monthly Revenue Analysis', date: 'Oct 2025', tag: 'Financial', color: '#DC2626' },
-              { title: 'Customer Engagement Metrics', date: 'Oct 2025', tag: 'Engagement', color: '#3B82F6' },
-              { title: 'Product Performance Dashboard', date: 'Oct 2025', tag: 'Product', color: '#FF6B35' },
-              { title: 'Operational Efficiency Report', date: 'Sept 2025', tag: 'Operations', color: '#84CC16' },
-              { title: 'Market Trends Analysis', date: 'Sept 2025', tag: 'Market', color: '#DC2626' },
-              { title: 'Q3 2025 Summary Report', date: 'Sept 2025', tag: 'Quarterly', color: '#3B82F6' },
+              {
+                title: 'Contact Center CDI Analysis',
+                date: 'NovaBank Financial',
+                desc: 'CDI 74 | 1,200 roles analyzed | RCL overweight in CSR functions',
+                tag: 'CX Operations',
+                color: '#DC2626'
+              },
+              {
+                title: 'BPO Automation Readiness Report',
+                date: 'Multi-client BPO',
+                desc: 'PTM 68 | High manual DWA share in billing & reconciliation',
+                tag: 'AI-First BPO',
+                color: '#3B82F6'
+              },
+              {
+                title: 'Loan Operations Efficiency Diagnostic',
+                date: 'NovaBank Financial',
+                desc: 'Top opportunity: OCR + LLM intake automation | 15-20pt PTM reduction',
+                tag: 'Process-Tech Gap',
+                color: '#FF6B35'
+              },
+              {
+                title: 'Customer Service Cognitive Load Study',
+                date: 'Telecom Provider',
+                desc: 'RCL 78 | Recommendation: AI Assist + guided workflows',
+                tag: 'CX Optimization',
+                color: '#84CC16'
+              },
+              {
+                title: 'O*NET Skill Taxonomy Benchmark',
+                date: 'NAICS 5221 Sector',
+                desc: '43-XXXX overweight +12pts | 15-series enablement underweight',
+                tag: 'Labor Analysis',
+                color: '#DC2626'
+              },
+              {
+                title: 'AI Implementation Roadmap',
+                date: 'Multi-Function CX Ops',
+                desc: 'Sequenced plan: Loan Ops → CSR → Exceptions | $2.1M ROI est.',
+                tag: 'Deployment Plan',
+                color: '#3B82F6'
+              },
             ].map((report, index) => (
               <div className={styles.reportCard} key={index}>
                 <div className={styles.reportHeader}>
                   <h3>{report.title}</h3>
                   <span className={styles.reportDate}>{report.date}</span>
                 </div>
+                <p style={{
+                  fontSize: '0.9rem',
+                  color: 'var(--color-warm-gray)',
+                  marginBottom: '15px',
+                  lineHeight: '1.5',
+                  fontFamily: 'var(--font-mono)',
+                  minHeight: '60px'
+                }}>
+                  {report.desc}
+                </p>
                 <div className={styles.reportFooter}>
                   <span className={styles.reportTag} style={{background: `${report.color}15`, color: report.color, borderColor: report.color}}>
                     {report.tag}

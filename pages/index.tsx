@@ -30,24 +30,25 @@ export default function Home() {
 
       <main className={styles.main}>
         <section className={styles.hero}>
-          <h1>Transform data into decisive action</h1>
+          <h1>Measure what slows you down. Build what speeds you up.</h1>
           <p>
-            Reflect Atlas brings clarity to complex data landscapes with business intelligence tools that feel intuitive and trustworthy.
+            Reflect Atlas quantifies organizational cognitive drag—the hidden friction between people, processes, and technology—and delivers AI-ready roadmaps that eliminate bottlenecks faster than your competitors.
           </p>
           <div className={styles.heroButtons}>
-            <Link href="/login" className={styles.btnPrimary}>Get Started Free</Link>
-            <a href="#features" className={styles.btnSecondary}>Watch Demo</a>
+            <Link href="/login" className={styles.btnPrimary}>View Sample Reports</Link>
+            <a href="#services" className={styles.btnSecondary}>Learn More</a>
           </div>
         </section>
 
         <section className={styles.sectionLight}>
-          <h2>See patterns others miss</h2>
+          <h2>The operational GPS for AI deployment</h2>
           <p className={styles.intro}>
-            Reflect Atlas reveals hidden insights in your data through advanced pattern recognition and predictive analytics. Stop guessing, start knowing.
+            Using O*NET taxonomy, labor-market benchmarks, and proprietary NLP, Reflect Atlas analyzes job postings, role descriptions, and workflow documentation to compute your Cognitive Drag Index (CDI)—a quantified measure of where manual processes, skill misalignment, and underutilized technology create hidden inefficiency.
           </p>
         </section>
 
-        <section id="features" className={styles.sectionFeatures}>
+        <section id="services" className={styles.sectionFeatures}>
+          <h2 style={{textAlign: 'center', fontFamily: 'var(--font-heading)', fontSize: '2.5rem', marginBottom: '50px', color: 'var(--color-dark)'}}>Our Services</h2>
           <div className={styles.featuresGrid}>
             <div className={styles.featureCard}>
               <div className={styles.iconBox} style={{background: '#DC2626'}}>
@@ -55,8 +56,8 @@ export default function Home() {
                   <polygon points="35,15 50,25 50,45 35,55 20,45 20,25" fill="none" stroke="white" strokeWidth="3"/>
                 </svg>
               </div>
-              <h3>Lightning Fast Queries</h3>
-              <p>Execute complex data queries in milliseconds, not minutes. Our optimized engine handles billions of records effortlessly.</p>
+              <h3>Cognitive Efficiency Diagnostic</h3>
+              <p>We quantify your Cognitive Drag Index by analyzing job postings, role descriptions, and technographic signals—mapped against peer performance and industry standards.</p>
             </div>
 
             <div className={styles.featureCard}>
@@ -65,8 +66,8 @@ export default function Home() {
                   <circle cx="35" cy="35" r="15" fill="none" stroke="white" strokeWidth="3"/>
                 </svg>
               </div>
-              <h3>Enterprise Security</h3>
-              <p>Bank-level encryption, SOC 2 compliance, and granular access controls keep your data protected at every layer.</p>
+              <h3>AI Readiness Roadmap</h3>
+              <p>Using your CDI analysis, we identify and prioritize your top automation opportunities with sequenced implementation roadmaps and estimated ROI.</p>
             </div>
 
             <div className={styles.featureCard}>
@@ -75,8 +76,8 @@ export default function Home() {
                   <path d="M 15 45 Q 25 30 35 35 T 55 25" fill="none" stroke="white" strokeWidth="3"/>
                 </svg>
               </div>
-              <h3>Real-Time Sync</h3>
-              <p>Live data updates across all connected sources. Your dashboard reflects reality, not yesterday's snapshot.</p>
+              <h3>Turnkey Implementation</h3>
+              <p>We don't just diagnose—we deploy. Leveraging our curated library of AI-native CX platforms, we deliver measurable efficiency gains with minimal disruption.</p>
             </div>
 
             <div className={styles.featureCard}>
@@ -85,8 +86,8 @@ export default function Home() {
                   <rect x="15" y="15" width="40" height="40" fill="none" stroke="white" strokeWidth="3"/>
                 </svg>
               </div>
-              <h3>AI-Powered Insights</h3>
-              <p>Automated anomaly detection and trend forecasting with 95% accuracy. Let AI find the patterns you need.</p>
+              <h3>CDI Velocity Tracking</h3>
+              <p>Continuous quarterly re-measurement of your Cognitive Drag Index to track efficiency improvements, validate ROI, and surface emerging opportunities.</p>
             </div>
           </div>
         </section>
@@ -94,28 +95,28 @@ export default function Home() {
         <section className={styles.sectionDark}>
           <div className={styles.contentGrid}>
             <div>
-              <h2 style={{color: 'white', borderBottom: 'none', fontSize: '2.5rem'}}>Built for scale, designed for humans</h2>
+              <h2 style={{color: 'white', borderBottom: 'none', fontSize: '2.5rem'}}>How the CDI Works</h2>
               <p style={{fontSize: '1.1rem', lineHeight: '1.8', color: '#E8E5E0', marginBottom: '30px'}}>
-                Whether you're analyzing customer behavior or tracking operational metrics, Reflect Atlas scales with your needs while staying intuitive.
+                Our proprietary Cognitive Drag Index combines three scientific dimensions derived from O*NET task analysis and labor market benchmarks:
               </p>
               <ul className={styles.checkList}>
-                <li>Connect unlimited data sources</li>
-                <li>Collaborate with your entire team</li>
-                <li>Export and share reports anywhere</li>
-                <li>Custom dashboards in minutes</li>
+                <li><strong>Role Complexity Load (RCL)</strong> — Measures cognitive load density from task verbs and decision-making language</li>
+                <li><strong>Process-Tech Misalignment (PTM)</strong> — Quantifies mismatch between described processes and available tools</li>
+                <li><strong>Tech-Labor Divergence (TLD)</strong> — Detects when your technology stack doesn't align with your labor profile</li>
+                <li><strong>Validation</strong> — Back-tested against Revenue per Employee, Operating Margin, and Time-to-Fill metrics</li>
               </ul>
-              <Link href="/login" className={styles.btnPrimary} style={{marginTop: '30px', display: 'inline-block'}}>Start Your Free Trial</Link>
+              <Link href="/login" className={styles.btnPrimary} style={{marginTop: '30px', display: 'inline-block'}}>View Sample Analysis</Link>
             </div>
             <div className={styles.visualPlaceholder}>
-              [Product Screenshot]
+              CDI Scoring Model
             </div>
           </div>
         </section>
 
         <section className={styles.sectionCta}>
-          <h2>Ready to see your data clearly?</h2>
-          <p>Join hundreds of companies making better decisions with Reflect Atlas.</p>
-          <Link href="/login" className={styles.btnPrimary}>Get Started Free</Link>
+          <h2>Ready to eliminate your bottlenecks?</h2>
+          <p>See how your organization compares to peers with a Cognitive Efficiency Diagnostic.</p>
+          <Link href="/login" className={styles.btnPrimary}>Access Sample Reports</Link>
         </section>
       </main>
 
