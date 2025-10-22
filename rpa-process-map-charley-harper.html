@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPA Process Map - Charley Harper Style</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #546e7a;
+            margin-bottom: 60px;
+            font-size: 1.1rem;
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        /* Animated circuit background */
+        .circuit-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Node animations */
+        .node {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+            transform-origin: center;
+        }
+
+        .node:hover .node-shape {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        .node-shape {
+            transition: all 0.3s ease;
+        }
+
+        /* Connection line animations */
+        .connection {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawLine 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes drawLine {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Flow animation markers */
+        .flow-marker {
+            animation: flow 3s linear infinite;
+        }
+
+        @keyframes flow {
+            0% {
+                offset-distance: 0%;
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                offset-distance: 100%;
+                opacity: 0;
+            }
+        }
+
+        /* Stagger animations */
+        .node:nth-child(1) { animation-delay: 0.1s; }
+        .node:nth-child(2) { animation-delay: 0.2s; }
+        .node:nth-child(3) { animation-delay: 0.3s; }
+        .node:nth-child(4) { animation-delay: 0.4s; }
+        .node:nth-child(5) { animation-delay: 0.5s; }
+        .node:nth-child(6) { animation-delay: 0.6s; }
+        .node:nth-child(7) { animation-delay: 0.7s; }
+        .node:nth-child(8) { animation-delay: 0.8s; }
+        .node:nth-child(9) { animation-delay: 0.9s; }
+        .node:nth-child(10) { animation-delay: 1s; }
+        .node:nth-child(11) { animation-delay: 1.1s; }
+        .node:nth-child(12) { animation-delay: 1.2s; }
+        .node:nth-child(13) { animation-delay: 1.3s; }
+        .node:nth-child(14) { animation-delay: 1.4s; }
+        .node:nth-child(15) { animation-delay: 1.5s; }
+        .node:nth-child(16) { animation-delay: 1.6s; }
+        .node:nth-child(17) { animation-delay: 1.7s; }
+        .node:nth-child(18) { animation-delay: 1.8s; }
+        .node:nth-child(19) { animation-delay: 1.9s; }
+        .node:nth-child(20) { animation-delay: 2s; }
+
+        .connection:nth-child(odd) { animation-delay: 0.3s; }
+        .connection:nth-child(even) { animation-delay: 0.5s; }
+
+        /* Legend */
+        .legend {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 3px;
+        }
+
+        /* Restart button */
+        .restart-btn {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            padding: 12px 24px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .restart-btn:hover {
+            background: #34495e;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Circuit pattern background -->
+    <svg class="circuit-bg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <pattern id="circuit" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                <line x1="0" y1="50" x2="100" y2="50" stroke="#2c3e50" stroke-width="1"/>
+                <line x1="50" y1="0" x2="50" y2="100" stroke="#2c3e50" stroke-width="1"/>
+                <circle cx="50" cy="50" r="3" fill="#2c3e50"/>
+            </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#circuit)"/>
+    </svg>
+
+    <button class="restart-btn" onclick="restartAnimation()">↻ Replay Animation</button>
+
+    <div class="container">
+        <h1>RPA Process Map</h1>
+        <p class="subtitle">Discover → Refine → Estimate → Implement</p>
+
+        <svg viewBox="0 0 1400 1800" xmlns="http://www.w3.org/2000/svg" id="mainSvg">
+            <defs>
+                <!-- Arrow markers -->
+                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <polygon points="0 0, 10 3, 0 6" fill="#34495e" />
+                </marker>
+
+                <!-- Gradients for Harper-style colors -->
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#EE5A6F;stop-opacity:1" />
+                </linearGradient>
+
+                <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#4ECDC4;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#44A08D;stop-opacity:1" />
+                </linearGradient>
+
+                <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#FFD93D;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#F4A261;stop-opacity:1" />
+                </linearGradient>
+
+                <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#6C5CE7;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#A29BFE;stop-opacity:1" />
+                </linearGradient>
+
+                <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#00B894;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#55EFC4;stop-opacity:1" />
+                </linearGradient>
+
+                <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#FD79A8;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#FDCB6E;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+
+            <!-- Connections (draw first, so they appear behind nodes) -->
+            <g id="connections">
+                <!-- Start to P1 -->
+                <path class="connection" d="M 700 80 L 700 140" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- P1 to D1 -->
+                <path class="connection" d="M 700 240 L 700 300" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- D1 to RPA/AI/HYB -->
+                <path class="connection" d="M 640 360 L 400 420" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                <path class="connection" d="M 700 400 L 700 420" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                <path class="connection" d="M 760 360 L 1000 420" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- RPA/AI/HYB to P2 -->
+                <path class="connection" d="M 400 500 L 700 560" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                <path class="connection" d="M 700 500 L 700 560" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                <path class="connection" d="M 1000 500 L 700 560" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- P2 to D2 -->
+                <path class="connection" d="M 580 620 L 400 680" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- D2 branches -->
+                <path class="connection" d="M 360 740 L 280 800" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                <path class="connection" d="M 440 740 L 520 800" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- P2 to P3 -->
+                <path class="connection" d="M 700 680 L 700 760" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- P3 to Cx -->
+                <path class="connection" d="M 700 860 L 700 920" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- Cx to L/M/H -->
+                <path class="connection" d="M 640 980 L 400 1040" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                <path class="connection" d="M 700 1020 L 700 1040" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                <path class="connection" d="M 760 980 L 1000 1040" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- P3 to Metrics -->
+                <path class="connection" d="M 820 810 L 1000 880" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- L/M/H/Metrics to Appr -->
+                <path class="connection" d="M 400 1120 L 700 1180" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                <path class="connection" d="M 700 1120 L 700 1180" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                <path class="connection" d="M 1000 1120 L 700 1180" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                <path class="connection" d="M 1000 960 L 1000 1000 L 800 1000 L 700 1180" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- Appr to Rework (feedback loop) -->
+                <path class="connection" d="M 640 1240 L 200 1240 L 200 600 L 580 600" stroke="#e74c3c" stroke-width="3" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="8,4"/>
+
+                <!-- Appr to P4 -->
+                <path class="connection" d="M 760 1240 L 900 1240 L 900 1320" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- P4 to Setup -->
+                <path class="connection" d="M 900 1400 L 900 1460" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- Setup to Dev -->
+                <path class="connection" d="M 800 1500 L 700 1540" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- Dev to DTech -->
+                <path class="connection" d="M 620 1580 L 500 1640" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- DTech branches -->
+                <path class="connection" d="M 460 1700 L 350 1760" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                <path class="connection" d="M 500 1740 L 500 1760" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                <path class="connection" d="M 540 1700 L 650 1760" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- Build* to UAT -->
+                <path class="connection" d="M 350 1840 L 900 1900" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                <path class="connection" d="M 500 1840 L 900 1900" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                <path class="connection" d="M 650 1840 L 900 1900" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- UAT to Hypercare -->
+                <path class="connection" d="M 1000 1940 L 1100 1980" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- Hypercare to End -->
+                <path class="connection" d="M 1100 2060 L 1100 2120" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+            </g>
+
+            <!-- Nodes -->
+            <g id="nodes">
+                <!-- Start Node -->
+                <g class="node">
+                    <circle class="node-shape" cx="700" cy="50" r="35" fill="url(#grad1)" stroke="#c0392b" stroke-width="3"/>
+                    <text x="700" y="45" text-anchor="middle" fill="white" font-size="14" font-weight="bold">RPA</text>
+                    <text x="700" y="60" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Discovery</text>
+                </g>
+
+                <!-- P1: Phase 1 -->
+                <g class="node">
+                    <rect class="node-shape" x="550" y="150" width="300" height="80" rx="10" fill="url(#grad2)" stroke="#16a085" stroke-width="3"/>
+                    <text x="700" y="175" text-anchor="middle" fill="white" font-size="13" font-weight="bold">Phase 1: DISCOVER</text>
+                    <text x="700" y="195" text-anchor="middle" fill="white" font-size="11">W1-2: Workshops, Mining</text>
+                    <text x="700" y="215" text-anchor="middle" fill="white" font-size="11">(AA/UiPath), Triage</text>
+                </g>
+
+                <!-- D1: Process Type Decision -->
+                <g class="node">
+                    <polygon class="node-shape" points="700,310 780,360 700,410 620,360" fill="url(#grad3)" stroke="#d68910" stroke-width="3"/>
+                    <text x="700" y="355" text-anchor="middle" fill="white" font-size="13" font-weight="bold">Process</text>
+                    <text x="700" y="375" text-anchor="middle" fill="white" font-size="13" font-weight="bold">Type?</text>
+                </g>
+
+                <!-- RPA Branch -->
+                <g class="node">
+                    <ellipse class="node-shape" cx="400" cy="460" rx="70" ry="40" fill="url(#grad4)" stroke="#5b3cc4" stroke-width="3"/>
+                    <text x="400" y="468" text-anchor="middle" fill="white" font-size="14" font-weight="bold">RPA</text>
+                    <text x="300" y="440" text-anchor="middle" fill="#7f8c8d" font-size="11">Structured</text>
+                </g>
+
+                <!-- AI Agent Branch -->
+                <g class="node">
+                    <ellipse class="node-shape" cx="700" cy="460" rx="70" ry="40" fill="url(#grad5)" stroke="#00875f" stroke-width="3"/>
+                    <text x="700" y="468" text-anchor="middle" fill="white" font-size="14" font-weight="bold">AI Agent</text>
+                    <text x="700" y="440" text-anchor="middle" fill="#7f8c8d" font-size="11">Unstructured</text>
+                </g>
+
+                <!-- Hybrid Branch -->
+                <g class="node">
+                    <ellipse class="node-shape" cx="1000" cy="460" rx="70" ry="40" fill="url(#grad6)" stroke="#d63031" stroke-width="3"/>
+                    <text x="1000" y="468" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Hybrid</text>
+                    <text x="1100" y="440" text-anchor="middle" fill="#7f8c8d" font-size="11">Complex</text>
+                </g>
+
+                <!-- P2: Phase 2 -->
+                <g class="node">
+                    <rect class="node-shape" x="550" y="570" width="300" height="100" rx="10" fill="url(#grad2)" stroke="#16a085" stroke-width="3"/>
+                    <text x="700" y="595" text-anchor="middle" fill="white" font-size="13" font-weight="bold">Phase 2: REFINE</text>
+                    <text x="700" y="615" text-anchor="middle" fill="white" font-size="11">W3-5: Current State (PDD)</text>
+                    <text x="700" y="635" text-anchor="middle" fill="white" font-size="11">User Journey</text>
+                    <text x="700" y="655" text-anchor="middle" fill="white" font-size="11">Tech Assessment</text>
+                </g>
+
+                <!-- D2: Decision Points -->
+                <g class="node">
+                    <polygon class="node-shape" points="400,690 460,740 400,790 340,740" fill="url(#grad3)" stroke="#d68910" stroke-width="3"/>
+                    <text x="400" y="740" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Decision</text>
+                    <text x="400" y="756" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Points</text>
+                </g>
+
+                <!-- AI Layer -->
+                <g class="node">
+                    <rect class="node-shape" x="200" y="810" width="160" height="50" rx="8" fill="url(#grad5)" stroke="#00875f" stroke-width="3"/>
+                    <text x="280" y="840" text-anchor="middle" fill="white" font-size="12" font-weight="bold">AI Layer</text>
+                    <text x="200" y="800" text-anchor="start" fill="#7f8c8d" font-size="10">Human</text>
+                </g>
+
+                <!-- RPA Layer -->
+                <g class="node">
+                    <rect class="node-shape" x="440" y="810" width="160" height="50" rx="8" fill="url(#grad4)" stroke="#5b3cc4" stroke-width="3"/>
+                    <text x="520" y="840" text-anchor="middle" fill="white" font-size="12" font-weight="bold">RPA</text>
+                    <text x="580" y="800" text-anchor="end" fill="#7f8c8d" font-size="10">Rules</text>
+                </g>
+
+                <!-- P3: Phase 3 -->
+                <g class="node">
+                    <rect class="node-shape" x="550" y="770" width="300" height="80" rx="10" fill="url(#grad2)" stroke="#16a085" stroke-width="3"/>
+                    <text x="700" y="795" text-anchor="middle" fill="white" font-size="13" font-weight="bold">Phase 3: ESTIMATE & CASE</text>
+                    <text x="700" y="815" text-anchor="middle" fill="white" font-size="11">W6: Roadmap</text>
+                    <text x="700" y="835" text-anchor="middle" fill="white" font-size="11">Business Case</text>
+                </g>
+
+                <!-- Cx: Complexity Decision -->
+                <g class="node">
+                    <polygon class="node-shape" points="700,930 780,980 700,1030 620,980" fill="url(#grad3)" stroke="#d68910" stroke-width="3"/>
+                    <text x="700" y="985" text-anchor="middle" fill="white" font-size="13" font-weight="bold">Complexity</text>
+                </g>
+
+                <!-- Low Complexity -->
+                <g class="node">
+                    <rect class="node-shape" x="300" y="1050" width="200" height="60" rx="8" fill="url(#grad5)" stroke="#00875f" stroke-width="3"/>
+                    <text x="400" y="1075" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Simple</text>
+                    <text x="400" y="1095" text-anchor="middle" fill="white" font-size="11">4-6 weeks</text>
+                    <text x="300" y="1040" text-anchor="start" fill="#7f8c8d" font-size="10">Low</text>
+                </g>
+
+                <!-- Med Complexity -->
+                <g class="node">
+                    <rect class="node-shape" x="600" y="1050" width="200" height="60" rx="8" fill="url(#grad3)" stroke="#d68910" stroke-width="3"/>
+                    <text x="700" y="1075" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Multi+AI</text>
+                    <text x="700" y="1095" text-anchor="middle" fill="white" font-size="11">8-12 weeks</text>
+                    <text x="700" y="1040" text-anchor="middle" fill="#7f8c8d" font-size="10">Med</text>
+                </g>
+
+                <!-- High Complexity -->
+                <g class="node">
+                    <rect class="node-shape" x="900" y="1050" width="200" height="60" rx="8" fill="url(#grad1)" stroke="#c0392b" stroke-width="3"/>
+                    <text x="1000" y="1070" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Orchestrated</text>
+                    <text x="1000" y="1090" text-anchor="middle" fill="white" font-size="11">12-16+ weeks</text>
+                    <text x="1100" y="1040" text-anchor="end" fill="#7f8c8d" font-size="10">High</text>
+                </g>
+
+                <!-- Metrics -->
+                <g class="node">
+                    <rect class="node-shape" x="900" y="890" width="200" height="60" rx="8" fill="url(#grad6)" stroke="#d63031" stroke-width="3"/>
+                    <text x="1000" y="910" text-anchor="middle" fill="white" font-size="11" font-weight="bold">FTE, Error ↓</text>
+                    <text x="1000" y="930" text-anchor="middle" fill="white" font-size="11" font-weight="bold">TCO 3yr</text>
+                </g>
+
+                <!-- Approval Decision -->
+                <g class="node">
+                    <polygon class="node-shape" points="700,1190 780,1240 700,1290 620,1240" fill="url(#grad3)" stroke="#d68910" stroke-width="3"/>
+                    <text x="700" y="1250" text-anchor="middle" fill="white" font-size="13" font-weight="bold">Approval?</text>
+                </g>
+
+                <!-- Rework -->
+                <g class="node">
+                    <rect class="node-shape" x="50" y="1215" width="140" height="50" rx="8" fill="#e74c3c" stroke="#c0392b" stroke-width="3" opacity="0.7"/>
+                    <text x="120" y="1235" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Refine/</text>
+                    <text x="120" y="1252" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Deprioritize</text>
+                    <text x="580" y="1260" text-anchor="end" fill="#7f8c8d" font-size="10">No</text>
+                </g>
+
+                <!-- P4: Phase 4 -->
+                <g class="node">
+                    <rect class="node-shape" x="800" y="1330" width="200" height="60" rx="10" fill="url(#grad2)" stroke="#16a085" stroke-width="3"/>
+                    <text x="900" y="1355" text-anchor="middle" fill="white" font-size="13" font-weight="bold">Phase 4</text>
+                    <text x="900" y="1375" text-anchor="middle" fill="white" font-size="13" font-weight="bold">IMPLEMENT</text>
+                    <text x="820" y="1260" text-anchor="start" fill="#7f8c8d" font-size="10">Yes</text>
+                </g>
+
+                <!-- Setup -->
+                <g class="node">
+                    <rect class="node-shape" x="800" y="1470" width="200" height="50" rx="8" fill="url(#grad4)" stroke="#5b3cc4" stroke-width="3"/>
+                    <text x="900" y="1490" text-anchor="middle" fill="white" font-size="11" font-weight="bold">W1-2 Setup</text>
+                    <text x="900" y="1507" text-anchor="middle" fill="white" font-size="11" font-weight="bold">& Access</text>
+                </g>
+
+                <!-- Dev -->
+                <g class="node">
+                    <rect class="node-shape" x="600" y="1550" width="200" height="50" rx="8" fill="url(#grad4)" stroke="#5b3cc4" stroke-width="3"/>
+                    <text x="700" y="1575" text-anchor="middle" fill="white" font-size="12" font-weight="bold">W3-6 Build</text>
+                </g>
+
+                <!-- DTech: Tech Decision -->
+                <g class="node">
+                    <polygon class="node-shape" points="500,1650 560,1700 500,1750 440,1700" fill="url(#grad3)" stroke="#d68910" stroke-width="3"/>
+                    <text x="500" y="1708" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Tech?</text>
+                </g>
+
+                <!-- BuildRPA -->
+                <g class="node">
+                    <ellipse class="node-shape" cx="350" cy="1800" rx="70" ry="40" fill="url(#grad4)" stroke="#5b3cc4" stroke-width="3"/>
+                    <text x="350" y="1795" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Build</text>
+                    <text x="350" y="1812" text-anchor="middle" fill="white" font-size="11" font-weight="bold">RPA</text>
+                </g>
+
+                <!-- BuildAI -->
+                <g class="node">
+                    <ellipse class="node-shape" cx="500" cy="1800" rx="70" ry="40" fill="url(#grad5)" stroke="#00875f" stroke-width="3"/>
+                    <text x="500" y="1795" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Build</text>
+                    <text x="500" y="1812" text-anchor="middle" fill="white" font-size="11" font-weight="bold">AI</text>
+                </g>
+
+                <!-- BuildHYB -->
+                <g class="node">
+                    <ellipse class="node-shape" cx="650" cy="1800" rx="70" ry="40" fill="url(#grad6)" stroke="#d63031" stroke-width="3"/>
+                    <text x="650" y="1795" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Build</text>
+                    <text x="650" y="1812" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Hybrid</text>
+                </g>
+
+                <!-- UAT -->
+                <g class="node">
+                    <rect class="node-shape" x="800" y="1910" width="200" height="50" rx="8" fill="url(#grad4)" stroke="#5b3cc4" stroke-width="3"/>
+                    <text x="900" y="1940" text-anchor="middle" fill="white" font-size="12" font-weight="bold">W7 UAT</text>
+                </g>
+
+                <!-- Hypercare -->
+                <g class="node">
+                    <rect class="node-shape" x="1000" y="1990" width="200" height="60" rx="8" fill="url(#grad6)" stroke="#d63031" stroke-width="3"/>
+                    <text x="1100" y="2010" text-anchor="middle" fill="white" font-size="11" font-weight="bold">W8 Hypercare</text>
+                    <text x="1100" y="2030" text-anchor="middle" fill="white" font-size="11" font-weight="bold">& CoE</text>
+                </g>
+
+                <!-- End Node -->
+                <g class="node">
+                    <circle class="node-shape" cx="1100" cy="2160" r="40" fill="url(#grad5)" stroke="#00875f" stroke-width="3"/>
+                    <text x="1100" y="2155" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Production</text>
+                    <text x="1100" y="2172" text-anchor="middle" fill="white" font-size="12" font-weight="bold">& Monitoring</text>
+                </g>
+            </g>
+
+            <!-- Animated flow markers (data particles) -->
+            <g id="flowMarkers">
+                <!-- These will be added via JavaScript for animation -->
+            </g>
+        </svg>
+    </div>
+
+    <div class="legend">
+        <h3 style="margin-bottom: 12px; color: #2c3e50;">Legend</h3>
+        <div class="legend-item">
+            <div class="legend-color" style="background: linear-gradient(135deg, #FF6B6B, #EE5A6F);"></div>
+            <span>Critical/Start</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);"></div>
+            <span>Phases</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: linear-gradient(135deg, #FFD93D, #F4A261);"></div>
+            <span>Decisions</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: linear-gradient(135deg, #6C5CE7, #A29BFE);"></div>
+            <span>RPA Elements</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: linear-gradient(135deg, #00B894, #55EFC4);"></div>
+            <span>AI Elements</span>
+        </div>
+    </div>
+
+    <script>
+        function restartAnimation() {
+            // Clone and replace SVG to restart animations
+            const svg = document.getElementById('mainSvg');
+            const newSvg = svg.cloneNode(true);
+            svg.parentNode.replaceChild(newSvg, svg);
+        }
+
+        // Add flowing particles along paths
+        function addFlowingParticles() {
+            const connections = document.querySelectorAll('.connection');
+            const flowMarkers = document.getElementById('flowMarkers');
+
+            connections.forEach((path, index) => {
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('r', '5');
+                circle.setAttribute('fill', '#3498db');
+                circle.setAttribute('opacity', '0.8');
+
+                const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+                animateMotion.setAttribute('dur', '4s');
+                animateMotion.setAttribute('repeatCount', 'indefinite');
+                animateMotion.setAttribute('begin', `${index * 0.3}s`);
+
+                const mpath = document.createElementNS('http://www.w3.org/2000/svg', 'mpath');
+                mpath.setAttributeNS('http://www.w3.org/1999/xlink', 'href', `#path${index}`);
+
+                // Give each path an ID
+                path.setAttribute('id', `path${index}`);
+
+                animateMotion.appendChild(mpath);
+                circle.appendChild(animateMotion);
+                flowMarkers.appendChild(circle);
+            });
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            addFlowingParticles();
+        });
+
+        // Hover effects
+        document.querySelectorAll('.node').forEach(node => {
+            node.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+
+            node.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
