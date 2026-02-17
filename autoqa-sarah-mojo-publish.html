@@ -1,0 +1,2937 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foundever QA Coach Mock - Sarah</title>
+  <style>
+    :root {
+      --bg: #080b10;
+      --surface: #10151f;
+      --surface2: #131b29;
+      --border: #25324a;
+      --text: #f1f5ff;
+      --muted: #9caecf;
+      --primary: #ff0a7a;
+      --success: #1fd49a;
+      --success-bg: rgba(31, 212, 154, 0.14);
+      --warning: #f5a30d;
+      --warning-bg: rgba(245, 163, 13, 0.16);
+      --danger: #ff5d6d;
+      --danger-bg: rgba(255, 93, 109, 0.14);
+      --info: #00b7ff;
+      --info-bg: rgba(0, 183, 255, 0.14);
+      --radius: 14px;
+      --shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 80% -20%, #1c2640 0%, #080b10 48%, #06080d 100%);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      min-height: 100vh;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      background: #0a0f17;
+      color: #dbe4ff;
+      padding: 18px 14px;
+      border-right: 1px solid #1c273b;
+    }
+
+    .brand {
+      margin-bottom: 18px;
+      padding: 10px;
+      border: 1px solid #2a3448;
+      border-radius: 12px;
+      background: linear-gradient(160deg, #111723, #0a101a);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.2px;
+    }
+
+    .brand p {
+      margin: 4px 0 0;
+      color: #8fb0c7;
+      font-size: 0.83rem;
+    }
+
+    .nav-btn {
+      width: 100%;
+      text-align: left;
+      margin-bottom: 8px;
+      border: 1px solid #27364f;
+      color: #cae1ff;
+      background: #11192a;
+      border-radius: 10px;
+      padding: 10px;
+      cursor: pointer;
+      font-weight: 650;
+      font-size: 0.9rem;
+    }
+
+    .nav-btn.active {
+      border-color: var(--primary);
+      background: rgba(255, 10, 122, 0.14);
+      color: #ffd6ec;
+      box-shadow: 0 0 0 1px rgba(255, 10, 122, 0.36) inset;
+    }
+
+    .sidebar .meta {
+      margin-top: 14px;
+      border-top: 1px solid #1c273b;
+      padding-top: 12px;
+      font-size: 0.8rem;
+      color: #8da0c4;
+      line-height: 1.45;
+    }
+
+    .main {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-width: 0;
+    }
+
+    .topbar {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(90deg, #101720, #0e141d);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .topbar h2 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: var(--surface2);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .view {
+      padding: 16px;
+      overflow: auto;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 12px;
+    }
+
+    .card h3,
+    .card h4 {
+      margin: 0 0 10px;
+      font-size: 0.93rem;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .kpi-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .kpi {
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .kpi .label {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .kpi .value {
+      font-size: 1.2rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .kpi .sub {
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .two-col {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .three-col {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 300px minmax(0, 1fr) 320px;
+    }
+
+    .bars { display: grid; gap: 8px; }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 1fr 44px;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bar-row .label {
+      margin-bottom: 4px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .track {
+      height: 8px;
+      border-radius: 999px;
+      background: #27344b;
+      overflow: hidden;
+    }
+
+    .fill {
+      height: 100%;
+      background: var(--primary);
+    }
+
+    .fill.success { background: var(--success); }
+    .fill.danger { background: var(--danger); }
+    .fill.warning { background: var(--warning); }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+    }
+
+    .table th,
+    .table td {
+      border-bottom: 1px solid var(--border);
+      padding: 8px 6px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .table th {
+      color: var(--muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.28px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+
+    .tag.pass { background: var(--success-bg); color: #066949; border-color: #b8efd9; }
+    .tag.partial { background: var(--warning-bg); color: #8a5808; border-color: #f7dca3; }
+    .tag.fail { background: var(--danger-bg); color: #9f1f1f; border-color: #f4b7b7; }
+    .tag.minor { background: rgba(148, 163, 184, 0.14); color: #d2dcf0; border-color: #425373; }
+    .tag.info { background: var(--info-bg); color: #7dd9ff; border-color: rgba(0, 183, 255, 0.4); }
+
+    .tree-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 6px;
+    }
+
+    .node {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #121b2a;
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    .node.active {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px rgba(255, 10, 122, 0.28) inset;
+      background: rgba(255, 10, 122, 0.12);
+    }
+
+    .node .line-1 {
+      font-size: 0.86rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .node .line-2 {
+      font-size: 0.77rem;
+      color: var(--muted);
+    }
+
+    .call-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 280px minmax(0, 1fr) 380px;
+      align-items: start;
+    }
+
+    .wave {
+      margin-top: 10px;
+      height: 80px;
+      display: grid;
+      grid-template-columns: repeat(20, minmax(0, 1fr));
+      gap: 4px;
+      align-items: end;
+    }
+
+    .wave span {
+      display: block;
+      border-radius: 999px;
+      background: #324763;
+      min-height: 6px;
+    }
+
+    .wave span.active { background: var(--primary); }
+
+    .control-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    button {
+      border: 1px solid #334966;
+      border-radius: 10px;
+      background: #131e31;
+      color: #ecf4ff;
+      padding: 7px 10px;
+      cursor: pointer;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    button.primary {
+      background: var(--primary);
+      color: #ffe8f4;
+      border-color: var(--primary);
+    }
+
+    .score-skills {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .skill-row {
+      width: 100%;
+      text-align: left;
+      border: 1px solid var(--border);
+      background: #121b2a;
+      border-radius: 10px;
+      padding: 8px;
+    }
+
+    .skill-row.active {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px rgba(255, 10, 122, 0.28) inset;
+      background: rgba(255, 10, 122, 0.12);
+    }
+
+    .skill-row .line {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .skill-row .name {
+      font-size: 0.83rem;
+      font-weight: 700;
+    }
+
+    .skill-row .note {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      line-height: 1.35;
+    }
+
+    .transcript-panel {
+      max-height: 760px;
+      overflow: auto;
+      display: grid;
+      gap: 8px;
+      padding-right: 2px;
+    }
+
+    .segment-row {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px;
+      background: #111a29;
+    }
+
+    .segment-row.active {
+      border-color: var(--primary);
+      background: rgba(0, 183, 255, 0.12);
+    }
+
+    .segment-row.evidence {
+      border-color: #f6ba4f;
+      box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.18) inset;
+      background: rgba(245, 163, 13, 0.12);
+    }
+
+    .segment-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 4px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.25px;
+    }
+
+    .segment-row p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.38;
+    }
+
+    .badge {
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 0.72rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: #101725;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge.agent { border-color: rgba(0, 183, 255, 0.45); color: #8ddfff; background: rgba(0, 183, 255, 0.14); }
+    .badge.customer { border-color: rgba(31, 212, 154, 0.45); color: #aaf0d5; background: rgba(31, 212, 154, 0.14); }
+
+    .list { margin: 0; padding-left: 16px; }
+    .list li { margin-bottom: 6px; font-size: 0.85rem; }
+
+    .module-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1.25fr 1fr;
+    }
+
+    .module-pill {
+      display: inline-flex;
+      margin: 0 6px 6px 0;
+      border: 1px solid #2b4f68;
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 0.74rem;
+      color: #9fd4ff;
+      background: rgba(0, 183, 255, 0.1);
+      font-weight: 700;
+    }
+
+    .module-step {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px;
+      background: #111a29;
+      margin-bottom: 8px;
+    }
+
+    .module-step h4 {
+      margin: 0 0 4px;
+      font-size: 0.83rem;
+    }
+
+    @media (max-width: 1280px) {
+      .kpi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .call-grid { grid-template-columns: 1fr; }
+      .three-col { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 980px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { border-right: 0; border-bottom: 1px solid #1f2a44; }
+      .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1 id="brand-title">Foundever QA Coach</h1>
+        <p id="brand-sub">Meridian Home demo dataset</p>
+      </div>
+
+      <button class="nav-btn" data-page="dashboard">Dashboard</button>
+      <button class="nav-btn" data-page="stratification">Stratification</button>
+      <button class="nav-btn" data-page="call">Call Analyzer</button>
+      <button class="nav-btn" data-page="queue">Coaching Queue</button>
+      <button class="nav-btn" data-page="agent">My Coach</button>
+      <button class="nav-btn" data-page="plan">Development Plan</button>
+      <button class="nav-btn" data-page="microlearning">Microlearning</button>
+
+      <div class="meta" id="meta-block"></div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <h2 id="page-title">Operations Dashboard</h2>
+        <div class="pill-row" id="global-pills"></div>
+      </header>
+      <main class="view" id="view"></main>
+    </div>
+  </div>
+
+  <script id="mock-data" type="application/json">{
+  "meta": {
+    "product": "Foundever QA Coach",
+    "version": "0.2-mock-ui",
+    "generated_at_utc": "2026-02-17T19:07:12Z",
+    "notes": "Fake data for slightly functional AutoQA/Coaching mock. Scenario: Meridian Home Pro Steam steam wand failure; agent Sarah; customer David Chen."
+  },
+  "taxonomy": {
+    "channels": [
+      "voice"
+    ],
+    "call_types": [
+      "Product Support",
+      "Warranty Support",
+      "Product Troubleshooting",
+      "Replacement Requests",
+      "Order Status",
+      "Other"
+    ],
+    "sites": [
+      "Remote",
+      "Jacksonville",
+      "Lewisville"
+    ],
+    "skill_categories": [
+      "Call Opening",
+      "Authentication",
+      "Diagnostic Questions",
+      "Issue Resolution",
+      "Policies",
+      "Compliance",
+      "Customer Satisfaction",
+      "Closing"
+    ]
+  },
+  "users": {
+    "agents": [
+      {
+        "agent_id": "agt_sarah_m",
+        "display_name": "Sarah M.",
+        "site": "Remote",
+        "team_lead_id": "tl_mike_holder",
+        "active": true
+      }
+    ],
+    "team_leads": [
+      {
+        "team_lead_id": "tl_mike_holder",
+        "display_name": "Mike Holder",
+        "site": "Remote",
+        "active": true
+      }
+    ],
+    "qa_analysts": [
+      {
+        "qa_id": "qa_james_a",
+        "display_name": "James A.",
+        "active": true
+      }
+    ]
+  },
+  "frameworks": [
+    {
+      "framework_id": "fw_meridian_v1",
+      "name": "Meridian Home Warranty Support QA Framework",
+      "version": "1.0",
+      "published_at": "2026-02-01T00:00:00Z",
+      "categories": [
+        {
+          "category_id": "cat_opening",
+          "name": "Call Opening",
+          "weight": 10,
+          "skills": [
+            {
+              "skill_id": "sk_greet_identify",
+              "name": "Greet customer and identify self",
+              "scoring": "pass_fail",
+              "severity": "minor",
+              "definition": "Agent greets the customer and states their name/role clearly within the first 10 seconds."
+            }
+          ]
+        },
+        {
+          "category_id": "cat_empathy",
+          "name": "Customer Satisfaction",
+          "weight": 10,
+          "skills": [
+            {
+              "skill_id": "sk_empathy_ack",
+              "name": "Empathy & acknowledgment",
+              "scoring": "pass_fail",
+              "severity": "minor",
+              "definition": "Agent acknowledges inconvenience/frustration and uses an empathy statement."
+            }
+          ]
+        },
+        {
+          "category_id": "cat_policy",
+          "name": "Policies",
+          "weight": 20,
+          "skills": [
+            {
+              "skill_id": "sk_policy_repair_replace",
+              "name": "Explain repair vs replacement policy",
+              "scoring": "pass_fail",
+              "severity": "major",
+              "definition": "Agent explains troubleshooting-first policy and replacement path when warranty is active."
+            }
+          ]
+        },
+        {
+          "category_id": "cat_issue_res",
+          "name": "Issue Resolution",
+          "weight": 20,
+          "skills": [
+            {
+              "skill_id": "sk_sop_troubleshoot_sequence",
+              "name": "Follow troubleshooting sequence (purge \u2192 thermoblock reset)",
+              "scoring": "pass_fail",
+              "severity": "major",
+              "definition": "Agent executes required troubleshooting steps in order before moving to replacement."
+            },
+            {
+              "skill_id": "sk_confirm_address",
+              "name": "Confirm shipping details for replacement",
+              "scoring": "pass_fail",
+              "severity": "minor",
+              "definition": "Agent confirms address and sets expectations for shipping/tracking."
+            }
+          ]
+        },
+        {
+          "category_id": "cat_compliance",
+          "name": "Compliance",
+          "weight": 30,
+          "skills": [
+            {
+              "skill_id": "sk_warranty_verify",
+              "name": "Verify warranty status before replacement",
+              "scoring": "pass_fail",
+              "severity": "critical",
+              "definition": "Agent confirms warranty is active before authorizing replacement."
+            },
+            {
+              "skill_id": "sk_privacy_min_data",
+              "name": "Avoid unnecessary PII collection",
+              "scoring": "pass_fail",
+              "severity": "minor",
+              "definition": "Agent only references/collects information necessary to resolve the issue."
+            }
+          ]
+        },
+        {
+          "category_id": "cat_closing",
+          "name": "Closing",
+          "weight": 10,
+          "skills": [
+            {
+              "skill_id": "sk_close_next_steps",
+              "name": "Confirm next steps and offer additional help",
+              "scoring": "pass_fail",
+              "severity": "minor",
+              "definition": "Agent states next steps (shipping/tracking) and asks if customer needs anything else."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "content": {
+    "microlearning_modules": [
+      {
+        "module_id": "ml_steamwand_sop",
+        "title": "Pro Steam \u2014 Steam Wand Failure (Warranty Path)",
+        "type": "guided_simulation",
+        "estimated_duration_seconds": 360,
+        "skills_targeted": [
+          "sk_empathy_ack",
+          "sk_policy_repair_replace",
+          "sk_sop_troubleshoot_sequence",
+          "sk_warranty_verify",
+          "sk_confirm_address",
+          "sk_close_next_steps"
+        ],
+        "created_by": "system",
+        "trigger": "Trend: SOP skipped on steam wand calls",
+        "description": "AI plays a frustrated customer. Agent must follow purge + thermoblock reset sequence, confirm warranty, and complete replacement workflow."
+      }
+    ]
+  },
+  "interactions": [
+    {
+      "interaction_id": "int_mh_2026_0008842",
+      "external_ticket_id": "MH-2026-08842",
+      "channel": "voice",
+      "call_type": "Warranty Support",
+      "disposition": "Replacement \u2014 Under Warranty",
+      "site": "Remote",
+      "agent_id": "agt_sarah_m",
+      "team_lead_id": "tl_mike_holder",
+      "customer": {
+        "customer_id": "cust_david_chen",
+        "name": "David Chen",
+        "email": "david.chen@email.com",
+        "shipping_address": "4821 Maple Drive, Portland, OR 97205"
+      },
+      "product": {
+        "brand": "Meridian Home",
+        "model": "Pro Steam Espresso Machine",
+        "issue": "Steam wand non-functional"
+      },
+      "timestamps": {
+        "call_start": "2026-02-18T15:04:12Z",
+        "call_end": "2026-02-18T15:06:20Z"
+      },
+      "duration_seconds": 128,
+      "aht_seconds": 507,
+      "sentiment": {
+        "start": "frustrated",
+        "end": "satisfied",
+        "delta_points": 15
+      },
+      "audio": {
+        "waveform_peaks": [
+          0.02,
+          0.05,
+          0.03,
+          0.08,
+          0.12,
+          0.09,
+          0.06,
+          0.07,
+          0.1,
+          0.11,
+          0.08,
+          0.05,
+          0.03,
+          0.04,
+          0.06,
+          0.09,
+          0.07,
+          0.04,
+          0.02,
+          0.01
+        ],
+        "url": "https://example.local/audio/int_mh_2026_0008842.mp3",
+        "playback_seconds": 128
+      },
+      "transcript": {
+        "language": "en",
+        "segments": [
+          {
+            "start_ms": 0,
+            "end_ms": 12565,
+            "speaker": "AGENT",
+            "text": "Hi David, I'm Sarah. I can see your Pro Steam's steam wand isn't working\u2014 I've pulled up the details from your earlier call. Let me check our repair and replacement policy for you."
+          },
+          {
+            "start_ms": 13065,
+            "end_ms": 13955,
+            "speaker": "CUSTOMER",
+            "text": "Okay, thanks."
+          },
+          {
+            "start_ms": 14455,
+            "end_ms": 25897,
+            "speaker": "AGENT",
+            "text": "So our policy is to try troubleshooting first, and if that doesn't resolve it, we move to a replacement since your machine is under warranty. Let me walk you through a couple of quick steps."
+          },
+          {
+            "start_ms": 26397,
+            "end_ms": 28410,
+            "speaker": "CUSTOMER",
+            "text": "Sure, go ahead."
+          },
+          {
+            "start_ms": 28910,
+            "end_ms": 37557,
+            "speaker": "AGENT",
+            "text": "First, can you try running a purge cycle? Hold the steam button for five seconds, release, and tell me if any steam comes out."
+          },
+          {
+            "start_ms": 38057,
+            "end_ms": 48299,
+            "speaker": "CUSTOMER",
+            "text": "Okay, hold on... No, nothing. Just a clicking sound."
+          },
+          {
+            "start_ms": 48799,
+            "end_ms": 61129,
+            "speaker": "AGENT",
+            "text": "Got it. Let's try one more thing\u2014 a thermoblock reset. Unplug the machine, wait thirty seconds, plug it back in, and try the steam wand again."
+          },
+          {
+            "start_ms": 61629,
+            "end_ms": 68840,
+            "speaker": "CUSTOMER",
+            "text": "Alright, give me a sec... Nope. Still nothing."
+          },
+          {
+            "start_ms": 69340,
+            "end_ms": 86948,
+            "speaker": "AGENT",
+            "text": "Okay David, we've gone through the troubleshooting and the steam wand isn't responding. Since your machine is under warranty, we have two options\u2014 we can send it in for repair, which typically takes ten to fourteen business days, or I can ship you a brand-new replacement."
+          },
+          {
+            "start_ms": 87448,
+            "end_ms": 92099,
+            "speaker": "CUSTOMER",
+            "text": "Yeah, I don't want to wait two weeks without an espresso machine. Let's do the replacement."
+          },
+          {
+            "start_ms": 92599,
+            "end_ms": 104616,
+            "speaker": "AGENT",
+            "text": "Absolutely. I'll get that set up right now. Can you confirm your shipping address is still 4821 Maple Drive, Portland, Oregon 97205?"
+          },
+          {
+            "start_ms": 105116,
+            "end_ms": 106240,
+            "speaker": "CUSTOMER",
+            "text": "Yep, that's correct."
+          },
+          {
+            "start_ms": 106740,
+            "end_ms": 120351,
+            "speaker": "AGENT",
+            "text": "Perfect. I've created the replacement ticket and your new Pro Steam will ship within two business days. You'll get a tracking email at david.chen@email.com. Is there anything else I can help with?"
+          },
+          {
+            "start_ms": 120851,
+            "end_ms": 122629,
+            "speaker": "CUSTOMER",
+            "text": "No, that's great. Thank you, Sarah."
+          },
+          {
+            "start_ms": 123129,
+            "end_ms": 128250,
+            "speaker": "AGENT",
+            "text": "Happy to help, David. Enjoy the new machine. Have a great day."
+          }
+        ]
+      },
+      "autoqa": {
+        "framework_id": "fw_meridian_v1",
+        "framework_version": "1.0",
+        "overall_score": 94,
+        "confidence_pct": 92,
+        "scored_at": "2026-02-18T15:06:45Z",
+        "category_scores": [
+          {
+            "category_id": "cat_opening",
+            "score": 10,
+            "max": 10
+          },
+          {
+            "category_id": "cat_empathy",
+            "score": 8,
+            "max": 10
+          },
+          {
+            "category_id": "cat_policy",
+            "score": 20,
+            "max": 20
+          },
+          {
+            "category_id": "cat_issue_res",
+            "score": 20,
+            "max": 20
+          },
+          {
+            "category_id": "cat_compliance",
+            "score": 26,
+            "max": 30
+          },
+          {
+            "category_id": "cat_closing",
+            "score": 10,
+            "max": 10
+          }
+        ],
+        "skills": [
+          {
+            "skill_id": "sk_greet_identify",
+            "result": "pass",
+            "confidence_pct": 96,
+            "evidence": [
+              {
+                "start_ms": 0,
+                "end_ms": 4500,
+                "text": "Hi David, I'm Sarah."
+              }
+            ]
+          },
+          {
+            "skill_id": "sk_empathy_ack",
+            "result": "partial",
+            "confidence_pct": 78,
+            "evidence": [
+              {
+                "start_ms": 48799,
+                "end_ms": 52000,
+                "text": "Got it."
+              }
+            ],
+            "notes": "Acknowledged issue but missed explicit empathy phrase (e.g., 'I'm sorry that's happening')."
+          },
+          {
+            "skill_id": "sk_policy_repair_replace",
+            "result": "pass",
+            "confidence_pct": 93,
+            "evidence": [
+              {
+                "start_ms": 14455,
+                "end_ms": 25897,
+                "text": "policy is to try troubleshooting first... move to a replacement... under warranty"
+              }
+            ]
+          },
+          {
+            "skill_id": "sk_sop_troubleshoot_sequence",
+            "result": "pass",
+            "confidence_pct": 90,
+            "evidence": [
+              {
+                "start_ms": 28910,
+                "end_ms": 37557,
+                "text": "try running a purge cycle"
+              },
+              {
+                "start_ms": 48799,
+                "end_ms": 61129,
+                "text": "thermoblock reset"
+              }
+            ]
+          },
+          {
+            "skill_id": "sk_warranty_verify",
+            "result": "pass",
+            "confidence_pct": 88,
+            "evidence": [
+              {
+                "start_ms": 14455,
+                "end_ms": 25897,
+                "text": "since your machine is under warranty"
+              }
+            ]
+          },
+          {
+            "skill_id": "sk_privacy_min_data",
+            "result": "pass",
+            "confidence_pct": 91,
+            "evidence": [
+              {
+                "start_ms": 92599,
+                "end_ms": 104616,
+                "text": "confirm your shipping address is still..."
+              }
+            ]
+          },
+          {
+            "skill_id": "sk_confirm_address",
+            "result": "pass",
+            "confidence_pct": 94,
+            "evidence": [
+              {
+                "start_ms": 92599,
+                "end_ms": 120351,
+                "text": "confirm your shipping address... ship within two business days... tracking email"
+              }
+            ]
+          },
+          {
+            "skill_id": "sk_close_next_steps",
+            "result": "pass",
+            "confidence_pct": 95,
+            "evidence": [
+              {
+                "start_ms": 106740,
+                "end_ms": 120351,
+                "text": "ship within two business days... tracking email... anything else I can help with?"
+              }
+            ]
+          }
+        ],
+        "flags": [
+          {
+            "type": "watch",
+            "key": "empathy_phrase_missing",
+            "label": "Empathy phrasing could be stronger",
+            "severity": "minor"
+          },
+          {
+            "type": "info",
+            "key": "sop_completed",
+            "label": "Troubleshooting SOP completed",
+            "severity": "info"
+          }
+        ],
+        "generated_wrap_up": {
+          "customer": "David Chen (david.chen@email.com)",
+          "product": "Meridian Home Pro Steam Espresso Machine",
+          "warranty": "Active",
+          "issue_summary": "Steam wand non-functional; no steam during purge; no improvement after thermoblock reset.",
+          "troubleshooting_steps": [
+            "Purge cycle test \u2014 failed (clicking sound, no steam)",
+            "Thermoblock reset \u2014 failed (no change after power cycle)"
+          ],
+          "resolution": "Warranty replacement authorized; ticket created; shipment within 2 business days; tracking via email.",
+          "disposition": "Replacement \u2014 Under Warranty",
+          "sentiment_shift": "Frustrated \u2192 Satisfied"
+        }
+      }
+    }
+  ],
+  "aggregates": {
+    "dashboard": {
+      "period": {
+        "start": "2026-02-01",
+        "end": "2026-02-29",
+        "label": "Feb 2026"
+      },
+      "calls_received": 20696,
+      "calls_scored": 16179,
+      "percent_scored": 78,
+      "avg_qa_score": 91.2,
+      "avg_aht_seconds": 507,
+      "compliance_fail_rate_pct": 3.8,
+      "sentiment_improvement_rate_pct": 81,
+      "call_type_distribution_pct": [
+        {
+          "label": "Warranty Support",
+          "value": 42
+        },
+        {
+          "label": "Product Troubleshooting",
+          "value": 33
+        },
+        {
+          "label": "Replacement Requests",
+          "value": 15
+        },
+        {
+          "label": "Order Status",
+          "value": 6
+        },
+        {
+          "label": "Other",
+          "value": 4
+        }
+      ],
+      "call_allocation_by_agent_calls": [
+        {
+          "label": "Sarah M.",
+          "value": 16
+        },
+        {
+          "label": "Amy",
+          "value": 11
+        },
+        {
+          "label": "Eric",
+          "value": 8
+        },
+        {
+          "label": "Keven",
+          "value": 7
+        },
+        {
+          "label": "No Supervisor",
+          "value": 5
+        }
+      ],
+      "data_volumes_by_site": [
+        {
+          "site": "Jacksonville",
+          "calls": 1697,
+          "minutes": 24067
+        },
+        {
+          "site": "Lewisville",
+          "calls": 1608,
+          "minutes": 21456
+        },
+        {
+          "site": "Remote",
+          "calls": 1608,
+          "minutes": 23118
+        }
+      ],
+      "top_strengths": [
+        {
+          "skill_label": "Policy explanation (repair vs replace)",
+          "score": 93
+        },
+        {
+          "skill_label": "Troubleshooting sequence adherence",
+          "score": 90
+        },
+        {
+          "skill_label": "Closing & next steps",
+          "score": 88
+        }
+      ],
+      "top_opportunities": [
+        {
+          "skill_label": "Explicit empathy statement",
+          "miss_rate_pct": 32
+        },
+        {
+          "skill_label": "Warranty confirmation phrasing",
+          "miss_rate_pct": 28
+        },
+        {
+          "skill_label": "Set expectations on repair option",
+          "miss_rate_pct": 21
+        }
+      ]
+    },
+    "stratification": {
+      "root": {
+        "label": "Steam Wand Failure Calls",
+        "call_count": 1000,
+        "avg_score": 90.8,
+        "avg_aht_seconds": 760,
+        "children": [
+          {
+            "label": "Warranty Verified = Yes",
+            "call_count": 880,
+            "avg_score": 92.2,
+            "avg_aht_seconds": 715,
+            "children": [
+              {
+                "label": "SOP Followed = Yes",
+                "call_count": 610,
+                "avg_score": 94.0,
+                "avg_aht_seconds": 550,
+                "children": [
+                  {
+                    "label": "Outcome: Replacement",
+                    "call_count": 450,
+                    "avg_score": 94.2,
+                    "avg_aht_seconds": 550
+                  },
+                  {
+                    "label": "Outcome: Resolved",
+                    "call_count": 110,
+                    "avg_score": 96.0,
+                    "avg_aht_seconds": 425
+                  },
+                  {
+                    "label": "Outcome: Repair Depot",
+                    "call_count": 50,
+                    "avg_score": 90.1,
+                    "avg_aht_seconds": 640
+                  }
+                ]
+              },
+              {
+                "label": "SOP Followed = No",
+                "call_count": 270,
+                "avg_score": 86.5,
+                "avg_aht_seconds": 785,
+                "children": [
+                  {
+                    "label": "Replacement issued anyway",
+                    "call_count": 180,
+                    "avg_score": 84.0,
+                    "avg_aht_seconds": 775
+                  },
+                  {
+                    "label": "Supervisor escalation",
+                    "call_count": 70,
+                    "avg_score": 88.3,
+                    "avg_aht_seconds": 820
+                  },
+                  {
+                    "label": "Callback required",
+                    "call_count": 20,
+                    "avg_score": 82.4,
+                    "avg_aht_seconds": 860
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Warranty Verified = No",
+            "call_count": 120,
+            "avg_score": 78.9,
+            "avg_aht_seconds": 860,
+            "children": [
+              {
+                "label": "Replacement offered",
+                "call_count": 60,
+                "avg_score": 70.2,
+                "avg_aht_seconds": 875
+              },
+              {
+                "label": "Repair quoted/denied coverage",
+                "call_count": 60,
+                "avg_score": 87.6,
+                "avg_aht_seconds": 845
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "trends": [
+      {
+        "trend_id": "tr_steamwand_mom_spike",
+        "title": "Steam wand failure calls up 340% MoM",
+        "magnitude_pct": 340,
+        "impact": {
+          "kpi": "AHT",
+          "delta_seconds": 265
+        },
+        "likely_root_cause": "Agents unfamiliar with thermoblock reset sequence; escalating early.",
+        "recommended_actions": [
+          {
+            "type": "microlearning",
+            "module_id": "ml_steamwand_sop"
+          },
+          {
+            "type": "coaching",
+            "skill_id": "sk_sop_troubleshoot_sequence"
+          }
+        ]
+      }
+    ]
+  },
+  "coaching": {
+    "development_plans": [
+      {
+        "plan_id": "dp_sarah_feb_2026",
+        "agent_id": "agt_sarah_m",
+        "period_label": "February 2026",
+        "due_date": "2026-03-20",
+        "kpis": {
+          "csat_pct": {
+            "actual": 88,
+            "goal": 90,
+            "delta_pct": -2
+          },
+          "fcr_pct": {
+            "actual": 79,
+            "goal": 90,
+            "delta_pct": -11
+          },
+          "aht_seconds": {
+            "actual": 507,
+            "goal": 480,
+            "delta_seconds": 27
+          }
+        },
+        "strengths": [
+          {
+            "skill_id": "sk_policy_repair_replace",
+            "score": 2.0,
+            "calls_observed": 20
+          },
+          {
+            "skill_id": "sk_sop_troubleshoot_sequence",
+            "score": 2.0,
+            "calls_observed": 23
+          }
+        ],
+        "opportunities": [
+          {
+            "skill_id": "sk_empathy_ack",
+            "score": 0.2,
+            "calls_observed": 16
+          },
+          {
+            "skill_id": "sk_warranty_verify",
+            "score": 0.5,
+            "calls_observed": 21
+          }
+        ],
+        "insights": [
+          "Avg Handle Time correlates with lower CSAT on calls under 10 minutes.",
+          "FCR improves when agents recap steps and ask follow-up questions."
+        ],
+        "recommended_modules": [
+          "ml_steamwand_sop"
+        ]
+      }
+    ],
+    "tasks": [
+      {
+        "task_id": "task_sarah_empathy_001",
+        "agent_id": "agt_sarah_m",
+        "created_by": "tl_mike_holder",
+        "created_at": "2026-02-19T10:00:00Z",
+        "due_at": "2026-02-26T23:59:59Z",
+        "priority": "medium",
+        "status": "not_started",
+        "type": "microlearning",
+        "title": "Add explicit empathy statement early",
+        "skill_id": "sk_empathy_ack",
+        "evidence_interaction_id": "int_mh_2026_0008842",
+        "module_id": "ml_steamwand_sop"
+      }
+    ]
+  },
+  "theme": {
+    "brand": {
+      "name": "Foundever QA Coach",
+      "client": "Meridian Home",
+      "logo_text": "QA Coach",
+      "accent_color": "#2563EB"
+    },
+    "colors": {
+      "bg": "#F5F6FA",
+      "surface": "#FFFFFF",
+      "surface2": "#F9FAFB",
+      "border": "#E5E7EB",
+      "text": "#111827",
+      "muted": "#6B7280",
+      "primary": "#2563EB",
+      "success": "#10B981",
+      "success_bg": "#ECFDF5",
+      "warning": "#F59E0B",
+      "warning_bg": "#FFFBEB",
+      "danger": "#EF4444",
+      "danger_bg": "#FEF2F2",
+      "info": "#3B82F6",
+      "info_bg": "#EFF6FF"
+    },
+    "typography": {
+      "font_family": "Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial",
+      "sizes": {
+        "h1": 18,
+        "h2": 14,
+        "body": 13,
+        "small": 11
+      },
+      "weights": {
+        "regular": 500,
+        "semibold": 650,
+        "bold": 800
+      }
+    },
+    "spacing": {
+      "page_padding": 18,
+      "card_padding": 14,
+      "gap": 14
+    },
+    "radius": {
+      "card": 14,
+      "button": 10,
+      "pill": 999
+    },
+    "shadows": {
+      "card": "0 1px 2px rgba(0,0,0,.05)",
+      "popover": "0 12px 30px rgba(0,0,0,.18)"
+    },
+    "icons": {
+      "pass": "check-circle",
+      "fail": "x-circle",
+      "partial": "alert-circle",
+      "watch": "alert-triangle",
+      "info": "info"
+    }
+  },
+  "ui_config": {
+    "app": {
+      "default_role": "qa",
+      "roles": [
+        "agent",
+        "team_lead",
+        "qa",
+        "ops",
+        "admin"
+      ],
+      "navigation": [
+        {
+          "id": "nav_dashboard",
+          "label": "Dashboard",
+          "route": "/dashboard",
+          "icon": "layout-dashboard"
+        },
+        {
+          "id": "nav_strat",
+          "label": "Stratification",
+          "route": "/stratification",
+          "icon": "git-fork"
+        },
+        {
+          "id": "nav_calls",
+          "label": "Call Analyzer",
+          "route": "/call/:interaction_id",
+          "icon": "headphones"
+        },
+        {
+          "id": "nav_queue",
+          "label": "Coaching Queue",
+          "route": "/coaching/queue",
+          "icon": "check-square"
+        },
+        {
+          "id": "nav_agent",
+          "label": "My Coach",
+          "route": "/agent/:agent_id",
+          "icon": "sparkles"
+        },
+        {
+          "id": "nav_plan",
+          "label": "Development Plan",
+          "route": "/coaching/plan/:plan_id",
+          "icon": "clipboard-list"
+        }
+      ],
+      "global_filters": [
+        {
+          "key": "date_range",
+          "type": "date_range",
+          "default": {
+            "preset": "month",
+            "label": "Feb 2026",
+            "start": "2026-02-01",
+            "end": "2026-02-29"
+          }
+        },
+        {
+          "key": "channel",
+          "type": "multi_select",
+          "options_from": "taxonomy.channels",
+          "default": [
+            "voice"
+          ]
+        },
+        {
+          "key": "site",
+          "type": "multi_select",
+          "options_from": "taxonomy.sites",
+          "default": []
+        },
+        {
+          "key": "agent_id",
+          "type": "multi_select",
+          "options_from": "users.agents",
+          "label_field": "display_name",
+          "value_field": "agent_id",
+          "default": []
+        },
+        {
+          "key": "call_type",
+          "type": "multi_select",
+          "options_from": "taxonomy.call_types",
+          "default": []
+        }
+      ]
+    },
+    "pages": [
+      {
+        "id": "page_dashboard",
+        "route": "/dashboard",
+        "title": "Operations Dashboard",
+        "layout": {
+          "type": "grid",
+          "columns": 12
+        },
+        "widgets": [
+          {
+            "id": "kpi_calls_received",
+            "type": "kpi_card",
+            "title": "Calls Received",
+            "value_path": "aggregates.dashboard.calls_received",
+            "format": "number",
+            "col_span": 3
+          },
+          {
+            "id": "kpi_calls_scored",
+            "type": "kpi_card",
+            "title": "Calls Scored",
+            "value_path": "aggregates.dashboard.calls_scored",
+            "format": "number",
+            "col_span": 3
+          },
+          {
+            "id": "kpi_percent_scored",
+            "type": "kpi_card",
+            "title": "% Scored",
+            "value_path": "aggregates.dashboard.percent_scored",
+            "format": "percent_int",
+            "col_span": 2
+          },
+          {
+            "id": "kpi_avg_score",
+            "type": "kpi_card",
+            "title": "Avg QA Score",
+            "value_path": "aggregates.dashboard.avg_qa_score",
+            "format": "score_0_100_1dp",
+            "col_span": 2
+          },
+          {
+            "id": "kpi_compliance_fail",
+            "type": "kpi_card",
+            "title": "Compliance Fail %",
+            "value_path": "aggregates.dashboard.compliance_fail_rate_pct",
+            "format": "percent_1dp",
+            "col_span": 2
+          },
+          {
+            "id": "donut_call_type",
+            "type": "donut",
+            "title": "Overall Call Type",
+            "series_path": "aggregates.dashboard.call_type_distribution_pct",
+            "label_field": "label",
+            "value_field": "value",
+            "col_span": 4,
+            "on_click": {
+              "action": "navigate",
+              "route": "/stratification",
+              "payload": {
+                "preset": "call_type_slice"
+              }
+            }
+          },
+          {
+            "id": "donut_allocation",
+            "type": "donut",
+            "title": "Call Allocation (by agent)",
+            "series_path": "aggregates.dashboard.call_allocation_by_agent_calls",
+            "label_field": "label",
+            "value_field": "value",
+            "col_span": 4,
+            "on_click": {
+              "action": "navigate",
+              "route": "/agent/agt_sarah_m"
+            }
+          },
+          {
+            "id": "table_sites",
+            "type": "table",
+            "title": "Volume by Site",
+            "rows_path": "aggregates.dashboard.data_volumes_by_site",
+            "col_span": 4,
+            "columns": [
+              {
+                "key": "site",
+                "label": "Site"
+              },
+              {
+                "key": "calls",
+                "label": "Calls",
+                "format": "number"
+              },
+              {
+                "key": "minutes",
+                "label": "Minutes",
+                "format": "number"
+              }
+            ]
+          },
+          {
+            "id": "bars_strengths",
+            "type": "bar_list",
+            "title": "Top 3 Strengths",
+            "rows_path": "aggregates.dashboard.top_strengths",
+            "label_field": "skill_label",
+            "value_field": "score",
+            "col_span": 6,
+            "color": "theme.colors.success"
+          },
+          {
+            "id": "bars_opps",
+            "type": "bar_list",
+            "title": "Top 3 Opportunities",
+            "rows_path": "aggregates.dashboard.top_opportunities",
+            "label_field": "skill_label",
+            "value_field": "miss_rate_pct",
+            "col_span": 6,
+            "color": "theme.colors.danger"
+          }
+        ]
+      },
+      {
+        "id": "page_stratification",
+        "route": "/stratification",
+        "title": "Call Stratification",
+        "layout": {
+          "type": "three_panel",
+          "left": 3,
+          "center": 6,
+          "right": 3
+        },
+        "left_panel": {
+          "widgets": [
+            {
+              "id": "layer_builder",
+              "type": "layer_builder",
+              "title": "Stratify by",
+              "default_layers": [
+                "Warranty Verified",
+                "SOP Followed",
+                "Outcome"
+              ],
+              "mode": "mock_static",
+              "available_layers": [
+                "Call Type",
+                "Warranty Verified",
+                "SOP Followed",
+                "Outcome",
+                "Sentiment Shift",
+                "AHT Bucket",
+                "Agent",
+                "Team",
+                "Site"
+              ]
+            }
+          ]
+        },
+        "center_panel": {
+          "widgets": [
+            {
+              "id": "tree",
+              "type": "drilldown_tree",
+              "title": "Population Flow",
+              "root_path": "aggregates.stratification.root",
+              "node_fields": [
+                "call_count",
+                "avg_score",
+                "avg_aht_seconds"
+              ],
+              "default_metric": "call_count"
+            }
+          ]
+        },
+        "right_panel": {
+          "widgets": [
+            {
+              "id": "segment_summary",
+              "type": "segment_summary",
+              "title": "Segment Summary",
+              "fields": [
+                {
+                  "label": "Calls",
+                  "value_from_active_node": "call_count",
+                  "format": "number"
+                },
+                {
+                  "label": "Avg Score",
+                  "value_from_active_node": "avg_score",
+                  "format": "score_0_100_1dp"
+                },
+                {
+                  "label": "Avg AHT",
+                  "value_from_active_node": "avg_aht_seconds",
+                  "format": "duration_mmss"
+                }
+              ]
+            },
+            {
+              "id": "btn_sample_calls",
+              "type": "button",
+              "label": "View sample call",
+              "variant": "primary",
+              "on_click": {
+                "action": "navigate",
+                "route": "/call/int_mh_2026_0008842"
+              }
+            },
+            {
+              "id": "btn_assign",
+              "type": "button",
+              "label": "Assign coaching",
+              "variant": "secondary",
+              "on_click": {
+                "action": "create_task",
+                "template_task_id": "task_sarah_empathy_001"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "page_call_analyzer",
+        "route": "/call/:interaction_id",
+        "title": "Call Analyzer",
+        "layout": {
+          "type": "four_zone",
+          "left": 2.5,
+          "center": 6.5,
+          "right": 3
+        },
+        "widgets": [
+          {
+            "id": "call_header",
+            "type": "call_header",
+            "interaction_path": "interactions_by_id[:interaction_id]"
+          },
+          {
+            "id": "audio_player",
+            "type": "audio_player",
+            "interaction_path": "interactions_by_id[:interaction_id]",
+            "left_zone": true
+          },
+          {
+            "id": "scorecard",
+            "type": "scorecard",
+            "framework_path": "frameworks[0]",
+            "interaction_path": "interactions_by_id[:interaction_id]",
+            "center_zone": true
+          },
+          {
+            "id": "transcript",
+            "type": "transcript",
+            "interaction_path": "interactions_by_id[:interaction_id]",
+            "right_zone": true,
+            "features": {
+              "search": true,
+              "highlight_evidence": true,
+              "speaker_badges": true
+            }
+          }
+        ],
+        "interactions": {
+          "skill_click_behavior": {
+            "action": "highlight_transcript_evidence",
+            "scroll_to_first": true
+          },
+          "override_rules": {
+            "enabled_roles": [
+              "qa",
+              "admin"
+            ],
+            "require_comment": true,
+            "audit_log": true
+          }
+        }
+      },
+      {
+        "id": "page_agent_home",
+        "route": "/agent/:agent_id",
+        "title": "My Coach",
+        "layout": {
+          "type": "three_column",
+          "left": 4,
+          "center": 5,
+          "right": 3
+        },
+        "widgets": [
+          {
+            "id": "next_module",
+            "type": "module_card",
+            "title": "What\u2019s Next",
+            "module_path": "content.microlearning_modules[0]",
+            "left_col": true
+          },
+          {
+            "id": "assigned_tasks",
+            "type": "task_list",
+            "title": "Assigned to you",
+            "rows_path": "coaching.tasks",
+            "filter": {
+              "agent_id": ":agent_id"
+            },
+            "left_col": true
+          },
+          {
+            "id": "last_call",
+            "type": "call_summary_card",
+            "title": "Most recent scored call",
+            "interaction_id": "int_mh_2026_0008842",
+            "center_col": true
+          },
+          {
+            "id": "skill_stats",
+            "type": "skill_stats",
+            "title": "Skill Stats",
+            "agent_id": ":agent_id",
+            "right_col": true
+          }
+        ]
+      },
+      {
+        "id": "page_dev_plan",
+        "route": "/coaching/plan/:plan_id",
+        "title": "Development Plan",
+        "layout": {
+          "type": "two_column",
+          "left": 8,
+          "right": 4
+        },
+        "widgets": [
+          {
+            "id": "plan_header",
+            "type": "plan_header",
+            "plan_path": "coaching.development_plans_by_id[:plan_id]"
+          },
+          {
+            "id": "kpi_block",
+            "type": "kpi_block",
+            "plan_path": "coaching.development_plans_by_id[:plan_id]"
+          },
+          {
+            "id": "strengths_opps",
+            "type": "strengths_opps_table",
+            "plan_path": "coaching.development_plans_by_id[:plan_id]",
+            "strength_color": "theme.colors.success_bg",
+            "opp_color": "theme.colors.danger_bg",
+            "skill_lookup": "frameworks[0]"
+          },
+          {
+            "id": "insights",
+            "type": "insight_list",
+            "plan_path": "coaching.development_plans_by_id[:plan_id]",
+            "right_col": true
+          }
+        ]
+      },
+      {
+        "id": "page_queue",
+        "route": "/coaching/queue",
+        "title": "Coaching Queue",
+        "layout": {
+          "type": "single",
+          "columns": 12
+        },
+        "widgets": [
+          {
+            "id": "task_filters",
+            "type": "task_filters",
+            "defaults": {
+              "status": "all",
+              "priority": "all"
+            }
+          },
+          {
+            "id": "task_table",
+            "type": "task_table",
+            "rows_path": "coaching.tasks",
+            "columns": [
+              {
+                "key": "title",
+                "label": "Task"
+              },
+              {
+                "key": "agent_id",
+                "label": "Agent",
+                "format": "lookup_agent_name"
+              },
+              {
+                "key": "skill_id",
+                "label": "Skill",
+                "format": "lookup_skill_name"
+              },
+              {
+                "key": "due_at",
+                "label": "Due",
+                "format": "date"
+              },
+              {
+                "key": "priority",
+                "label": "Priority"
+              },
+              {
+                "key": "status",
+                "label": "Status"
+              },
+              {
+                "key": "evidence_interaction_id",
+                "label": "Evidence",
+                "format": "call_link"
+              }
+            ],
+            "row_actions": [
+              {
+                "id": "open_call",
+                "label": "Open call",
+                "action": "navigate",
+                "route": "/call/:evidence_interaction_id"
+              },
+              {
+                "id": "mark_done",
+                "label": "Mark complete",
+                "action": "update_task_status",
+                "to": "completed"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "formatters": {
+      "number": {
+        "locale": "en-US"
+      },
+      "duration_mmss": {
+        "pattern": "m:ss"
+      },
+      "date": {
+        "pattern": "MMM d, yyyy"
+      },
+      "score_0_100_1dp": {
+        "decimals": 1
+      },
+      "percent_int": {
+        "suffix": "%",
+        "decimals": 0
+      },
+      "percent_1dp": {
+        "suffix": "%",
+        "decimals": 1
+      }
+    }
+  },
+  "indices": {
+    "interactions_by_id": {
+      "int_mh_2026_0008842": {
+        "interaction_id": "int_mh_2026_0008842",
+        "external_ticket_id": "MH-2026-08842",
+        "channel": "voice",
+        "call_type": "Warranty Support",
+        "disposition": "Replacement \u2014 Under Warranty",
+        "site": "Remote",
+        "agent_id": "agt_sarah_m",
+        "team_lead_id": "tl_mike_holder",
+        "customer": {
+          "customer_id": "cust_david_chen",
+          "name": "David Chen",
+          "email": "david.chen@email.com",
+          "shipping_address": "4821 Maple Drive, Portland, OR 97205"
+        },
+        "product": {
+          "brand": "Meridian Home",
+          "model": "Pro Steam Espresso Machine",
+          "issue": "Steam wand non-functional"
+        },
+        "timestamps": {
+          "call_start": "2026-02-18T15:04:12Z",
+          "call_end": "2026-02-18T15:06:20Z"
+        },
+        "duration_seconds": 128,
+        "aht_seconds": 507,
+        "sentiment": {
+          "start": "frustrated",
+          "end": "satisfied",
+          "delta_points": 15
+        },
+        "audio": {
+          "waveform_peaks": [
+            0.02,
+            0.05,
+            0.03,
+            0.08,
+            0.12,
+            0.09,
+            0.06,
+            0.07,
+            0.1,
+            0.11,
+            0.08,
+            0.05,
+            0.03,
+            0.04,
+            0.06,
+            0.09,
+            0.07,
+            0.04,
+            0.02,
+            0.01
+          ],
+          "url": "https://example.local/audio/int_mh_2026_0008842.mp3",
+          "playback_seconds": 128
+        },
+        "transcript": {
+          "language": "en",
+          "segments": [
+            {
+              "start_ms": 0,
+              "end_ms": 12565,
+              "speaker": "AGENT",
+              "text": "Hi David, I'm Sarah. I can see your Pro Steam's steam wand isn't working\u2014 I've pulled up the details from your earlier call. Let me check our repair and replacement policy for you."
+            },
+            {
+              "start_ms": 13065,
+              "end_ms": 13955,
+              "speaker": "CUSTOMER",
+              "text": "Okay, thanks."
+            },
+            {
+              "start_ms": 14455,
+              "end_ms": 25897,
+              "speaker": "AGENT",
+              "text": "So our policy is to try troubleshooting first, and if that doesn't resolve it, we move to a replacement since your machine is under warranty. Let me walk you through a couple of quick steps."
+            },
+            {
+              "start_ms": 26397,
+              "end_ms": 28410,
+              "speaker": "CUSTOMER",
+              "text": "Sure, go ahead."
+            },
+            {
+              "start_ms": 28910,
+              "end_ms": 37557,
+              "speaker": "AGENT",
+              "text": "First, can you try running a purge cycle? Hold the steam button for five seconds, release, and tell me if any steam comes out."
+            },
+            {
+              "start_ms": 38057,
+              "end_ms": 48299,
+              "speaker": "CUSTOMER",
+              "text": "Okay, hold on... No, nothing. Just a clicking sound."
+            },
+            {
+              "start_ms": 48799,
+              "end_ms": 61129,
+              "speaker": "AGENT",
+              "text": "Got it. Let's try one more thing\u2014 a thermoblock reset. Unplug the machine, wait thirty seconds, plug it back in, and try the steam wand again."
+            },
+            {
+              "start_ms": 61629,
+              "end_ms": 68840,
+              "speaker": "CUSTOMER",
+              "text": "Alright, give me a sec... Nope. Still nothing."
+            },
+            {
+              "start_ms": 69340,
+              "end_ms": 86948,
+              "speaker": "AGENT",
+              "text": "Okay David, we've gone through the troubleshooting and the steam wand isn't responding. Since your machine is under warranty, we have two options\u2014 we can send it in for repair, which typically takes ten to fourteen business days, or I can ship you a brand-new replacement."
+            },
+            {
+              "start_ms": 87448,
+              "end_ms": 92099,
+              "speaker": "CUSTOMER",
+              "text": "Yeah, I don't want to wait two weeks without an espresso machine. Let's do the replacement."
+            },
+            {
+              "start_ms": 92599,
+              "end_ms": 104616,
+              "speaker": "AGENT",
+              "text": "Absolutely. I'll get that set up right now. Can you confirm your shipping address is still 4821 Maple Drive, Portland, Oregon 97205?"
+            },
+            {
+              "start_ms": 105116,
+              "end_ms": 106240,
+              "speaker": "CUSTOMER",
+              "text": "Yep, that's correct."
+            },
+            {
+              "start_ms": 106740,
+              "end_ms": 120351,
+              "speaker": "AGENT",
+              "text": "Perfect. I've created the replacement ticket and your new Pro Steam will ship within two business days. You'll get a tracking email at david.chen@email.com. Is there anything else I can help with?"
+            },
+            {
+              "start_ms": 120851,
+              "end_ms": 122629,
+              "speaker": "CUSTOMER",
+              "text": "No, that's great. Thank you, Sarah."
+            },
+            {
+              "start_ms": 123129,
+              "end_ms": 128250,
+              "speaker": "AGENT",
+              "text": "Happy to help, David. Enjoy the new machine. Have a great day."
+            }
+          ]
+        },
+        "autoqa": {
+          "framework_id": "fw_meridian_v1",
+          "framework_version": "1.0",
+          "overall_score": 94,
+          "confidence_pct": 92,
+          "scored_at": "2026-02-18T15:06:45Z",
+          "category_scores": [
+            {
+              "category_id": "cat_opening",
+              "score": 10,
+              "max": 10
+            },
+            {
+              "category_id": "cat_empathy",
+              "score": 8,
+              "max": 10
+            },
+            {
+              "category_id": "cat_policy",
+              "score": 20,
+              "max": 20
+            },
+            {
+              "category_id": "cat_issue_res",
+              "score": 20,
+              "max": 20
+            },
+            {
+              "category_id": "cat_compliance",
+              "score": 26,
+              "max": 30
+            },
+            {
+              "category_id": "cat_closing",
+              "score": 10,
+              "max": 10
+            }
+          ],
+          "skills": [
+            {
+              "skill_id": "sk_greet_identify",
+              "result": "pass",
+              "confidence_pct": 96,
+              "evidence": [
+                {
+                  "start_ms": 0,
+                  "end_ms": 4500,
+                  "text": "Hi David, I'm Sarah."
+                }
+              ]
+            },
+            {
+              "skill_id": "sk_empathy_ack",
+              "result": "partial",
+              "confidence_pct": 78,
+              "evidence": [
+                {
+                  "start_ms": 48799,
+                  "end_ms": 52000,
+                  "text": "Got it."
+                }
+              ],
+              "notes": "Acknowledged issue but missed explicit empathy phrase (e.g., 'I'm sorry that's happening')."
+            },
+            {
+              "skill_id": "sk_policy_repair_replace",
+              "result": "pass",
+              "confidence_pct": 93,
+              "evidence": [
+                {
+                  "start_ms": 14455,
+                  "end_ms": 25897,
+                  "text": "policy is to try troubleshooting first... move to a replacement... under warranty"
+                }
+              ]
+            },
+            {
+              "skill_id": "sk_sop_troubleshoot_sequence",
+              "result": "pass",
+              "confidence_pct": 90,
+              "evidence": [
+                {
+                  "start_ms": 28910,
+                  "end_ms": 37557,
+                  "text": "try running a purge cycle"
+                },
+                {
+                  "start_ms": 48799,
+                  "end_ms": 61129,
+                  "text": "thermoblock reset"
+                }
+              ]
+            },
+            {
+              "skill_id": "sk_warranty_verify",
+              "result": "pass",
+              "confidence_pct": 88,
+              "evidence": [
+                {
+                  "start_ms": 14455,
+                  "end_ms": 25897,
+                  "text": "since your machine is under warranty"
+                }
+              ]
+            },
+            {
+              "skill_id": "sk_privacy_min_data",
+              "result": "pass",
+              "confidence_pct": 91,
+              "evidence": [
+                {
+                  "start_ms": 92599,
+                  "end_ms": 104616,
+                  "text": "confirm your shipping address is still..."
+                }
+              ]
+            },
+            {
+              "skill_id": "sk_confirm_address",
+              "result": "pass",
+              "confidence_pct": 94,
+              "evidence": [
+                {
+                  "start_ms": 92599,
+                  "end_ms": 120351,
+                  "text": "confirm your shipping address... ship within two business days... tracking email"
+                }
+              ]
+            },
+            {
+              "skill_id": "sk_close_next_steps",
+              "result": "pass",
+              "confidence_pct": 95,
+              "evidence": [
+                {
+                  "start_ms": 106740,
+                  "end_ms": 120351,
+                  "text": "ship within two business days... tracking email... anything else I can help with?"
+                }
+              ]
+            }
+          ],
+          "flags": [
+            {
+              "type": "watch",
+              "key": "empathy_phrase_missing",
+              "label": "Empathy phrasing could be stronger",
+              "severity": "minor"
+            },
+            {
+              "type": "info",
+              "key": "sop_completed",
+              "label": "Troubleshooting SOP completed",
+              "severity": "info"
+            }
+          ],
+          "generated_wrap_up": {
+            "customer": "David Chen (david.chen@email.com)",
+            "product": "Meridian Home Pro Steam Espresso Machine",
+            "warranty": "Active",
+            "issue_summary": "Steam wand non-functional; no steam during purge; no improvement after thermoblock reset.",
+            "troubleshooting_steps": [
+              "Purge cycle test \u2014 failed (clicking sound, no steam)",
+              "Thermoblock reset \u2014 failed (no change after power cycle)"
+            ],
+            "resolution": "Warranty replacement authorized; ticket created; shipment within 2 business days; tracking via email.",
+            "disposition": "Replacement \u2014 Under Warranty",
+            "sentiment_shift": "Frustrated \u2192 Satisfied"
+          }
+        }
+      }
+    },
+    "coaching": {
+      "development_plans_by_id": {
+        "dp_sarah_feb_2026": {
+          "plan_id": "dp_sarah_feb_2026",
+          "agent_id": "agt_sarah_m",
+          "period_label": "February 2026",
+          "due_date": "2026-03-20",
+          "kpis": {
+            "csat_pct": {
+              "actual": 88,
+              "goal": 90,
+              "delta_pct": -2
+            },
+            "fcr_pct": {
+              "actual": 79,
+              "goal": 90,
+              "delta_pct": -11
+            },
+            "aht_seconds": {
+              "actual": 507,
+              "goal": 480,
+              "delta_seconds": 27
+            }
+          },
+          "strengths": [
+            {
+              "skill_id": "sk_policy_repair_replace",
+              "score": 2.0,
+              "calls_observed": 20
+            },
+            {
+              "skill_id": "sk_sop_troubleshoot_sequence",
+              "score": 2.0,
+              "calls_observed": 23
+            }
+          ],
+          "opportunities": [
+            {
+              "skill_id": "sk_empathy_ack",
+              "score": 0.2,
+              "calls_observed": 16
+            },
+            {
+              "skill_id": "sk_warranty_verify",
+              "score": 0.5,
+              "calls_observed": 21
+            }
+          ],
+          "insights": [
+            "Avg Handle Time correlates with lower CSAT on calls under 10 minutes.",
+            "FCR improves when agents recap steps and ask follow-up questions."
+          ],
+          "recommended_modules": [
+            "ml_steamwand_sop"
+          ]
+        }
+      }
+    }
+  }
+}</script>
+  <script>
+    let data;
+    try {
+      data = JSON.parse(document.getElementById("mock-data").textContent);
+    } catch (err) {
+      const container = document.getElementById("view");
+      if (container) {
+        container.innerHTML =
+          "<section class='card'>" +
+          "<h3>Mock failed to load data</h3>" +
+          "<p class='muted'>The embedded JSON could not be parsed in this browser context.</p>" +
+          "<pre style='white-space:pre-wrap;background:#0f172a;color:#e2e8f0;padding:10px;border-radius:8px;overflow:auto;'>" +
+          String(err && err.message ? err.message : err) +
+          "</pre>" +
+          "</section>";
+      }
+      throw err;
+    }
+
+    const interactionId = Object.keys(data.indices.interactions_by_id)[0];
+    const interaction = data.indices.interactions_by_id[interactionId];
+    const framework = data.frameworks[0];
+    const moduleCard = data.content.microlearning_modules[0];
+    const planId = Object.keys(data.indices.coaching.development_plans_by_id)[0];
+    const plan = data.indices.coaching.development_plans_by_id[planId];
+    const dashboard = data.aggregates.dashboard;
+
+    const skillMap = {};
+    framework.categories.forEach((cat) => {
+      cat.skills.forEach((skill) => {
+        skillMap[skill.skill_id] = {
+          name: skill.name,
+          category: cat.name,
+          severity: skill.severity,
+          definition: skill.definition
+        };
+      });
+    });
+
+    const agentMap = {};
+    data.users.agents.forEach((a) => {
+      agentMap[a.agent_id] = a.display_name;
+    });
+
+    const state = {
+      page: "dashboard",
+      selectedNodePath: "root",
+      selectedSkillId: null,
+      callSec: 0,
+      timer: null
+    };
+    const validPages = new Set(["dashboard", "stratification", "call", "queue", "agent", "plan", "microlearning"]);
+
+    function fmtNumber(n) {
+      return new Intl.NumberFormat("en-US").format(n);
+    }
+
+    function fmtPercent(n, digits) {
+      return Number(n).toFixed(digits || 0) + "%";
+    }
+
+    function fmtSec(sec) {
+      const s = Math.max(0, Math.round(sec));
+      const m = Math.floor(s / 60);
+      const r = s % 60;
+      return m + ":" + String(r).padStart(2, "0");
+    }
+
+    function applyTheme() {
+      const c = {
+        bg: "#080b10",
+        surface: "#10151f",
+        surface2: "#131b29",
+        border: "#25324a",
+        text: "#f1f5ff",
+        muted: "#9caecf",
+        primary: "#ff0a7a",
+        success: "#1fd49a",
+        success_bg: "rgba(31, 212, 154, 0.14)",
+        warning: "#f5a30d",
+        warning_bg: "rgba(245, 163, 13, 0.16)",
+        danger: "#ff5d6d",
+        danger_bg: "rgba(255, 93, 109, 0.14)",
+        info: "#00b7ff",
+        info_bg: "rgba(0, 183, 255, 0.14)"
+      };
+      const root = document.documentElement.style;
+      root.setProperty("--bg", c.bg);
+      root.setProperty("--surface", c.surface);
+      root.setProperty("--surface2", c.surface2);
+      root.setProperty("--border", c.border);
+      root.setProperty("--text", c.text);
+      root.setProperty("--muted", c.muted);
+      root.setProperty("--primary", c.primary);
+      root.setProperty("--success", c.success);
+      root.setProperty("--success-bg", c.success_bg);
+      root.setProperty("--warning", c.warning);
+      root.setProperty("--warning-bg", c.warning_bg);
+      root.setProperty("--danger", c.danger);
+      root.setProperty("--danger-bg", c.danger_bg);
+      root.setProperty("--info", c.info);
+      root.setProperty("--info-bg", c.info_bg);
+
+      document.getElementById("brand-title").textContent = "mojoCX QA Coach";
+      document.getElementById("brand-sub").textContent = "Meridian Home demo dataset";
+
+      document.getElementById("meta-block").innerHTML =
+        "Version: " + data.meta.version + "<br/>" +
+        "Generated: " + data.meta.generated_at_utc.replace("T", " ").replace("Z", " UTC") + "<br/>" +
+        "Primary Agent: " + data.users.agents[0].display_name;
+
+      document.getElementById("global-pills").innerHTML =
+        "<span class='pill'>" + dashboard.period.label + "</span>" +
+        "<span class='pill'>Channel: voice</span>" +
+        "<span class='pill'>Site: " + data.users.agents[0].site + "</span>";
+    }
+
+    function setTitle() {
+      const titles = {
+        dashboard: "Operations Dashboard",
+        stratification: "Call Stratification",
+        call: "Call Analyzer",
+        queue: "Coaching Queue",
+        agent: "My Coach",
+        plan: "Development Plan",
+        microlearning: "Microlearning"
+      };
+      document.getElementById("page-title").textContent = titles[state.page] || "Foundever QA Coach";
+    }
+
+    function kpiCard(label, value, sub) {
+      return "<div class='kpi'><div class='label'>" + label + "</div><div class='value'>" + value + "</div><div class='sub'>" + (sub || "") + "</div></div>";
+    }
+
+    function barRows(rows, labelField, valueField, className) {
+      const max = Math.max.apply(null, rows.map((r) => Number(r[valueField])));
+      return "<div class='bars'>" + rows.map((row) => {
+        const value = Number(row[valueField]);
+        const pct = max ? (value / max) * 100 : 0;
+        return "<div class='bar-row'>" +
+          "<div><div class='label'>" + row[labelField] + "</div><div class='track'><div class='fill " + (className || "") + "' style='width:" + pct.toFixed(1) + "%'></div></div></div>" +
+          "<div class='muted' style='text-align:right;font-weight:700;'>" + value + "</div>" +
+        "</div>";
+      }).join("") + "</div>";
+    }
+
+    function renderDashboard() {
+      const trend = data.aggregates.trends[0];
+
+      return "<section class='grid'>" +
+        "<div class='kpi-grid'>" +
+          kpiCard("Calls Received", fmtNumber(dashboard.calls_received), "Total inbound") +
+          kpiCard("Calls Scored", fmtNumber(dashboard.calls_scored), fmtPercent(dashboard.percent_scored, 0) + " coverage") +
+          kpiCard("Avg QA Score", dashboard.avg_qa_score.toFixed(1), "Out of 100") +
+          kpiCard("Avg AHT", fmtSec(dashboard.avg_aht_seconds), "Target: " + fmtSec(480)) +
+          kpiCard("Compliance Fail", fmtPercent(dashboard.compliance_fail_rate_pct, 1), "Lower is better") +
+        "</div>" +
+
+        "<div class='two-col'>" +
+          "<div class='card'><h3>Overall Call Type</h3>" + barRows(dashboard.call_type_distribution_pct, "label", "value", "") + "</div>" +
+          "<div class='card'><h3>Call Allocation (by Agent)</h3>" + barRows(dashboard.call_allocation_by_agent_calls, "label", "value", "warning") + "</div>" +
+        "</div>" +
+
+        "<div class='two-col'>" +
+          "<div class='card'><h3>Volume by Site</h3>" +
+            "<table class='table'><thead><tr><th>Site</th><th>Calls</th><th>Minutes</th></tr></thead><tbody>" +
+            dashboard.data_volumes_by_site.map((row) => "<tr><td>" + row.site + "</td><td>" + fmtNumber(row.calls) + "</td><td>" + fmtNumber(row.minutes) + "</td></tr>").join("") +
+            "</tbody></table></div>" +
+          "<div class='card'><h3>Trend Alert</h3>" +
+            "<p><strong>" + trend.title + "</strong></p>" +
+            "<p class='muted'>Impact: " + trend.impact.kpi + " +" + trend.impact.delta_seconds + " sec</p>" +
+            "<p class='muted'>Likely cause: " + trend.likely_root_cause + "</p>" +
+            "<ul class='list'>" + trend.recommended_actions.map((a) => "<li>" + a.type + ": " + (a.module_id || a.skill_id) + "</li>").join("") + "</ul>" +
+          "</div>" +
+        "</div>" +
+
+        "<div class='two-col'>" +
+          "<div class='card'><h3>Top 3 Strengths</h3>" + barRows(dashboard.top_strengths, "skill_label", "score", "success") + "</div>" +
+          "<div class='card'><h3>Top 3 Opportunities</h3>" + barRows(dashboard.top_opportunities, "skill_label", "miss_rate_pct", "danger") + "</div>" +
+        "</div>" +
+      "</section>";
+    }
+
+    function flattenTree(node, path, acc) {
+      const p = path || "root";
+      acc[p] = node;
+      const children = node.children || [];
+      children.forEach((child, idx) => {
+        flattenTree(child, p + "." + idx, acc);
+      });
+    }
+
+    function renderTree(node, path, depth) {
+      const p = path || "root";
+      const d = depth || 0;
+      const active = state.selectedNodePath === p;
+      let html = "<li>" +
+        "<button class='node " + (active ? "active" : "") + "' data-node-path='" + p + "' style='margin-left:" + (d * 14) + "px'>" +
+          "<div class='line-1'>" + node.label + "</div>" +
+          "<div class='line-2'>Calls: " + fmtNumber(node.call_count) + " | Avg Score: " + Number(node.avg_score).toFixed(1) + " | Avg AHT: " + fmtSec(node.avg_aht_seconds) + "</div>" +
+        "</button>";
+      if (node.children && node.children.length) {
+        html += "<ul class='tree-list'>" + node.children.map((child, i) => renderTree(child, p + "." + i, d + 1)).join("") + "</ul>";
+      }
+      html += "</li>";
+      return html;
+    }
+
+    function renderStratification() {
+      const root = data.aggregates.stratification.root;
+      const map = {};
+      flattenTree(root, "root", map);
+      const activeNode = map[state.selectedNodePath] || root;
+
+      return "<section class='three-col'>" +
+        "<div class='card'><h3>Stratify by</h3><ul class='list'><li>Warranty Verified</li><li>SOP Followed</li><li>Outcome</li></ul><p class='muted'>Layer builder is static in this mock; click any node for segment summary.</p></div>" +
+        "<div class='card'><h3>Population Flow</h3><ul class='tree-list'>" + renderTree(root, "root", 0) + "</ul></div>" +
+        "<div class='card'><h3>Segment Summary</h3>" +
+          "<p><strong>" + activeNode.label + "</strong></p>" +
+          "<p class='muted'>Calls: " + fmtNumber(activeNode.call_count) + "</p>" +
+          "<p class='muted'>Avg Score: " + Number(activeNode.avg_score).toFixed(1) + "</p>" +
+          "<p class='muted'>Avg AHT: " + fmtSec(activeNode.avg_aht_seconds) + "</p>" +
+          "<div class='control-row'><button class='primary' data-nav-page='call'>View sample call</button><button data-nav-page='queue'>Assign coaching</button></div>" +
+        "</div>" +
+      "</section>";
+    }
+
+    function overlaps(seg, evidence) {
+      if (!evidence || !evidence.length) return false;
+      return evidence.some((e) => seg.start_ms <= e.end_ms && seg.end_ms >= e.start_ms);
+    }
+
+    function skillStatusTag(result) {
+      if (result === "pass") return "pass";
+      if (result === "partial") return "partial";
+      return "fail";
+    }
+
+    function renderCallAnalyzer() {
+      const peaks = interaction.audio.waveform_peaks || [];
+      const autoqa = interaction.autoqa;
+
+      const selectedSkill = autoqa.skills.find((s) => s.skill_id === state.selectedSkillId) || null;
+      const selectedEvidence = selectedSkill ? (selectedSkill.evidence || []) : [];
+
+      return "<section class='call-grid'>" +
+        "<div class='card'>" +
+          "<h3>Call Header</h3>" +
+          "<p><strong>" + interaction.external_ticket_id + "</strong></p>" +
+          "<p class='muted'>Agent: " + agentMap[interaction.agent_id] + " | Customer: " + interaction.customer.name + "</p>" +
+          "<p class='muted'>Product: " + interaction.product.model + "</p>" +
+          "<p class='muted'>Issue: " + interaction.product.issue + "</p>" +
+          "<div class='control-row'><span class='tag info'>Score " + autoqa.overall_score + "</span><span class='tag minor'>Confidence " + autoqa.confidence_pct + "%</span></div>" +
+
+          "<h4 style='margin-top:12px'>Audio</h4>" +
+          "<div class='wave' id='waveform'>" + peaks.map((p, idx) => "<span class='wave-bar' data-wave-idx='" + idx + "' style='height:" + Math.max(8, Math.round(p * 100)) + "%'></span>").join("") + "</div>" +
+          "<div class='control-row'>" +
+            "<button id='call-play' class='primary' type='button'>Play</button>" +
+            "<button id='call-reset' type='button'>Reset</button>" +
+            "<span class='muted'>Time: <strong id='call-time'>" + fmtSec(state.callSec) + "</strong></span>" +
+          "</div>" +
+          "<input id='call-progress' type='range' min='0' max='" + interaction.duration_seconds + "' step='0.2' value='" + state.callSec + "' style='width:100%;margin-top:8px' />" +
+        "</div>" +
+
+        "<div class='card'>" +
+          "<h3>Scorecard</h3>" +
+          "<table class='table'><thead><tr><th>Category</th><th>Score</th></tr></thead><tbody>" +
+            autoqa.category_scores.map((c) => {
+              const cat = framework.categories.find((x) => x.category_id === c.category_id);
+              const pct = c.max ? (100 * c.score / c.max) : 0;
+              return "<tr><td>" + (cat ? cat.name : c.category_id) + "</td><td>" + c.score + "/" + c.max + " (" + pct.toFixed(0) + "%)</td></tr>";
+            }).join("") +
+          "</tbody></table>" +
+
+          "<h4 style='margin-top:12px'>Skill-level AutoQA</h4>" +
+          "<div class='score-skills'>" +
+            autoqa.skills.map((s) => {
+              const meta = skillMap[s.skill_id] || { name: s.skill_id, category: "Other", severity: "minor", definition: "" };
+              const active = state.selectedSkillId === s.skill_id;
+              return "<button type='button' class='skill-row " + (active ? "active" : "") + "' data-skill-id='" + s.skill_id + "'>" +
+                "<div class='line'><span class='name'>" + meta.name + "</span><span class='tag " + skillStatusTag(s.result) + "'>" + s.result + "</span></div>" +
+                "<div class='line'><span class='muted'>" + meta.category + "</span><span class='muted'>" + s.confidence_pct + "% conf</span></div>" +
+                (s.notes ? "<div class='note'>" + s.notes + "</div>" : "") +
+              "</button>";
+            }).join("") +
+          "</div>" +
+        "</div>" +
+
+        "<div class='card'>" +
+          "<h3>Transcript</h3>" +
+          (selectedSkill ? "<p class='muted'>Highlighting evidence for: <strong>" + (skillMap[selectedSkill.skill_id] ? skillMap[selectedSkill.skill_id].name : selectedSkill.skill_id) + "</strong></p>" : "<p class='muted'>Click a skill to highlight evidence spans.</p>") +
+          "<div class='transcript-panel' id='transcript-panel'>" +
+            interaction.transcript.segments.map((seg, idx) => {
+              const evidence = overlaps(seg, selectedEvidence);
+              const speakerClass = seg.speaker === "AGENT" ? "agent" : "customer";
+              return "<article class='segment-row " + (evidence ? "evidence" : "") + "' data-seg-idx='" + idx + "' data-start='" + (seg.start_ms / 1000) + "' data-end='" + (seg.end_ms / 1000) + "'>" +
+                "<div class='segment-meta'><span class='badge " + speakerClass + "'>" + seg.speaker + "</span><span>" + fmtSec(seg.start_ms / 1000) + " - " + fmtSec(seg.end_ms / 1000) + "</span></div>" +
+                "<p>" + seg.text + "</p>" +
+              "</article>";
+            }).join("") +
+          "</div>" +
+
+          "<h4 style='margin-top:12px'>Auto Wrap-up</h4>" +
+          "<ul class='list'>" +
+            "<li><strong>Customer:</strong> " + autoqa.generated_wrap_up.customer + "</li>" +
+            "<li><strong>Issue:</strong> " + autoqa.generated_wrap_up.issue_summary + "</li>" +
+            "<li><strong>Resolution:</strong> " + autoqa.generated_wrap_up.resolution + "</li>" +
+            "<li><strong>Sentiment Shift:</strong> " + autoqa.generated_wrap_up.sentiment_shift + "</li>" +
+          "</ul>" +
+        "</div>" +
+      "</section>";
+    }
+
+    function renderQueue() {
+      return "<section class='grid'>" +
+        "<div class='card'><h3>Task Queue</h3>" +
+          "<table class='table'><thead><tr><th>Task</th><th>Agent</th><th>Skill</th><th>Due</th><th>Priority</th><th>Status</th><th>Evidence</th></tr></thead><tbody>" +
+            data.coaching.tasks.map((t) => {
+              const skill = skillMap[t.skill_id] ? skillMap[t.skill_id].name : t.skill_id;
+              return "<tr>" +
+                "<td>" + t.title + "</td>" +
+                "<td>" + (agentMap[t.agent_id] || t.agent_id) + "</td>" +
+                "<td>" + skill + "</td>" +
+                "<td>" + t.due_at.slice(0, 10) + "</td>" +
+                "<td><span class='tag minor'>" + t.priority + "</span></td>" +
+                "<td><span class='tag info'>" + t.status.replace(/_/g, " ") + "</span></td>" +
+                "<td><button type='button' data-open-call='1'>Open call</button></td>" +
+              "</tr>";
+            }).join("") +
+          "</tbody></table>" +
+        "</div>" +
+      "</section>";
+    }
+
+    function renderAgent() {
+      const tasks = data.coaching.tasks.filter((t) => t.agent_id === data.users.agents[0].agent_id);
+      return "<section class='two-col'>" +
+        "<div class='grid'>" +
+          "<div class='card'><h3>What's Next</h3><p><strong>" + moduleCard.title + "</strong></p><p class='muted'>" + moduleCard.description + "</p><p class='muted'>Duration: " + fmtSec(moduleCard.estimated_duration_seconds) + "</p></div>" +
+          "<div class='card'><h3>Assigned to You</h3>" +
+            (tasks.length ? "<ul class='list'>" + tasks.map((t) => "<li><strong>" + t.title + "</strong> (" + t.status.replace(/_/g, " ") + ")</li>").join("") + "</ul>" : "<p class='muted'>No assigned tasks.</p>") +
+          "</div>" +
+        "</div>" +
+
+        "<div class='grid'>" +
+          "<div class='card'><h3>Most Recent Scored Call</h3><p><strong>" + interaction.external_ticket_id + "</strong></p><p class='muted'>Disposition: " + interaction.disposition + "</p><p class='muted'>Score: " + interaction.autoqa.overall_score + " | AHT: " + fmtSec(interaction.aht_seconds) + "</p><button type='button' class='primary' data-open-call='1'>Open Call Analyzer</button></div>" +
+          "<div class='card'><h3>Skill Stats Snapshot</h3><p class='muted'>Strengths and opportunities from current scoring period.</p>" +
+            barRows(data.aggregates.dashboard.top_strengths, "skill_label", "score", "success") +
+          "</div>" +
+        "</div>" +
+      "</section>";
+    }
+
+    function renderPlan() {
+      return "<section class='two-col'>" +
+        "<div class='grid'>" +
+          "<div class='card'><h3>Development Plan - " + plan.period_label + "</h3><p class='muted'>Agent: " + (agentMap[plan.agent_id] || plan.agent_id) + " | Due: " + plan.due_date + "</p></div>" +
+          "<div class='card'><h3>KPI Block</h3>" +
+            "<table class='table'><thead><tr><th>KPI</th><th>Actual</th><th>Goal</th><th>Delta</th></tr></thead><tbody>" +
+              "<tr><td>CSAT %</td><td>" + plan.kpis.csat_pct.actual + "</td><td>" + plan.kpis.csat_pct.goal + "</td><td>" + plan.kpis.csat_pct.delta_pct + "</td></tr>" +
+              "<tr><td>FCR %</td><td>" + plan.kpis.fcr_pct.actual + "</td><td>" + plan.kpis.fcr_pct.goal + "</td><td>" + plan.kpis.fcr_pct.delta_pct + "</td></tr>" +
+              "<tr><td>AHT sec</td><td>" + plan.kpis.aht_seconds.actual + "</td><td>" + plan.kpis.aht_seconds.goal + "</td><td>+" + plan.kpis.aht_seconds.delta_seconds + "</td></tr>" +
+            "</tbody></table>" +
+          "</div>" +
+          "<div class='card'><h3>Strengths & Opportunities</h3>" +
+            "<div class='two-col'>" +
+              "<div><h4>Strengths</h4><ul class='list'>" +
+                plan.strengths.map((s) => "<li>" + (skillMap[s.skill_id] ? skillMap[s.skill_id].name : s.skill_id) + "</li>").join("") +
+              "</ul></div>" +
+              "<div><h4>Opportunities</h4><ul class='list'>" +
+                plan.opportunities.map((s) => "<li>" + (skillMap[s.skill_id] ? skillMap[s.skill_id].name : s.skill_id) + "</li>").join("") +
+              "</ul></div>" +
+            "</div>" +
+          "</div>" +
+        "</div>" +
+
+        "<div class='grid'>" +
+          "<div class='card'><h3>Insights</h3><ul class='list'>" + plan.insights.map((i) => "<li>" + i + "</li>").join("") + "</ul></div>" +
+          "<div class='card'><h3>Recommended Modules</h3><ul class='list'>" + plan.recommended_modules.map((m) => "<li>" + m + "</li>").join("") + "</ul></div>" +
+        "</div>" +
+      "</section>";
+    }
+
+    function renderMicrolearning() {
+      const trend = data.aggregates.trends[0];
+      const autoqa = interaction.autoqa;
+      const targetSkills = moduleCard.skills_targeted.map((id) => skillMap[id] ? skillMap[id].name : id);
+      const steps = [
+        { title: "Open + set policy context", range: "0:00 - 0:26", detail: "State troubleshooting-first policy and warranty path clearly." },
+        { title: "Run purge cycle", range: "0:28 - 0:48", detail: "Guide customer through purge and confirm no steam output." },
+        { title: "Run thermoblock reset", range: "0:49 - 1:09", detail: "Perform reset sequence before replacement decision." },
+        { title: "Offer repair vs replacement", range: "1:09 - 1:32", detail: "Present both options with timing expectations." },
+        { title: "Close with logistics", range: "1:32 - 2:08", detail: "Confirm shipping, tracking email, and final help check." }
+      ];
+
+      return "<section class='module-grid'>" +
+        "<div class='grid'>" +
+          "<div class='card'>" +
+            "<h3>" + moduleCard.title + "</h3>" +
+            "<p class='muted'>" + moduleCard.description + "</p>" +
+            "<p class='muted'><strong>Trigger:</strong> " + moduleCard.trigger + "</p>" +
+            "<p class='muted'><strong>Estimated Duration:</strong> " + fmtSec(moduleCard.estimated_duration_seconds) + "</p>" +
+            "<div>" + targetSkills.map((s) => "<span class='module-pill'>" + s + "</span>").join("") + "</div>" +
+            "<div class='control-row'><button class='primary' data-open-call='1'>Launch Guided Call</button><button data-nav-page='plan'>Open Development Plan</button></div>" +
+          "</div>" +
+
+          "<div class='card'>" +
+            "<h3>Guided Simulation Flow</h3>" +
+            steps.map((step) => "<div class='module-step'><h4>" + step.title + " <span class='muted'>(" + step.range + ")</span></h4><p class='muted'>" + step.detail + "</p></div>").join("") +
+          "</div>" +
+        "</div>" +
+
+        "<div class='grid'>" +
+          "<div class='card'>" +
+            "<h3>Why This Module Exists</h3>" +
+            "<p><strong>" + trend.title + "</strong></p>" +
+            "<p class='muted'>MoM increase: " + trend.magnitude_pct + "% | AHT impact: +" + trend.impact.delta_seconds + "s</p>" +
+            "<ul class='list'>" +
+              "<li>Root cause: " + trend.likely_root_cause + "</li>" +
+              "<li>Primary coaching focus: " + (skillMap["sk_sop_troubleshoot_sequence"] ? skillMap["sk_sop_troubleshoot_sequence"].name : "SOP sequence") + "</li>" +
+              "<li>Secondary focus: " + (skillMap["sk_empathy_ack"] ? skillMap["sk_empathy_ack"].name : "Empathy phrasing") + "</li>" +
+            "</ul>" +
+          "</div>" +
+
+          "<div class='card'>" +
+            "<h3>Latest Call Outcomes</h3>" +
+            "<p class='muted'>Overall AutoQA: <strong>" + autoqa.overall_score + "</strong> (confidence " + autoqa.confidence_pct + "%)</p>" +
+            "<table class='table'><thead><tr><th>Skill</th><th>Result</th></tr></thead><tbody>" +
+              autoqa.skills.filter((s) => moduleCard.skills_targeted.includes(s.skill_id)).map((s) => "<tr><td>" + (skillMap[s.skill_id] ? skillMap[s.skill_id].name : s.skill_id) + "</td><td><span class='tag " + skillStatusTag(s.result) + "'>" + s.result + "</span></td></tr>").join("") +
+            "</tbody></table>" +
+            "<p class='muted' style='margin-top:8px'>Use this module to tighten empathy language and keep SOP adherence consistent.</p>" +
+          "</div>" +
+        "</div>" +
+      "</section>";
+    }
+
+    function renderView() {
+      clearTimerIfNeeded();
+
+      let html = "";
+      if (state.page === "dashboard") html = renderDashboard();
+      if (state.page === "stratification") html = renderStratification();
+      if (state.page === "call") html = renderCallAnalyzer();
+      if (state.page === "queue") html = renderQueue();
+      if (state.page === "agent") html = renderAgent();
+      if (state.page === "plan") html = renderPlan();
+      if (state.page === "microlearning") html = renderMicrolearning();
+
+      document.getElementById("view").innerHTML = html;
+      setTitle();
+      bindPageEvents();
+      drawCallPlayback();
+    }
+
+    function clearTimerIfNeeded() {
+      if (state.page !== "call" && state.timer) {
+        clearInterval(state.timer);
+        state.timer = null;
+      }
+    }
+
+    function bindCommonNav() {
+      document.querySelectorAll(".nav-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          state.page = btn.getAttribute("data-page");
+          state.selectedSkillId = null;
+          location.hash = state.page;
+          document.querySelectorAll(".nav-btn").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          renderView();
+        });
+      });
+
+      document.querySelectorAll(".nav-btn").forEach((b) => {
+        b.classList.toggle("active", b.getAttribute("data-page") === state.page);
+      });
+    }
+
+    function bindPageEvents() {
+      document.querySelectorAll("[data-nav-page]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          state.page = btn.getAttribute("data-nav-page");
+          location.hash = state.page;
+          document.querySelectorAll(".nav-btn").forEach((b) => {
+            b.classList.toggle("active", b.getAttribute("data-page") === state.page);
+          });
+          renderView();
+        });
+      });
+
+      document.querySelectorAll("[data-open-call]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          state.page = "call";
+          location.hash = state.page;
+          document.querySelectorAll(".nav-btn").forEach((b) => {
+            b.classList.toggle("active", b.getAttribute("data-page") === "call");
+          });
+          renderView();
+        });
+      });
+
+      document.querySelectorAll("[data-node-path]").forEach((node) => {
+        node.addEventListener("click", () => {
+          state.selectedNodePath = node.getAttribute("data-node-path");
+          renderView();
+        });
+      });
+
+      document.querySelectorAll("[data-skill-id]").forEach((row) => {
+        row.addEventListener("click", () => {
+          const id = row.getAttribute("data-skill-id");
+          state.selectedSkillId = state.selectedSkillId === id ? null : id;
+          renderView();
+        });
+      });
+
+      const play = document.getElementById("call-play");
+      const reset = document.getElementById("call-reset");
+      const progress = document.getElementById("call-progress");
+
+      if (play) {
+        play.addEventListener("click", () => {
+          if (state.timer) {
+            clearInterval(state.timer);
+            state.timer = null;
+            drawCallPlayback();
+            return;
+          }
+          state.timer = setInterval(() => {
+            state.callSec = Math.min(interaction.duration_seconds, state.callSec + 0.2);
+            drawCallPlayback();
+            if (state.callSec >= interaction.duration_seconds) {
+              clearInterval(state.timer);
+              state.timer = null;
+              drawCallPlayback();
+            }
+          }, 200);
+          drawCallPlayback();
+        });
+      }
+
+      if (reset) {
+        reset.addEventListener("click", () => {
+          state.callSec = 0;
+          drawCallPlayback();
+        });
+      }
+
+      if (progress) {
+        progress.addEventListener("input", () => {
+          state.callSec = Number(progress.value || 0);
+          drawCallPlayback();
+        });
+      }
+    }
+
+    function drawCallPlayback() {
+      if (state.page !== "call") return;
+
+      const time = document.getElementById("call-time");
+      const progress = document.getElementById("call-progress");
+      const play = document.getElementById("call-play");
+
+      if (time) time.textContent = fmtSec(state.callSec);
+      if (progress) progress.value = String(state.callSec);
+      if (play) play.textContent = state.timer ? "Pause" : "Play";
+
+      const segments = document.querySelectorAll(".segment-row");
+      segments.forEach((seg) => {
+        const start = Number(seg.getAttribute("data-start") || 0);
+        const end = Number(seg.getAttribute("data-end") || 0);
+        seg.classList.toggle("active", state.callSec >= start && state.callSec < end);
+      });
+
+      const peaks = interaction.audio.waveform_peaks || [];
+      const idx = Math.min(peaks.length - 1, Math.floor((state.callSec / interaction.duration_seconds) * peaks.length));
+      document.querySelectorAll(".wave-bar").forEach((bar) => {
+        const b = Number(bar.getAttribute("data-wave-idx") || 0);
+        bar.classList.toggle("active", b <= idx);
+      });
+    }
+
+    function syncPageFromHash() {
+      const hashPage = (location.hash || "").replace(/^#/, "");
+      if (validPages.has(hashPage)) {
+        state.page = hashPage;
+      }
+    }
+
+    syncPageFromHash();
+    applyTheme();
+    bindCommonNav();
+    renderView();
+    window.addEventListener("hashchange", () => {
+      const prevPage = state.page;
+      syncPageFromHash();
+      if (state.page !== prevPage) {
+        document.querySelectorAll(".nav-btn").forEach((b) => {
+          b.classList.toggle("active", b.getAttribute("data-page") === state.page);
+        });
+        renderView();
+      }
+    });
+  </script>
+</body>
+</html>
