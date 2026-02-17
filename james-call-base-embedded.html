@@ -393,12 +393,15 @@
     const embeddedAudio = document.getElementById("embeddedAudio");
 
     const delayInput = document.getElementById("bridgeDelay");
-    const BRIDGE_DELAY_KEY = "meridian_part23_delay_sec";
+    const BRIDGE_DELAY_KEY = "meridian_part23_delay_sec_v2";
     try {
-      const saved = Number(localStorage.getItem(BRIDGE_DELAY_KEY));
-      if (Number.isFinite(saved)) {
-        const clamped = Math.max(0, Math.min(30, saved));
-        if (delayInput) delayInput.value = clamped.toFixed(1);
+      const savedRaw = localStorage.getItem(BRIDGE_DELAY_KEY);
+      if (savedRaw !== null) {
+        const saved = Number(savedRaw);
+        if (Number.isFinite(saved)) {
+          const clamped = Math.max(0, Math.min(30, saved));
+          if (delayInput) delayInput.value = clamped.toFixed(1);
+        }
       }
     } catch (_e) {}
     const PART2_TO_3_SEC = 67.665;
